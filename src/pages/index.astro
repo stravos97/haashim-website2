@@ -264,6 +264,74 @@ import Layout from '../layouts/Layout.astro';
 	</main>
 
 	<script>
+		// Add mobile navigation toggle button to the DOM
+		function addMobileNavToggle() {
+			// Only add on smaller screens
+			if (window.innerWidth <= 480) {
+				const toggleButton = document.createElement('button');
+				toggleButton.className = 'mobile-nav-toggle';
+				toggleButton.setAttribute('aria-label', 'Toggle navigation menu');
+				toggleButton.innerHTML = `
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="3" y1="12" x2="21" y2="12"></line>
+						<line x1="3" y1="6" x2="21" y2="6"></line>
+						<line x1="3" y1="18" x2="21" y2="18"></line>
+					</svg>
+				`;
+				
+				document.body.appendChild(toggleButton);
+				
+				// Toggle navigation menu when clicked
+				toggleButton.addEventListener('click', () => {
+					const navMenu = document.querySelector('.nav-menu');
+					if (navMenu.classList.contains('expanded')) {
+						navMenu.classList.remove('expanded');
+						toggleButton.innerHTML = `
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="3" y1="12" x2="21" y2="12"></line>
+								<line x1="3" y1="6" x2="21" y2="6"></line>
+								<line x1="3" y1="18" x2="21" y2="18"></line>
+							</svg>
+						`;
+					} else {
+						navMenu.classList.add('expanded');
+						toggleButton.innerHTML = `
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						`;
+					}
+				});
+				
+				// Close menu when clicking a navigation link
+				document.querySelectorAll('.nav-menu a').forEach(link => {
+					link.addEventListener('click', () => {
+						const navMenu = document.querySelector('.nav-menu');
+						navMenu.classList.remove('expanded');
+						toggleButton.innerHTML = `
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="3" y1="12" x2="21" y2="12"></line>
+								<line x1="3" y1="6" x2="21" y2="6"></line>
+								<line x1="3" y1="18" x2="21" y2="18"></line>
+							</svg>
+						`;
+					});
+				});
+			}
+		}
+
+		// Check for horizontal scroll in nav menu and add indicator if needed
+		function checkNavScroll() {
+			const navMenu = document.querySelector('.nav-menu');
+			if (navMenu.scrollWidth > navMenu.clientWidth) {
+				// Show visual indicator that there's more content
+				navMenu.classList.add('scrollable');
+			} else {
+				navMenu.classList.remove('scrollable');
+			}
+		}
+
 		// Add smooth scrolling for navigation links
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
@@ -299,6 +367,17 @@ import Layout from '../layouts/Layout.astro';
 				if (link.getAttribute('href').substring(1) === current) {
 					link.classList.add('active');
 				}
+			});
+		});
+
+		// Initialize mobile navigation
+		document.addEventListener('DOMContentLoaded', () => {
+			addMobileNavToggle();
+			checkNavScroll();
+			
+			// Update on window resize
+			window.addEventListener('resize', () => {
+				checkNavScroll();
 			});
 		});
 	</script>
