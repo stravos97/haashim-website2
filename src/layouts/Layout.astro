@@ -334,6 +334,12 @@ li::marker {
   margin-bottom: 2rem;
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-container.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-menu {
@@ -344,6 +350,7 @@ li::marker {
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  position: relative;
 }
 
 .nav-menu::-webkit-scrollbar {
@@ -359,12 +366,57 @@ li::marker {
   font-weight: 500;
   white-space: nowrap;
   border-radius: 30px;
-  transition: var(--transition);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .nav-menu a:hover {
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--secondary-color);
+}
+
+.nav-menu a.active {
   background: var(--secondary-color);
   color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Add indicator dot below active nav item */
+.nav-menu a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.8;
+}
+
+/* Add indicator that nav is scrollable on mobile */
+.nav-menu.scrollable::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  pointer-events: none;
+}
+
+.nav-menu.scrollable::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  pointer-events: none;
 }
 
 /* Mobile-specific navigation improvements */

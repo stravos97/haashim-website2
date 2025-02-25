@@ -332,13 +332,82 @@ import Layout from '../layouts/Layout.astro';
 			}
 		}
 
+		// Enhanced navigation with auto-scrolling to active item
+		function highlightNavOnScroll() {
+			const navLinks = document.querySelectorAll('.nav-menu a');
+			const navMenu = document.querySelector('.nav-menu');
+			const sections = document.querySelectorAll('section');
+			const scrollPos = window.scrollY;
+
+			// Determine which section is in view
+			let currentSection = '';
+			sections.forEach(section => {
+				const sectionTop = section.offsetTop - 100; // Offset for header
+				const sectionHeight = section.offsetHeight;
+
+				if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+					currentSection = section.getAttribute('id');
+				}
+			});
+
+			// Update nav links
+			navLinks.forEach(link => {
+				// Remove active class from all links
+				link.classList.remove('active');
+
+				// Add active class to current section's link
+				const href = link.getAttribute('href').substring(1);
+				if (href === currentSection) {
+					link.classList.add('active');
+
+					// Auto-scroll navigation to make active item visible
+					if (navMenu) {
+						// Calculate position of active link relative to navigation container
+						const linkRect = link.getBoundingClientRect();
+						const navRect = navMenu.getBoundingClientRect();
+
+						// Check if active link is not fully visible
+						if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
+							// Calculate scroll position to center the active link in the navigation
+							const scrollLeft = link.offsetLeft - navMenu.clientWidth / 2 + link.clientWidth / 2;
+
+							// Smooth scroll the navigation horizontally
+							navMenu.scrollTo({
+								left: scrollLeft,
+								behavior: 'smooth'
+							});
+						}
+					}
+				}
+			});
+		}
+
+		// Function to update nav background on scroll
+		function updateNavBackground() {
+			const navContainer = document.querySelector('.nav-container');
+			if (window.scrollY > 50) {
+				navContainer.classList.add('scrolled');
+			} else {
+				navContainer.classList.remove('scrolled');
+			}
+		}
+
 		// Add smooth scrolling for navigation links
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
 				e.preventDefault();
-				document.querySelector(this.getAttribute('href')).scrollIntoView({
-					behavior: 'smooth'
-				});
+				const targetId = this.getAttribute('href');
+				const targetSection = document.querySelector(targetId);
+
+				if (targetSection) {
+					window.scrollTo({
+						top: targetSection.offsetTop - 70, // Adjust for header height
+						behavior: 'smooth'
+					});
+
+					// Update URL hash without jumping
+					history.pushState(null, null, targetId);
+				}
 			});
 		});
 
@@ -347,26 +416,16 @@ import Layout from '../layouts/Layout.astro';
 			window.print();
 		});
 
-		// Add active class to navigation items on scroll
-		window.addEventListener('scroll', function() {
-			const sections = document.querySelectorAll('section');
-			const navLinks = document.querySelectorAll('.nav-menu a');
+		// Initialize scroll handlers
+		document.addEventListener('DOMContentLoaded', () => {
+			// Initial calls
+			highlightNavOnScroll();
+			updateNavBackground();
 			
-			let current = '';
-			
-			sections.forEach(section => {
-				const sectionTop = section.offsetTop;
-				const sectionHeight = section.clientHeight;
-				if (pageYOffset >= sectionTop - 100) {
-					current = section.getAttribute('id');
-				}
-			});
-
-			navLinks.forEach(link => {
-				link.classList.remove('active');
-				if (link.getAttribute('href').substring(1) === current) {
-					link.classList.add('active');
-				}
+			// Bind scroll events
+			window.addEventListener('scroll', () => {
+				highlightNavOnScroll();
+				updateNavBackground();
 			});
 		});
 
