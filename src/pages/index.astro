@@ -3,6 +3,19 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Haashim Alvi - CV">
+	<!-- Navigation Menu -->
+	<div class="nav-container">
+		<nav class="nav-menu">
+			<a href="#summary">Summary</a>
+			<a href="#experience">Experience</a>
+			<a href="#education">Education</a>
+			<a href="#certificates">Certificates</a>
+			<a href="#projects">Projects</a>
+			<a href="#extracurricular">Activities</a>
+			<a href="#references">References</a>
+		</nav>
+	</div>
+
 	<main>
 		<header class="hero">
 			<h1>Haashim Alvi</h1>
@@ -10,8 +23,27 @@ import Layout from '../layouts/Layout.astro';
 			<div class="contact-info">
 				<p>Manchester, United Kingdom</p>
 				<div class="contact-links">
-					<a href="https://github.com/stravos97" target="_blank">🔗 stravos97</a> |
-					<a href="https://linkedin.com/in/haashim-alvi" target="_blank">👔 haashim-alvi</a>
+					<a href="https://github.com/stravos97" target="_blank">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+							<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+						</svg>
+						<span>GitHub</span>
+					</a>
+					<a href="https://linkedin.com/in/haashim-alvi" target="_blank">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+							<rect x="2" y="9" width="4" height="12"></rect>
+							<circle cx="4" cy="4" r="2"></circle>
+						</svg>
+						<span>LinkedIn</span>
+					</a>
+					<a href="mailto:contact@example.com" class="contact-email">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+							<polyline points="22,6 12,13 2,6"></polyline>
+						</svg>
+						<span>Email</span>
+					</a>
 				</div>
 			</div>
 		</header>
@@ -114,6 +146,9 @@ import Layout from '../layouts/Layout.astro';
 					<p class="company">Amazon Web Services (AWS)</p>
 					<p class="date">2024</p>
 				</div>
+				<div class="certificate-badge">
+					<img src="/api/placeholder/80/80" alt="AWS Certification Badge" />
+				</div>
 			</div>
 		</section>
 
@@ -173,18 +208,18 @@ import Layout from '../layouts/Layout.astro';
 					</ul>
 				</div>
 
-<div class="project">
-  <h3>Docker Environment Management</h3>
-  <p class="project-link">
-    <a href="‎ " target="_blank">‎ </a>
-  </p>
-  <ul>
-    <li>Managed Docker nodes and environments</li>
-    <li>Developed Docker Compose configurations</li>
-    <li>Implemented containerization best practices</li>
-    <li>Automated deployment processes</li>
-  </ul>
-</div>
+				<div class="project">
+					<h3>Docker Environment Management</h3>
+					<p class="project-link">
+						<a href="https://github.com/stravos97/docker-configs" target="_blank">github.com/stravos97/docker-configs</a>
+					</p>
+					<ul>
+						<li>Managed Docker nodes and environments</li>
+						<li>Developed Docker Compose configurations</li>
+						<li>Implemented containerization best practices</li>
+						<li>Automated deployment processes</li>
+					</ul>
+				</div>
 			</div>
 		</section>
 
@@ -221,167 +256,105 @@ import Layout from '../layouts/Layout.astro';
 			<h2>References</h2>
 			<p class="references-note">References available upon request</p>
 		</section>
+
+		<footer>
+			<p>© 2025 Haashim Alvi. Last updated: February 2025</p>
+			<button id="print-button" class="print-button">Print CV</button>
+		</footer>
 	</main>
+
+	<script>
+		// Add smooth scrolling for navigation links
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				document.querySelector(this.getAttribute('href')).scrollIntoView({
+					behavior: 'smooth'
+				});
+			});
+		});
+
+		// Print button functionality
+		document.getElementById('print-button').addEventListener('click', function() {
+			window.print();
+		});
+
+		// Add active class to navigation items on scroll
+		window.addEventListener('scroll', function() {
+			const sections = document.querySelectorAll('section');
+			const navLinks = document.querySelectorAll('.nav-menu a');
+			
+			let current = '';
+			
+			sections.forEach(section => {
+				const sectionTop = section.offsetTop;
+				const sectionHeight = section.clientHeight;
+				if (pageYOffset >= sectionTop - 100) {
+					current = section.getAttribute('id');
+				}
+			});
+
+			navLinks.forEach(link => {
+				link.classList.remove('active');
+				if (link.getAttribute('href').substring(1) === current) {
+					link.classList.add('active');
+				}
+			});
+		});
+	</script>
 </Layout>
 
-<style>
-	main {
-		margin: auto;
-		padding: 2rem;
-		max-width: 1200px;
-		color: #333;
-		font-size: 16px;
-		line-height: 1.6;
+<style is:global>
+	/* Additional styles for the new elements */
+	.icon {
+		margin-right: 0.25rem;
 	}
 
-	.hero {
-		text-align: center;
-		margin-bottom: 4rem;
-		padding: 3rem 2rem;
-		background: linear-gradient(to right, #2c3e50, #3498db);
-		color: white;
-		border-radius: 8px;
+	.certificate-badge {
+		display: flex;
+		justify-content: center;
+		margin-top: 1rem;
 	}
 
-	.hero h1 {
-		font-size: 2.5rem;
-		margin: 0;
-		font-weight: 700;
-	}
-
-	.hero .title {
-		font-size: 1.2rem;
-		margin: 0.5rem 0 1.5rem;
-		letter-spacing: 0.05em;
-	}
-
-	.contact-info {
-		font-size: 0.9rem;
-		opacity: 0.9;
-	}
-
-	.contact-links {
-		margin-top: 0.5rem;
-	}
-
-	.contact-links a {
-		color: white;
-		text-decoration: none;
-		padding: 0 0.5rem;
-	}
-
-	.contact-links a:hover {
-		text-decoration: underline;
-	}
-
-	section {
-		margin-bottom: 3rem;
-		padding: 2rem;
-		background: white;
+	.certificate-badge img {
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	}
 
-	h2 {
-		color: #2c3e50;
-		border-bottom: 2px solid #e2e8f0;
-		padding-bottom: 0.5rem;
-		margin-bottom: 1.5rem;
-		font-weight: 600;
+	.active {
+		background: var(--secondary-color) !important;
+		color: white !important;
 	}
 
-	.timeline .entry {
-		margin-bottom: 2rem;
-	}
-
-	.header {
-		margin-bottom: 1rem;
-	}
-
-	.header h3 {
-		color: #2c3e50;
-		margin: 0;
-		font-weight: 600;
-	}
-
-	.company {
-		color: #3498db;
-		font-weight: 500;
-		margin: 0.2rem 0;
-	}
-
-	.date {
-		color: #718096;
-		font-size: 0.9rem;
-		margin: 0;
-	}
-
-	ul {
-		margin: 0;
-		padding-left: 1.5rem;
-	}
-
-	li {
-		margin-bottom: 0.5rem;
-	}
-
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-		gap: 2rem;
-	}
-
-	.project {
-		padding: 1.5rem;
-		background: #f8fafc;
-		border-radius: 6px;
-		border: 1px solid #e2e8f0;
-	}
-
-	.project h3 {
-		color: #2c3e50;
-		margin: 0 0 0.5rem 0;
-	}
-
-	.project-link {
-		margin-bottom: 1rem;
-	}
-
-	.project-link a {
-		color: #3498db;
-		text-decoration: none;
-		font-size: 0.9rem;
-	}
-
-	.project-link a:hover {
-		text-decoration: underline;
-	}
-
-	.references-note {
-		color: #718096;
-		font-style: italic;
+	footer {
 		text-align: center;
+		margin-top: 4rem;
+		padding: 2rem 0;
+		color: var(--text-light);
+		font-size: 0.9rem;
 	}
 
-	@media (max-width: 768px) {
-		main {
-			padding: 1rem;
-		}
+	.print-button {
+		margin-top: 1rem;
+		padding: 0.5rem 1.5rem;
+		background: var(--secondary-color);
+		color: white;
+		border: none;
+		border-radius: 30px;
+		cursor: pointer;
+		font-family: var(--font-family);
+		font-weight: 500;
+		transition: var(--transition);
+	}
 
-		.hero {
-			padding: 2rem 1rem;
-		}
+	.print-button:hover {
+		background: var(--primary-color);
+		transform: translateY(-2px);
+	}
 
-		.hero h1 {
-			font-size: 2rem;
-		}
-
-		section {
-			padding: 1.5rem;
-		}
-
-		.projects-grid {
-			grid-template-columns: 1fr;
+	@media print {
+		footer, .print-button {
+			display: none;
 		}
 	}
 </style>
