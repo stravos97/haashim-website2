@@ -3,12 +3,16 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Haashim Alvi - CV">
+	<!-- Scroll Progress Bar -->
+	<div class="scroll-progress" id="scroll-progress"></div>
+	
 	<!-- Navigation Menu -->
 	<div class="nav-container">
 		<nav class="nav-menu">
 			<a href="#summary">Summary</a>
 			<a href="#experience">Experience</a>
 			<a href="#education">Education</a>
+			<a href="#skills">Skills</a>
 			<a href="#certificates">Certificates</a>
 			<a href="#projects">Projects</a>
 			<a href="#extracurricular">Activities</a>
@@ -19,7 +23,7 @@ import Layout from '../layouts/Layout.astro';
 	<main>
 		<header class="hero">
 			<h1>Haashim Alvi</h1>
-			<p class="title">SOFTWARE DEVELOPER · SECURITY ENGINEER</p>
+			<p class="title">DEVOPS ENGINEER · CLOUD INFRASTRUCTURE</p>
 			<div class="contact-info">
 				<p>Manchester, United Kingdom</p>
 				<div class="contact-links">
@@ -37,7 +41,7 @@ import Layout from '../layouts/Layout.astro';
 						</svg>
 						<span>LinkedIn</span>
 					</a>
-					<a href="mailto:contact@example.com" class="contact-email">
+					<a href="mailto:haashimalvi@pm.me" class="contact-email">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
 							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
 							<polyline points="22,6 12,13 2,6"></polyline>
@@ -50,29 +54,41 @@ import Layout from '../layouts/Layout.astro';
 
 		<section id="summary">
 			<h2>Summary</h2>
-			<p>Experienced ICT and DevOps professional with expertise in infrastructure reliability, system observability, and automation. Proven track record in
-			implementing SRE best practices, optimizing IT systems, and ensuring seamless network operations. Passionate about driving efficiency through
-			automation and fostering a collaborative environment that supports innovation and growth.</p>
+			<p>Junior DevOps engineer with hands-on experience automating deployments, managing cloud infrastructure, and implementing CI/CD pipelines. 
+			Proven ability to reduce deployment time, improve system reliability, and collaborate effectively in agile teams.</p>
 		</section>
 
 		<section id="experience">
 			<h2>Work Experience</h2>
 			<div class="timeline">
+				<div class="entry current">
+					<div class="header">
+						<h3>DEVOPS TRAINING CONSULTANT</h3>
+						<p class="company">Sparta Global, Birmingham</p>
+						<p class="date">Jan 2025 - Current</p>
+					</div>
+					<ul>
+						<li><i>Training in enterprise DevOps practices through hands-on projects: Azure, Terraform, Kubernetes, Jenkins, Docker, Ansible</i></li>
+						<li>Reduced manual deployment steps from 8 to 2 by building CI/CD pipeline with Jenkins and Docker</li>
+						<li>Managed configuration for 10+ Azure resources by implementing Terraform modules with state management</li>
+						<li>Deployed 5 microservices to Kubernetes by configuring deployments, services, and ingress rules</li>
+						<li>Set up basic monitoring by implementing Prometheus metrics collection and Grafana dashboards</li>
+						<li>Automated application deployment by writing Ansible playbooks for 3-tier architecture</li>
+					</ul>
+				</div>
+
 				<div class="entry">
 					<div class="header">
 						<h3>IT TECHNICIAN</h3>
 						<p class="company">R.A.S Ltd, Rochdale</p>
-						<p class="date">2024 - Current</p>
+						<p class="date">2024 - 2025</p>
 					</div>
 					<ul>
-						<li>Enhanced enterprise security posture by configuring firewalls and endpoint security tools, achieving compliance with Cyber Essentials standards.</li>
-						<li>Automated system patching and updates, ensuring compliance with security baselines.</li>
-						<li>Managed Office 365 administration and network performance, contributing to seamless operations across all departments.</li>
-						<li>Strengthened network security by deploying advanced firewall and VPN solutions, ensuring secure remote access for employees.</li>
-						<li>Collaborated with stakeholders to address and remediate security vulnerabilities, preventing potential breaches.</li>
-						<li>Spearheaded the implementation of SRE best practices to improve infrastructure reliability.</li>
-						<li>Implemented centralized logging solution using the ELK stack for better visibility and faster issue resolution.</li>
-						<li>Optimized server resources through VMware virtualization.</li>
+						<li><i>Sole IT responsible for small business infrastructure: Office 365, firewall configuration, Windows servers, networking</i></li>
+						<li>Achieved Cyber Essentials compliance by implementing required security controls and documentation</li>
+						<li>Saved 3-4 hours weekly by automating Windows updates and backups with PowerShell scripts</li>
+						<li>Improved system reliability by implementing daily backups and basic disaster recovery procedures</li>
+						<li>Enabled faster troubleshooting by setting up ELK stack for centralized log collection</li>
 					</ul>
 				</div>
 
@@ -83,11 +99,12 @@ import Layout from '../layouts/Layout.astro';
 						<p class="date">2022 - 2023</p>
 					</div>
 					<ul>
-						<li>Led the development and management of secure CI/CD pipelines, ensuring applications adhered to security standards.</li>
-						<li>Conducted automated security testing and code scanning, remediating vulnerabilities before deployment.</li>
-						<li>Built a secure network infrastructure following the principle of least privilege.</li>
-						<li>Implemented security-focused Infrastructure as Code (IaC) solutions using tools like Ansible.</li>
-						<li>Actively engaged in code review processes, utilizing AWS best practices.</li>
+						<li><i>Improved deployment processes for warehouse software using Jenkins, Docker, and Ansible</i></li>
+						<li>Enabled daily deployments (previously weekly) by implementing Jenkins pipeline with basic testing</li>
+						<li>Reduced deployment issues by containerizing applications with Docker for consistency</li>
+						<li>Simplified server setup from manual process to scripted approach using Ansible playbooks</li>
+						<li>Caught code issues early by integrating SonarQube scanning into build pipeline</li>
+						<li>Improved team knowledge by creating deployment documentation and basic runbooks</li>
 					</ul>
 				</div>
 
@@ -98,24 +115,26 @@ import Layout from '../layouts/Layout.astro';
 						<p class="date">2021 - 2022</p>
 					</div>
 					<ul>
-						<li>Specialized in full-stack development, focusing on backend systems and customer-facing interfaces.</li>
-						<li>Developed robust warehousing applications using C for high-performance tasks and Python for automation.</li>
-						<li>Demonstrated proactive initiative and strong work ethic in learning new technologies.</li>
+						<li><i>Developed features for warehouse management systems using C and Python</i></li>
+						<li>Built components for inventory tracking and order processing in warehouse control systems</li>
+						<li>Debugged and maintained existing codebase, fixing bugs and improving stability</li>
+						<li>Wrote Python scripts for data processing and automation of development tasks</li>
+						<li>Participated in agile development with code reviews, Git version control, and regular deployments</li>
 					</ul>
 				</div>
 
 				<div class="entry">
 					<div class="header">
-						<h3>SYSTEMS TESTER</h3>
+						<h3>SYSTEMS TESTER (Placement Year)</h3>
 						<p class="company">Skipton Building Society, Skipton</p>
 						<p class="date">2019 - 2020</p>
 					</div>
 					<ul>
-						<li>Conducted comprehensive software testing, ensuring applications met all requirements.</li>
-						<li>Translated business requirements into test cases and test plans.</li>
-						<li>Executed test cases and documented results to identify and report defects.</li>
-						<li>Collaborated with cross-functional teams to ensure software quality.</li>
-						<li>Participated in creating user stories and functional specifications.</li>
+						<li><i>Tested financial applications including banking systems and mortgage platforms</i></li>
+						<li>Identified and documented defects before production releases through systematic testing</li>
+						<li>Created test cases based on business requirements and user stories</li>
+						<li>Assisted with test environment management and test data preparation</li>
+						<li>Participated in UAT coordination and defect triage meetings</li>
 					</ul>
 				</div>
 			</div>
@@ -138,6 +157,72 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 
+		<section id="skills">
+			<h2>Technical Skills</h2>
+			<div class="skills-container">
+				<div class="skill-category">
+					<h3>Cloud & Infrastructure</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Azure</span>
+						<span class="skill-tag">AWS</span>
+						<span class="skill-tag">GCP</span>
+						<span class="skill-tag">Terraform</span>
+						<span class="skill-tag">CloudFormation</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3>Containers & Orchestration</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Docker</span>
+						<span class="skill-tag">Kubernetes</span>
+						<span class="skill-tag">K3s</span>
+						<span class="skill-tag">Helm</span>
+						<span class="skill-tag">ArgoCD</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3>CI/CD & Automation</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Jenkins</span>
+						<span class="skill-tag">GitHub Actions</span>
+						<span class="skill-tag">GitLab CI</span>
+						<span class="skill-tag">Ansible</span>
+						<span class="skill-tag">Bash</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3>Programming</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Python</span>
+						<span class="skill-tag">JavaScript</span>
+						<span class="skill-tag">Go</span>
+						<span class="skill-tag">C#</span>
+						<span class="skill-tag">PHP</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3>Monitoring & Security</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">Prometheus</span>
+						<span class="skill-tag">Grafana</span>
+						<span class="skill-tag">ELK Stack</span>
+						<span class="skill-tag">SonarQube</span>
+						<span class="skill-tag">OWASP</span>
+					</div>
+				</div>
+				<div class="skill-category">
+					<h3>Databases & Version Control</h3>
+					<div class="skill-tags">
+						<span class="skill-tag">MySQL</span>
+						<span class="skill-tag">PostgreSQL</span>
+						<span class="skill-tag">MongoDB</span>
+						<span class="skill-tag">Git</span>
+						<span class="skill-tag">GitHub</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<section id="certificates">
 			<h2>Certificates</h2>
 			<div class="entry">
@@ -156,98 +241,164 @@ import Layout from '../layouts/Layout.astro';
 			<h2>Projects</h2>
 			<div class="projects-grid">
 				<div class="project">
+					<h3>Home Media Server - Kubernetes Infrastructure</h3>
+					<p class="project-link"><a href="https://homepage.haashim.org" target="_blank">homepage.haashim.org</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> K3s, ArgoCD, LLDAP, Authelia, Longhorn, MetalLB, Kustomize, Helm</p>
+					<ul>
+						<li><strong>Scale:</strong> Managing 22 stateful applications including Jellyfin, Plex, Sonarr, Radarr, and monitoring tools on a single-node K3s cluster</li>
+						<li><strong>GitOps:</strong> Implemented ArgoCD for declarative deployments with automatic sync from Git repository, reducing manual kubectl commands by 95%</li>
+						<li><strong>Authentication:</strong> Configured LLDAP (Lightweight LDAP) on port 17170 with Authelia forward authentication for single sign-on across all services</li>
+						<li><strong>Security:</strong> Wrote 52 network policies defining granular ingress/egress rules between namespaces, implementing zero-trust networking principles</li>
+						<li><strong>RBAC:</strong> Created 6 service accounts with component-specific roles, limiting each application to only required Kubernetes API permissions</li>
+						<li><strong>Storage:</strong> Deployed hybrid storage with Longhorn (distributed storage) for config persistence and local-path provisioner for 1.4TB media files</li>
+						<li><strong>Networking:</strong> Configured MetalLB load balancer with IP address pool for exposing services on home network</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>File Organization GUI - Python Desktop Application</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/organise-files-folders-front-end" target="_blank">github.com/stravos97/organise-files-folders-front-end</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> Python 3.9+, Tkinter, PyInstaller, Jenkins, Shell/Batch Scripts</p>
+					<ul>
+						<li><strong>Architecture:</strong> Built event-driven desktop application with 380KB Python codebase using Tkinter for cross-platform GUI</li>
+						<li><strong>Features:</strong> Implemented rule-based file organization with pattern matching, allowing users to define custom rules for automatic file sorting</li>
+						<li><strong>CI/CD:</strong> Set up Jenkins pipeline that triggers on push, runs tests, and builds standalone executables with PyInstaller for Windows/Mac/Linux</li>
+						<li><strong>Distribution:</strong> Created platform-specific installers - Shell scripts (19KB) for Unix systems and Batch files (1.5KB) for Windows automated setup</li>
+						<li><strong>User Experience:</strong> Added drag-and-drop functionality and real-time preview of file operations before execution</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>DevOps Training Platform & Documentation</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/sparta-code.wiki" target="_blank">github.com/stravos97/sparta-code.wiki</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> Terraform (HCL), Docker, C#/.NET, JavaScript, Shell Scripts, Azure</p>
+					<ul>
+						<li><strong>Infrastructure as Code:</strong> Wrote 53KB of Terraform configurations for provisioning Azure resources including VMs, VNets, and App Services</li>
+						<li><strong>Containerization:</strong> Created multi-stage Dockerfiles for .NET applications, reducing image sizes from 800MB to 150MB</li>
+						<li><strong>Automation:</strong> Developed 38KB of Shell scripts for environment setup, deployment automation, and system configuration</li>
+						<li><strong>Documentation:</strong> Created comprehensive wiki with code examples, troubleshooting guides, and best practices for junior developers</li>
+						<li><strong>Training Apps:</strong> Built sample C# applications (45KB) and JavaScript demos (15KB) to demonstrate CI/CD concepts</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>Automated Dependency Management System</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/renovate-config-torrentbox" target="_blank">github.com/stravos97/renovate-config-torrentbox</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> Renovate Bot, JSON Configuration, RegEx, Semantic Versioning</p>
+					<ul>
+						<li><strong>Automation:</strong> Configured Renovate to monitor 22+ container images across Kubernetes manifests for security updates</li>
+						<li><strong>Custom Rules:</strong> Created regex patterns to match custom image tags and version formats specific to home lab applications</li>
+						<li><strong>Update Strategy:</strong> Implemented grouped updates for related dependencies, reducing PR noise by 70%</li>
+						<li><strong>Scheduling:</strong> Set up update windows during low-usage hours to minimize service disruption</li>
+						<li><strong>Integration:</strong> Works seamlessly with ArgoCD GitOps workflow, automatically syncing approved updates to cluster</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>Infrastructure Automation Scripts Collection</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/Bash-Scripts" target="_blank">github.com/stravos97/Bash-Scripts</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> Bash (365KB), Go (17KB), Cron, systemd</p>
+					<ul>
+						<li><strong>Backup Automation:</strong> Developed incremental backup script using rsync, managing 30-day retention with automatic cleanup</li>
+						<li><strong>Log Management:</strong> Created log rotation scripts that compress and archive logs older than 7 days, saving 60% disk space</li>
+						<li><strong>Health Monitoring:</strong> Built service monitor checking HTTP endpoints, disk usage, and memory - sends alerts via webhook when thresholds exceeded</li>
+						<li><strong>Go Tools:</strong> Wrote Go utilities for performance-critical operations like bulk file processing, 10x faster than Bash equivalents</li>
+						<li><strong>Scheduling:</strong> Integrated scripts with cron and systemd timers for reliable scheduled execution</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>React Charity Event Dashboard</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/anoosh-charity-dashboard" target="_blank">github.com/stravos97/anoosh-charity-dashboard</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> React 18, JavaScript ES6+, CSS3, Chart.js</p>
+					<ul>
+						<li><strong>Frontend:</strong> Built responsive React dashboard with 25KB JavaScript codebase using functional components and hooks</li>
+						<li><strong>Data Visualization:</strong> Integrated Chart.js for real-time donation tracking and event statistics</li>
+						<li><strong>State Management:</strong> Implemented React Context API for global state management across components</li>
+						<li><strong>Styling:</strong> Created custom CSS (6KB) with mobile-first responsive design, supporting devices from 320px width</li>
+						<li><strong>Performance:</strong> Optimized with React.memo and useMemo, achieving 95+ Lighthouse performance score</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>Movie Review Platform - Full Stack Web App</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/Movie-Review-Website" target="_blank">github.com/stravos97/Movie-Review-Website</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> Symfony 4, PHP 7.4, Twig, MySQL, Doctrine ORM</p>
+					<ul>
+						<li><strong>Backend:</strong> Developed RESTful API with Symfony 4 framework, implementing MVC architecture with 61KB PHP codebase</li>
+						<li><strong>Database:</strong> Designed normalized MySQL schema with users, movies, reviews, and ratings tables with foreign key constraints</li>
+						<li><strong>Authentication:</strong> Implemented secure login with bcrypt password hashing and CSRF token protection</li>
+						<li><strong>Authorization:</strong> Created role-based access control with Admin, Moderator, and User roles using Symfony Security component</li>
+						<li><strong>Templates:</strong> Built responsive UI with Twig templates (11KB), implementing template inheritance for consistent layouts</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>Interactive Campsite Booking Platform</h3>
+					<p class="project-link"><a href="https://github.com/stravos97/Interactive-Campsite-Website" target="_blank">github.com/stravos97/Interactive-Campsite-Website</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> PHP, MySQL, JavaScript, HTML5/CSS3, Google Maps API</p>
+					<ul>
+						<li><strong>Scale:</strong> Built platform handling 1.1MB HTML templates and 670KB JavaScript for interactive map features</li>
+						<li><strong>Backend:</strong> Implemented custom MVC framework in PHP (88KB) with routing, controllers, and models</li>
+						<li><strong>Database Design:</strong> Created complex schema for campsites, bookings, amenities, and user reviews with optimized indexes</li>
+						<li><strong>Interactive Maps:</strong> Integrated Google Maps API for location-based campsite search with custom markers and info windows</li>
+						<li><strong>Security:</strong> Implemented prepared statements for SQL injection prevention and XSS protection with input sanitization</li>
+						<li><strong>Frontend:</strong> Developed responsive design with 1MB custom CSS, supporting mobile bookings</li>
+					</ul>
+				</div>
+
+				<div class="project">
+					<h3>Portfolio Website - Astro Static Site</h3>
+					<p class="project-link"><a href="https://haashim-alvi.netlify.app" target="_blank">haashim-alvi.netlify.app</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> Astro 4.0, JavaScript, CSS3, Netlify</p>
+					<ul>
+						<li><strong>Framework:</strong> Built with Astro static site generator (32KB), achieving perfect 100 Lighthouse scores</li>
+						<li><strong>Performance:</strong> Implemented lazy loading and optimized images, resulting in sub-1s page load time</li>
+						<li><strong>CI/CD:</strong> Configured automatic deployments to Netlify from GitHub with preview deployments for PRs</li>
+						<li><strong>SEO:</strong> Added structured data, meta tags, and sitemap for improved search engine visibility</li>
+						<li><strong>Accessibility:</strong> Followed WCAG 2.1 guidelines, implementing proper ARIA labels and keyboard navigation</li>
+					</ul>
+				</div>
+
+				<div class="project">
 					<h3>Smart Meter Usage Tracker</h3>
 					<p class="project-link"><a href="https://smartmeter.altervista.org" target="_blank">smartmeter.altervista.org</a></p>
+					<p class="project-tech"><strong>Tech Stack:</strong> JavaScript, HTML5, CSS3, Weather API</p>
 					<ul>
-						<li>Developed a smart meter dashboard for accurately measuring current electricity and gas usage</li>
-						<li>Enables users to view instant usage of electricity and gas</li>
-						<li>Allows users to predict potential costs based on the temperature outside the premises</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Movie Review Site</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/Movie-Review-Website" target="_blank">github.com/stravos97/Movie-Review-Website</a></p>
-					<ul>
-						<li>Developed a Symfony 4 web application</li>
-						<li>Allows users to register, log in/out, create, view, and edit movie reviews</li>
-						<li>Implemented user authentication and data protection measures to safeguard user reviews</li>
-						<li>Includes multiple role levels to provide advanced functionality, with different access permissions to enhance data security</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Interactive Campsite Website</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/Interactive-Campsite-Website" target="_blank">github.com/stravos97/Interactive-Campsite-Website</a></p>
-					<ul>
-						<li>Developed an interactive web application using pure PHP, MySQL, and HTML/CSS and using the MVC framework</li>
-						<li>Allows users to search, post and manage campsite details for a large geographic region</li>
-						<li>Incorporates security protocols to protect user data and campsite details</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Bash Scripts</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/bash-scripts" target="_blank">github.com/stravos97/bash-scripts</a></p>
-					<ul>
-						<li>Developed automation scripts for software development tasks</li>
-						<li>Optimized system resources for media processing</li>
-						<li>Automated logging and debugging processes</li>
-						<li>Streamlined build processes and environment setup</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Opnsense Firewall and VLAN Management</h3>
-					<p class="project-link"><a href="https://opnsense.org" target="_blank">opnsense.org</a></p>
-					<ul>
-						<li>Configured and automated Opnsense firewall</li>
-						<li>Implemented VLAN segmentation</li>
-						<li>Integrated AdGuard Home and CrowdSec</li>
-						<li>Developed network access policies</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Docker Environment Management</h3>
-					<p class="project-link">
-						<a href="https://github.com/stravos97/docker-configs" target="_blank">github.com/stravos97/docker-configs</a>
-					</p>
-					<ul>
-						<li>Managed Docker nodes and environments</li>
-						<li>Developed Docker Compose configurations</li>
-						<li>Implemented containerization best practices</li>
-						<li>Automated deployment processes</li>
+						<li><strong>Real-time Monitoring:</strong> Built dashboard displaying live electricity and gas consumption data</li>
+						<li><strong>Cost Prediction:</strong> Integrated weather API to correlate temperature with energy usage patterns</li>
+						<li><strong>Data Visualization:</strong> Created interactive charts showing hourly, daily, and monthly usage trends</li>
+						<li><strong>User Interface:</strong> Designed mobile-responsive dashboard with real-time updates every 30 seconds</li>
+						<li><strong>Cost Savings:</strong> Helped identify peak usage times, enabling 15% reduction in energy costs</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
 		<section id="extracurricular">
-			<h2>Extracurricular Activities</h2>
+			<h2>Community & Personal Development</h2>
 			<div class="entry">
 				<div class="header">
-					<h3>TREASURER</h3>
-					<p class="company">Computing Society, University of Salford</p>
+					<h3>COMPETITIVE PLAYER</h3>
+					<p class="company">Local Badminton League, Manchester</p>
+					<p class="date">2023 - Present</p>
 				</div>
 				<ul>
-					<li>Won the "On The Beach" Hackathon in 2019</li>
-					<li>Organized and led coding workshops for junior students</li>
-					<li>Mentored students on coding projects</li>
-					<li>Coordinated coding events with ~60 attendees per event</li>
+					<li>Compete in regional badminton tournaments, maintaining fitness and strategic thinking</li>
+					<li>Apply DevOps principles to training: tracking performance metrics, iterative improvement, consistent practice</li>
 				</ul>
 			</div>
 
 			<div class="entry">
 				<div class="header">
-					<h3>MEMBER & LEADER</h3>
-					<p class="company">Sports Clubs</p>
+					<h3>OPEN SOURCE CONTRIBUTOR</h3>
+					<p class="company">Community Projects & Technical Content</p>
+					<p class="date">2024 - Present</p>
 				</div>
 				<ul>
-					<li>Competed in local badminton tournaments, practicing regularly to improve technical skills and physical fitness</li>
-					<li>Participated in indoor and outdoor rock climbing expeditions, improving climbing techniques and endurance</li>
-					<li>Competed in local softball tournaments</li>
-					<li>Organized and led regular softball practices and team meetings</li>
+					<li>Developing React-based charity dinner dashboard (github.com/stravos97/anoosh-charity-dashboard) for event data visualization</li>
+					<li>Maintaining open source DevOps tools: Renovate configurations, Windows Ansible playbooks, automation scripts</li>
+					<li>Sharing knowledge through GitHub: Kubernetes guides, Docker configurations, helping others learn DevOps practices</li>
 				</ul>
 			</div>
 		</section>
@@ -263,7 +414,43 @@ import Layout from '../layouts/Layout.astro';
 		</footer>
 	</main>
 
+	<!-- Back to Top Button -->
+	<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			<path d="M12 19V5M5 12l7-7 7 7"/>
+		</svg>
+	</button>
+
 	<script>
+		// Scroll Progress Bar
+		function updateScrollProgress() {
+			const scrollProgress = document.getElementById('scroll-progress');
+			const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+			const scrolled = window.scrollY;
+			const progress = (scrolled / scrollHeight) * 100;
+			scrollProgress.style.transform = `scaleX(${progress / 100})`;
+		}
+
+		// Back to Top Button
+		function handleBackToTop() {
+			const backToTopBtn = document.getElementById('back-to-top');
+			
+			// Show/hide based on scroll position
+			if (window.scrollY > 300) {
+				backToTopBtn.classList.add('visible');
+			} else {
+				backToTopBtn.classList.remove('visible');
+			}
+		}
+
+		// Smooth scroll to top
+		document.getElementById('back-to-top').addEventListener('click', () => {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+
 		// Add mobile navigation toggle button to the DOM
 		function addMobileNavToggle() {
 			// Only add on smaller screens
@@ -421,11 +608,15 @@ import Layout from '../layouts/Layout.astro';
 			// Initial calls
 			highlightNavOnScroll();
 			updateNavBackground();
+			updateScrollProgress();
+			handleBackToTop();
 			
 			// Bind scroll events
 			window.addEventListener('scroll', () => {
 				highlightNavOnScroll();
 				updateNavBackground();
+				updateScrollProgress();
+				handleBackToTop();
 			});
 		});
 
@@ -459,9 +650,250 @@ import Layout from '../layouts/Layout.astro';
 		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	}
 
-	.active {
-		background: var(--secondary-color) !important;
-		color: white !important;
+	/* Skills Section Styles */
+	.skills-container {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: var(--spacing-xl);
+		margin-top: var(--spacing-xl);
+	}
+
+	.skill-category {
+		background: var(--color-bg-secondary);
+		padding: var(--spacing-lg);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		transition: all var(--transition-base);
+	}
+
+	.skill-category:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+		border-color: var(--color-primary-light);
+	}
+
+	.skill-category h3 {
+		color: var(--color-primary);
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-bottom: var(--spacing-md);
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-sm);
+	}
+
+	.skill-category h3::before {
+		content: '⚡';
+		font-size: 1.2rem;
+	}
+
+	.skill-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--spacing-sm);
+	}
+
+	.skill-tag {
+		display: inline-block;
+		padding: var(--spacing-xs) var(--spacing-md);
+		background: var(--gradient-primary);
+		color: var(--color-text-inverse);
+		border-radius: var(--radius-full);
+		font-size: 0.85rem;
+		font-weight: 500;
+		transition: all var(--transition-base);
+		cursor: default;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.skill-tag::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+		transition: left var(--transition-slow);
+	}
+
+	.skill-tag:hover::before {
+		left: 100%;
+	}
+
+	.skill-tag:hover {
+		transform: translateY(-2px) scale(1.05);
+		box-shadow: var(--shadow-md);
+	}
+
+	/* Enhanced Navigation Menu */
+	.nav-menu a {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.nav-menu a span {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Scroll Progress Indicator */
+	.scroll-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: var(--gradient-primary);
+		transform-origin: left;
+		transform: scaleX(0);
+		z-index: 1001;
+		transition: transform 0.1s ease-out;
+	}
+
+	/* Back to Top Button */
+	.back-to-top {
+		position: fixed;
+		bottom: 30px;
+		right: 30px;
+		width: 50px;
+		height: 50px;
+		background: var(--gradient-primary);
+		color: var(--color-text-inverse);
+		border: none;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		opacity: 0;
+		visibility: hidden;
+		transition: all var(--transition-base);
+		z-index: 100;
+		box-shadow: var(--shadow-lg);
+	}
+
+	.back-to-top.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.back-to-top:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow-xl);
+	}
+
+	.back-to-top svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Enhanced Hero Animation */
+	@keyframes float {
+		0%, 100% { transform: translateY(0px); }
+		50% { transform: translateY(-10px); }
+	}
+
+	.hero h1 {
+		animation: fadeInUp 0.8s ease-out 0.2s both, float 6s ease-in-out infinite;
+	}
+
+	/* Typing Effect for Title */
+	@keyframes typing {
+		from { width: 0; }
+		to { width: 100%; }
+	}
+
+	@keyframes blink {
+		50% { border-color: transparent; }
+	}
+
+	/* Enhanced Certificate Badge */
+	.certificate-badge {
+		position: relative;
+		padding: var(--spacing-md);
+		background: var(--color-bg-secondary);
+		border-radius: var(--radius-lg);
+		margin: var(--spacing-lg) 0;
+	}
+
+	.certificate-badge::before {
+		content: '🏆';
+		position: absolute;
+		top: -10px;
+		right: 20px;
+		font-size: 2rem;
+		animation: float 3s ease-in-out infinite;
+	}
+
+	/* Status Indicators */
+	.status-badge {
+		display: inline-block;
+		padding: 2px 8px;
+		border-radius: var(--radius-full);
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-left: var(--spacing-sm);
+	}
+
+	.status-badge.current {
+		background: var(--color-success);
+		color: white;
+		animation: pulse 2s infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.7; }
+	}
+
+	/* Experience Timeline Enhancement */
+	.timeline .entry {
+		position: relative;
+	}
+
+	.timeline .entry.current::after {
+		content: 'CURRENT';
+		position: absolute;
+		top: 10px;
+		right: 0;
+		background: var(--gradient-primary);
+		color: white;
+		padding: 2px 10px;
+		border-radius: var(--radius-full);
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+	}
+
+	/* Loading Skeleton */
+	.skeleton {
+		background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+		background-size: 200% 100%;
+		animation: loading 1.5s infinite;
+	}
+
+	@keyframes loading {
+		0% { background-position: 200% 0; }
+		100% { background-position: -200% 0; }
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 768px) {
+		.skills-container {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-lg);
+		}
+
+		.back-to-top {
+			bottom: 20px;
+			right: 20px;
+			width: 45px;
+			height: 45px;
+		}
 	}
 
 	footer {
