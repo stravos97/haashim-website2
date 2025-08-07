@@ -1,0 +1,111 @@
+---
+// Theme toggle component with sun/moon icons
+---
+
+<button 
+  id="theme-toggle" 
+  class="theme-toggle"
+  aria-label="Toggle theme"
+  title="Toggle dark/light mode"
+>
+  <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+    background: var(--color-surface-hover);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .sun-icon,
+  .moon-icon {
+    position: absolute;
+    transition: all var(--transition-base);
+    color: var(--color-text);
+  }
+
+  :global([data-theme="light"]) .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  :global([data-theme="light"]) .moon-icon {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+
+  :global([data-theme="dark"]) .sun-icon {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+
+  :global([data-theme="dark"]) .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  @media (max-width: 768px) {
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      top: 15px;
+      right: 15px;
+    }
+
+    .sun-icon,
+    .moon-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+
+<script>
+  import { toggleTheme, initTheme } from '../utils/theme';
+  
+  // Initialize theme on page load
+  initTheme();
+  
+  // Handle theme toggle
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    toggleTheme();
+    
+    // Add rotation animation
+    const button = document.getElementById('theme-toggle');
+    if (button) {
+      button.style.transform = 'rotate(360deg)';
+      setTimeout(() => {
+        button.style.transform = '';
+      }, 300);
+    }
+  });
+</script>

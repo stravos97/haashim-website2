@@ -1,930 +1,563 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import SkillSection from '../components/SkillSection.astro';
+import { cvData } from '../data/cvData';
+
+const { personal, skills, experience, projects, education, certifications } = cvData;
 ---
 
-<Layout title="Haashim Alvi - CV">
-	<!-- Scroll Progress Bar -->
-	<div class="scroll-progress" id="scroll-progress"></div>
-	
-	<!-- Navigation Menu -->
-	<div class="nav-container">
-		<nav class="nav-menu">
-			<a href="#summary">Summary</a>
-			<a href="#experience">Experience</a>
-			<a href="#education">Education</a>
-			<a href="#skills">Skills</a>
-			<a href="#certificates">Certificates</a>
-			<a href="#projects">Projects</a>
-			<a href="#extracurricular">Activities</a>
-			<a href="#references">References</a>
-		</nav>
-	</div>
+<Layout title={`${personal.name} - Portfolio`}>
+  <main>
+    <!-- Hero Section -->
+    <header class="hero">
+      <h1 class="hero-name">{personal.name}</h1>
+      <p class="hero-title">{personal.title}</p>
+      <p class="hero-summary">{personal.summary}</p>
+      
+      <div class="contact-links">
+        <a href={`mailto:${personal.contact.email}`} aria-label="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-10 5L2 7"/>
+          </svg>
+          <span>Email</span>
+        </a>
+        <a href={`tel:${personal.contact.phone.replace(/\s/g, '')}`} aria-label="Phone">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>Call</span>
+        </a>
+        <a href={`https://${personal.contact.linkedin}`} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href={`https://${personal.contact.github}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a href={`https://${personal.contact.website}`} target="_blank" rel="noopener noreferrer" aria-label="Website">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span>Website</span>
+        </a>
+      </div>
+    </header>
 
-	<main>
-		<header class="hero">
-			<h1>Haashim Alvi</h1>
-			<p class="title">DEVOPS ENGINEER · CLOUD INFRASTRUCTURE</p>
-			<div class="contact-info">
-				<p>Manchester, United Kingdom</p>
-				<div class="contact-links">
-					<a href="https://github.com/stravos97" target="_blank">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-							<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-						</svg>
-						<span>GitHub</span>
-					</a>
-					<a href="https://linkedin.com/in/haashim-alvi" target="_blank">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-							<rect x="2" y="9" width="4" height="12"></rect>
-							<circle cx="4" cy="4" r="2"></circle>
-						</svg>
-						<span>LinkedIn</span>
-					</a>
-					<a href="mailto:haashimalvi@pm.me" class="contact-email">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-							<polyline points="22,6 12,13 2,6"></polyline>
-						</svg>
-						<span>Email</span>
-					</a>
-				</div>
-			</div>
-		</header>
+    <!-- Navigation -->
+    <nav class="nav-container" id="nav-container">
+      <div class="nav-menu">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+      </div>
+    </nav>
 
-		<section id="summary">
-			<h2>Summary</h2>
-			<p>Junior DevOps engineer with hands-on experience automating deployments, managing cloud infrastructure, and implementing CI/CD pipelines. 
-			Proven ability to reduce deployment time, improve system reliability, and collaborate effectively in agile teams.</p>
-		</section>
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2>Professional Experience</h2>
+      <div class="timeline">
+        {experience.map((exp, index) => (
+          <ExperienceCard experience={exp} index={index} />
+        ))}
+      </div>
+    </section>
 
-		<section id="experience">
-			<h2>Work Experience</h2>
-			<div class="timeline">
-				<div class="entry current">
-					<div class="header">
-						<h3>DEVOPS TRAINING CONSULTANT</h3>
-						<p class="company">Sparta Global, Birmingham</p>
-						<p class="date">Jan 2025 - Current</p>
-					</div>
-					<ul>
-						<li><i>Training in enterprise DevOps practices through hands-on projects: Azure, Terraform, Kubernetes, Jenkins, Docker, Ansible</i></li>
-						<li>Reduced manual deployment steps from 8 to 2 by building CI/CD pipeline with Jenkins and Docker</li>
-						<li>Managed configuration for 10+ Azure resources by implementing Terraform modules with state management</li>
-						<li>Deployed 5 microservices to Kubernetes by configuring deployments, services, and ingress rules</li>
-						<li>Set up basic monitoring by implementing Prometheus metrics collection and Grafana dashboards</li>
-						<li>Automated application deployment by writing Ansible playbooks for 3-tier architecture</li>
-					</ul>
-				</div>
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
 
-				<div class="entry">
-					<div class="header">
-						<h3>IT TECHNICIAN</h3>
-						<p class="company">R.A.S Ltd, Rochdale</p>
-						<p class="date">2024 - 2025</p>
-					</div>
-					<ul>
-						<li><i>Sole IT responsible for small business infrastructure: Office 365, firewall configuration, Windows servers, networking</i></li>
-						<li>Achieved Cyber Essentials compliance by implementing required security controls and documentation</li>
-						<li>Saved 3-4 hours weekly by automating Windows updates and backups with PowerShell scripts</li>
-						<li>Improved system reliability by implementing daily backups and basic disaster recovery procedures</li>
-						<li>Enabled faster troubleshooting by setting up ELK stack for centralized log collection</li>
-					</ul>
-				</div>
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        {Object.entries(skills).map(([category, skillList], index) => (
+          <SkillSection category={category} skills={skillList} index={index} />
+        ))}
+      </div>
+    </section>
 
-				<div class="entry">
-					<div class="header">
-						<h3>DEVOPS ENGINEER</h3>
-						<p class="company">Dematic, Stockport</p>
-						<p class="date">2022 - 2023</p>
-					</div>
-					<ul>
-						<li><i>Improved deployment processes for warehouse software using Jenkins, Docker, and Ansible</i></li>
-						<li>Enabled daily deployments (previously weekly) by implementing Jenkins pipeline with basic testing</li>
-						<li>Reduced deployment issues by containerizing applications with Docker for consistency</li>
-						<li>Simplified server setup from manual process to scripted approach using Ansible playbooks</li>
-						<li>Caught code issues early by integrating SonarQube scanning into build pipeline</li>
-						<li>Improved team knowledge by creating deployment documentation and basic runbooks</li>
-					</ul>
-				</div>
+    <!-- Education Section -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="education-content">
+        {education.map((edu) => (
+          <div class="education-card">
+            <h3>{edu.degree}</h3>
+            <p class="institution">{edu.institution}</p>
+            <div class="education-meta">
+              <span class="date">{edu.period}</span>
+              <span class="location">{edu.location}</span>
+              {edu.grade && <span class="grade">{edu.grade}</span>}
+            </div>
+            {edu.modules && (
+              <div class="modules">
+                <h4>Key Modules:</h4>
+                <ul>
+                  {edu.modules.map((module) => (
+                    <li>{module}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
 
-				<div class="entry">
-					<div class="header">
-						<h3>SOFTWARE DEVELOPER</h3>
-						<p class="company">Dematic, Stockport</p>
-						<p class="date">2021 - 2022</p>
-					</div>
-					<ul>
-						<li><i>Developed features for warehouse management systems using C and Python</i></li>
-						<li>Built components for inventory tracking and order processing in warehouse control systems</li>
-						<li>Debugged and maintained existing codebase, fixing bugs and improving stability</li>
-						<li>Wrote Python scripts for data processing and automation of development tasks</li>
-						<li>Participated in agile development with code reviews, Git version control, and regular deployments</li>
-					</ul>
-				</div>
+    <!-- Certifications Section -->
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <div class="certifications-grid">
+        {certifications.map((cert) => (
+          <div class="certification-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+            <span>{cert}</span>
+          </div>
+        ))}
+      </div>
+    </section>
 
-				<div class="entry">
-					<div class="header">
-						<h3>SYSTEMS TESTER (Placement Year)</h3>
-						<p class="company">Skipton Building Society, Skipton</p>
-						<p class="date">2019 - 2020</p>
-					</div>
-					<ul>
-						<li><i>Tested financial applications including banking systems and mortgage platforms</i></li>
-						<li>Identified and documented defects before production releases through systematic testing</li>
-						<li>Created test cases based on business requirements and user stories</li>
-						<li>Assisted with test environment management and test data preparation</li>
-						<li>Participated in UAT coordination and defect triage meetings</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-
-		<section id="education">
-			<h2>Education</h2>
-			<div class="entry">
-				<div class="header">
-					<h3>BSc COMPUTER SCIENCE WITH WEB DEVELOPMENT</h3>
-					<p class="company">University of Salford, Salford, Manchester</p>
-					<p class="date">2017 - 2021</p>
-				</div>
-				<ul>
-					<li>Achieved a First-Class Honours Degree</li>
-					<li>Completed a placement year as a Systems Tester at Skipton Building Society</li>
-					<li>Key modules: Computer Science, Programming Fundamentals, Object-Oriented Programming, Computer Architecture, Operating Systems, Database Systems, Networks, Web Development, Cyber Security, and more</li>
-					<li>Final Year Project: Analysis of password managers, comparing security vulnerabilities and risks of password data leakage</li>
-				</ul>
-			</div>
-		</section>
-
-		<section id="skills">
-			<h2>Technical Skills</h2>
-			<div class="skills-container">
-				<div class="skill-category">
-					<h3>Cloud & Infrastructure</h3>
-					<div class="skill-tags">
-						<span class="skill-tag">Azure</span>
-						<span class="skill-tag">AWS</span>
-						<span class="skill-tag">GCP</span>
-						<span class="skill-tag">Terraform</span>
-						<span class="skill-tag">CloudFormation</span>
-					</div>
-				</div>
-				<div class="skill-category">
-					<h3>Containers & Orchestration</h3>
-					<div class="skill-tags">
-						<span class="skill-tag">Docker</span>
-						<span class="skill-tag">Kubernetes</span>
-						<span class="skill-tag">K3s</span>
-						<span class="skill-tag">Helm</span>
-						<span class="skill-tag">ArgoCD</span>
-					</div>
-				</div>
-				<div class="skill-category">
-					<h3>CI/CD & Automation</h3>
-					<div class="skill-tags">
-						<span class="skill-tag">Jenkins</span>
-						<span class="skill-tag">GitHub Actions</span>
-						<span class="skill-tag">GitLab CI</span>
-						<span class="skill-tag">Ansible</span>
-						<span class="skill-tag">Bash</span>
-					</div>
-				</div>
-				<div class="skill-category">
-					<h3>Programming</h3>
-					<div class="skill-tags">
-						<span class="skill-tag">Python</span>
-						<span class="skill-tag">JavaScript</span>
-						<span class="skill-tag">Go</span>
-						<span class="skill-tag">C#</span>
-						<span class="skill-tag">PHP</span>
-					</div>
-				</div>
-				<div class="skill-category">
-					<h3>Monitoring & Security</h3>
-					<div class="skill-tags">
-						<span class="skill-tag">Prometheus</span>
-						<span class="skill-tag">Grafana</span>
-						<span class="skill-tag">ELK Stack</span>
-						<span class="skill-tag">SonarQube</span>
-						<span class="skill-tag">OWASP</span>
-					</div>
-				</div>
-				<div class="skill-category">
-					<h3>Databases & Version Control</h3>
-					<div class="skill-tags">
-						<span class="skill-tag">MySQL</span>
-						<span class="skill-tag">PostgreSQL</span>
-						<span class="skill-tag">MongoDB</span>
-						<span class="skill-tag">Git</span>
-						<span class="skill-tag">GitHub</span>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="certificates">
-			<h2>Certificates</h2>
-			<div class="entry">
-				<div class="header">
-					<h3>AWS CLOUD PRACTITIONER</h3>
-					<p class="company">Amazon Web Services (AWS)</p>
-					<p class="date">2024</p>
-				</div>
-				<div class="certificate-badge">
-					<img src="/api/placeholder/80/80" alt="AWS Certification Badge" />
-				</div>
-			</div>
-		</section>
-
-		<section id="projects">
-			<h2>Projects</h2>
-			<div class="projects-grid">
-				<div class="project">
-					<h3>Home Media Server - Kubernetes Infrastructure</h3>
-					<p class="project-link"><a href="https://homepage.haashim.org" target="_blank">homepage.haashim.org</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> K3s, ArgoCD, LLDAP, Authelia, Longhorn, MetalLB, Kustomize, Helm</p>
-					<ul>
-						<li><strong>Scale:</strong> Managing 22 stateful applications including Jellyfin, Plex, Sonarr, Radarr, and monitoring tools on a single-node K3s cluster</li>
-						<li><strong>GitOps:</strong> Implemented ArgoCD for declarative deployments with automatic sync from Git repository, reducing manual kubectl commands by 95%</li>
-						<li><strong>Authentication:</strong> Configured LLDAP (Lightweight LDAP) on port 17170 with Authelia forward authentication for single sign-on across all services</li>
-						<li><strong>Security:</strong> Wrote 52 network policies defining granular ingress/egress rules between namespaces, implementing zero-trust networking principles</li>
-						<li><strong>RBAC:</strong> Created 6 service accounts with component-specific roles, limiting each application to only required Kubernetes API permissions</li>
-						<li><strong>Storage:</strong> Deployed hybrid storage with Longhorn (distributed storage) for config persistence and local-path provisioner for 1.4TB media files</li>
-						<li><strong>Networking:</strong> Configured MetalLB load balancer with IP address pool for exposing services on home network</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>File Organization GUI - Python Desktop Application</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/organise-files-folders-front-end" target="_blank">github.com/stravos97/organise-files-folders-front-end</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> Python 3.9+, Tkinter, PyInstaller, Jenkins, Shell/Batch Scripts</p>
-					<ul>
-						<li><strong>Architecture:</strong> Built event-driven desktop application with 380KB Python codebase using Tkinter for cross-platform GUI</li>
-						<li><strong>Features:</strong> Implemented rule-based file organization with pattern matching, allowing users to define custom rules for automatic file sorting</li>
-						<li><strong>CI/CD:</strong> Set up Jenkins pipeline that triggers on push, runs tests, and builds standalone executables with PyInstaller for Windows/Mac/Linux</li>
-						<li><strong>Distribution:</strong> Created platform-specific installers - Shell scripts (19KB) for Unix systems and Batch files (1.5KB) for Windows automated setup</li>
-						<li><strong>User Experience:</strong> Added drag-and-drop functionality and real-time preview of file operations before execution</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>DevOps Training Platform & Documentation</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/sparta-code.wiki" target="_blank">github.com/stravos97/sparta-code.wiki</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> Terraform (HCL), Docker, C#/.NET, JavaScript, Shell Scripts, Azure</p>
-					<ul>
-						<li><strong>Infrastructure as Code:</strong> Wrote 53KB of Terraform configurations for provisioning Azure resources including VMs, VNets, and App Services</li>
-						<li><strong>Containerization:</strong> Created multi-stage Dockerfiles for .NET applications, reducing image sizes from 800MB to 150MB</li>
-						<li><strong>Automation:</strong> Developed 38KB of Shell scripts for environment setup, deployment automation, and system configuration</li>
-						<li><strong>Documentation:</strong> Created comprehensive wiki with code examples, troubleshooting guides, and best practices for junior developers</li>
-						<li><strong>Training Apps:</strong> Built sample C# applications (45KB) and JavaScript demos (15KB) to demonstrate CI/CD concepts</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Automated Dependency Management System</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/renovate-config-torrentbox" target="_blank">github.com/stravos97/renovate-config-torrentbox</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> Renovate Bot, JSON Configuration, RegEx, Semantic Versioning</p>
-					<ul>
-						<li><strong>Automation:</strong> Configured Renovate to monitor 22+ container images across Kubernetes manifests for security updates</li>
-						<li><strong>Custom Rules:</strong> Created regex patterns to match custom image tags and version formats specific to home lab applications</li>
-						<li><strong>Update Strategy:</strong> Implemented grouped updates for related dependencies, reducing PR noise by 70%</li>
-						<li><strong>Scheduling:</strong> Set up update windows during low-usage hours to minimize service disruption</li>
-						<li><strong>Integration:</strong> Works seamlessly with ArgoCD GitOps workflow, automatically syncing approved updates to cluster</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Infrastructure Automation Scripts Collection</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/Bash-Scripts" target="_blank">github.com/stravos97/Bash-Scripts</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> Bash (365KB), Go (17KB), Cron, systemd</p>
-					<ul>
-						<li><strong>Backup Automation:</strong> Developed incremental backup script using rsync, managing 30-day retention with automatic cleanup</li>
-						<li><strong>Log Management:</strong> Created log rotation scripts that compress and archive logs older than 7 days, saving 60% disk space</li>
-						<li><strong>Health Monitoring:</strong> Built service monitor checking HTTP endpoints, disk usage, and memory - sends alerts via webhook when thresholds exceeded</li>
-						<li><strong>Go Tools:</strong> Wrote Go utilities for performance-critical operations like bulk file processing, 10x faster than Bash equivalents</li>
-						<li><strong>Scheduling:</strong> Integrated scripts with cron and systemd timers for reliable scheduled execution</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>React Charity Event Dashboard</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/anoosh-charity-dashboard" target="_blank">github.com/stravos97/anoosh-charity-dashboard</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> React 18, JavaScript ES6+, CSS3, Chart.js</p>
-					<ul>
-						<li><strong>Frontend:</strong> Built responsive React dashboard with 25KB JavaScript codebase using functional components and hooks</li>
-						<li><strong>Data Visualization:</strong> Integrated Chart.js for real-time donation tracking and event statistics</li>
-						<li><strong>State Management:</strong> Implemented React Context API for global state management across components</li>
-						<li><strong>Styling:</strong> Created custom CSS (6KB) with mobile-first responsive design, supporting devices from 320px width</li>
-						<li><strong>Performance:</strong> Optimized with React.memo and useMemo, achieving 95+ Lighthouse performance score</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Movie Review Platform - Full Stack Web App</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/Movie-Review-Website" target="_blank">github.com/stravos97/Movie-Review-Website</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> Symfony 4, PHP 7.4, Twig, MySQL, Doctrine ORM</p>
-					<ul>
-						<li><strong>Backend:</strong> Developed RESTful API with Symfony 4 framework, implementing MVC architecture with 61KB PHP codebase</li>
-						<li><strong>Database:</strong> Designed normalized MySQL schema with users, movies, reviews, and ratings tables with foreign key constraints</li>
-						<li><strong>Authentication:</strong> Implemented secure login with bcrypt password hashing and CSRF token protection</li>
-						<li><strong>Authorization:</strong> Created role-based access control with Admin, Moderator, and User roles using Symfony Security component</li>
-						<li><strong>Templates:</strong> Built responsive UI with Twig templates (11KB), implementing template inheritance for consistent layouts</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Interactive Campsite Booking Platform</h3>
-					<p class="project-link"><a href="https://github.com/stravos97/Interactive-Campsite-Website" target="_blank">github.com/stravos97/Interactive-Campsite-Website</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> PHP, MySQL, JavaScript, HTML5/CSS3, Google Maps API</p>
-					<ul>
-						<li><strong>Scale:</strong> Built platform handling 1.1MB HTML templates and 670KB JavaScript for interactive map features</li>
-						<li><strong>Backend:</strong> Implemented custom MVC framework in PHP (88KB) with routing, controllers, and models</li>
-						<li><strong>Database Design:</strong> Created complex schema for campsites, bookings, amenities, and user reviews with optimized indexes</li>
-						<li><strong>Interactive Maps:</strong> Integrated Google Maps API for location-based campsite search with custom markers and info windows</li>
-						<li><strong>Security:</strong> Implemented prepared statements for SQL injection prevention and XSS protection with input sanitization</li>
-						<li><strong>Frontend:</strong> Developed responsive design with 1MB custom CSS, supporting mobile bookings</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Portfolio Website - Astro Static Site</h3>
-					<p class="project-link"><a href="https://haashim-alvi.netlify.app" target="_blank">haashim-alvi.netlify.app</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> Astro 4.0, JavaScript, CSS3, Netlify</p>
-					<ul>
-						<li><strong>Framework:</strong> Built with Astro static site generator (32KB), achieving perfect 100 Lighthouse scores</li>
-						<li><strong>Performance:</strong> Implemented lazy loading and optimized images, resulting in sub-1s page load time</li>
-						<li><strong>CI/CD:</strong> Configured automatic deployments to Netlify from GitHub with preview deployments for PRs</li>
-						<li><strong>SEO:</strong> Added structured data, meta tags, and sitemap for improved search engine visibility</li>
-						<li><strong>Accessibility:</strong> Followed WCAG 2.1 guidelines, implementing proper ARIA labels and keyboard navigation</li>
-					</ul>
-				</div>
-
-				<div class="project">
-					<h3>Smart Meter Usage Tracker</h3>
-					<p class="project-link"><a href="https://smartmeter.altervista.org" target="_blank">smartmeter.altervista.org</a></p>
-					<p class="project-tech"><strong>Tech Stack:</strong> JavaScript, HTML5, CSS3, Weather API</p>
-					<ul>
-						<li><strong>Real-time Monitoring:</strong> Built dashboard displaying live electricity and gas consumption data</li>
-						<li><strong>Cost Prediction:</strong> Integrated weather API to correlate temperature with energy usage patterns</li>
-						<li><strong>Data Visualization:</strong> Created interactive charts showing hourly, daily, and monthly usage trends</li>
-						<li><strong>User Interface:</strong> Designed mobile-responsive dashboard with real-time updates every 30 seconds</li>
-						<li><strong>Cost Savings:</strong> Helped identify peak usage times, enabling 15% reduction in energy costs</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-
-		<section id="extracurricular">
-			<h2>Community & Personal Development</h2>
-			<div class="entry">
-				<div class="header">
-					<h3>COMPETITIVE PLAYER</h3>
-					<p class="company">Local Badminton League, Manchester</p>
-					<p class="date">2023 - Present</p>
-				</div>
-				<ul>
-					<li>Compete in regional badminton tournaments, maintaining fitness and strategic thinking</li>
-					<li>Apply DevOps principles to training: tracking performance metrics, iterative improvement, consistent practice</li>
-				</ul>
-			</div>
-
-			<div class="entry">
-				<div class="header">
-					<h3>OPEN SOURCE CONTRIBUTOR</h3>
-					<p class="company">Community Projects & Technical Content</p>
-					<p class="date">2024 - Present</p>
-				</div>
-				<ul>
-					<li>Developing React-based charity dinner dashboard (github.com/stravos97/anoosh-charity-dashboard) for event data visualization</li>
-					<li>Maintaining open source DevOps tools: Renovate configurations, Windows Ansible playbooks, automation scripts</li>
-					<li>Sharing knowledge through GitHub: Kubernetes guides, Docker configurations, helping others learn DevOps practices</li>
-				</ul>
-			</div>
-		</section>
-
-		<section id="references">
-			<h2>References</h2>
-			<p class="references-note">References available upon request</p>
-		</section>
-
-		<footer>
-			<p>© 2025 Haashim Alvi. Last updated: February 2025</p>
-			<button id="print-button" class="print-button">Print CV</button>
-		</footer>
-	</main>
-
-	<!-- Back to Top Button -->
-	<button class="back-to-top" id="back-to-top" aria-label="Back to top">
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-			<path d="M12 19V5M5 12l7-7 7 7"/>
-		</svg>
-	</button>
-
-	<script>
-		// Scroll Progress Bar
-		function updateScrollProgress() {
-			const scrollProgress = document.getElementById('scroll-progress');
-			const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-			const scrolled = window.scrollY;
-			const progress = (scrolled / scrollHeight) * 100;
-			scrollProgress.style.transform = `scaleX(${progress / 100})`;
-		}
-
-		// Back to Top Button
-		function handleBackToTop() {
-			const backToTopBtn = document.getElementById('back-to-top');
-			
-			// Show/hide based on scroll position
-			if (window.scrollY > 300) {
-				backToTopBtn.classList.add('visible');
-			} else {
-				backToTopBtn.classList.remove('visible');
-			}
-		}
-
-		// Smooth scroll to top
-		document.getElementById('back-to-top').addEventListener('click', () => {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		});
-
-		// Add mobile navigation toggle button to the DOM
-		function addMobileNavToggle() {
-			// Only add on smaller screens
-			if (window.innerWidth <= 480) {
-				const toggleButton = document.createElement('button');
-				toggleButton.className = 'mobile-nav-toggle';
-				toggleButton.setAttribute('aria-label', 'Toggle navigation menu');
-				toggleButton.innerHTML = `
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<line x1="3" y1="12" x2="21" y2="12"></line>
-						<line x1="3" y1="6" x2="21" y2="6"></line>
-						<line x1="3" y1="18" x2="21" y2="18"></line>
-					</svg>
-				`;
-				
-				document.body.appendChild(toggleButton);
-				
-				// Toggle navigation menu when clicked
-				toggleButton.addEventListener('click', () => {
-					const navMenu = document.querySelector('.nav-menu');
-					if (navMenu.classList.contains('expanded')) {
-						navMenu.classList.remove('expanded');
-						toggleButton.innerHTML = `
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="3" y1="12" x2="21" y2="12"></line>
-								<line x1="3" y1="6" x2="21" y2="6"></line>
-								<line x1="3" y1="18" x2="21" y2="18"></line>
-							</svg>
-						`;
-					} else {
-						navMenu.classList.add('expanded');
-						toggleButton.innerHTML = `
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="18" y1="6" x2="6" y2="18"></line>
-								<line x1="6" y1="6" x2="18" y2="18"></line>
-							</svg>
-						`;
-					}
-				});
-				
-				// Close menu when clicking a navigation link
-				document.querySelectorAll('.nav-menu a').forEach(link => {
-					link.addEventListener('click', () => {
-						const navMenu = document.querySelector('.nav-menu');
-						navMenu.classList.remove('expanded');
-						toggleButton.innerHTML = `
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="3" y1="12" x2="21" y2="12"></line>
-								<line x1="3" y1="6" x2="21" y2="6"></line>
-								<line x1="3" y1="18" x2="21" y2="18"></line>
-							</svg>
-						`;
-					});
-				});
-			}
-		}
-
-		// Check for horizontal scroll in nav menu and add indicator if needed
-		function checkNavScroll() {
-			const navMenu = document.querySelector('.nav-menu');
-			if (navMenu.scrollWidth > navMenu.clientWidth) {
-				// Show visual indicator that there's more content
-				navMenu.classList.add('scrollable');
-			} else {
-				navMenu.classList.remove('scrollable');
-			}
-		}
-
-		// Enhanced navigation with auto-scrolling to active item
-		function highlightNavOnScroll() {
-			const navLinks = document.querySelectorAll('.nav-menu a');
-			const navMenu = document.querySelector('.nav-menu');
-			const sections = document.querySelectorAll('section');
-			const scrollPos = window.scrollY;
-
-			// Determine which section is in view
-			let currentSection = '';
-			sections.forEach(section => {
-				const sectionTop = section.offsetTop - 100; // Offset for header
-				const sectionHeight = section.offsetHeight;
-
-				if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-					currentSection = section.getAttribute('id');
-				}
-			});
-
-			// Update nav links
-			navLinks.forEach(link => {
-				// Remove active class from all links
-				link.classList.remove('active');
-
-				// Add active class to current section's link
-				const href = link.getAttribute('href').substring(1);
-				if (href === currentSection) {
-					link.classList.add('active');
-
-					// Auto-scroll navigation to make active item visible
-					if (navMenu) {
-						// Calculate position of active link relative to navigation container
-						const linkRect = link.getBoundingClientRect();
-						const navRect = navMenu.getBoundingClientRect();
-
-						// Check if active link is not fully visible
-						if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
-							// Calculate scroll position to center the active link in the navigation
-							const scrollLeft = link.offsetLeft - navMenu.clientWidth / 2 + link.clientWidth / 2;
-
-							// Smooth scroll the navigation horizontally
-							navMenu.scrollTo({
-								left: scrollLeft,
-								behavior: 'smooth'
-							});
-						}
-					}
-				}
-			});
-		}
-
-		// Function to update nav background on scroll
-		function updateNavBackground() {
-			const navContainer = document.querySelector('.nav-container');
-			if (window.scrollY > 50) {
-				navContainer.classList.add('scrolled');
-			} else {
-				navContainer.classList.remove('scrolled');
-			}
-		}
-
-		// Add smooth scrolling for navigation links
-		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-			anchor.addEventListener('click', function (e) {
-				e.preventDefault();
-				const targetId = this.getAttribute('href');
-				const targetSection = document.querySelector(targetId);
-
-				if (targetSection) {
-					window.scrollTo({
-						top: targetSection.offsetTop - 70, // Adjust for header height
-						behavior: 'smooth'
-					});
-
-					// Update URL hash without jumping
-					history.pushState(null, null, targetId);
-				}
-			});
-		});
-
-		// Print button functionality
-		document.getElementById('print-button').addEventListener('click', function() {
-			window.print();
-		});
-
-		// Initialize scroll handlers
-		document.addEventListener('DOMContentLoaded', () => {
-			// Initial calls
-			highlightNavOnScroll();
-			updateNavBackground();
-			updateScrollProgress();
-			handleBackToTop();
-			
-			// Bind scroll events
-			window.addEventListener('scroll', () => {
-				highlightNavOnScroll();
-				updateNavBackground();
-				updateScrollProgress();
-				handleBackToTop();
-			});
-		});
-
-		// Initialize mobile navigation
-		document.addEventListener('DOMContentLoaded', () => {
-			addMobileNavToggle();
-			checkNavScroll();
-			
-			// Update on window resize
-			window.addEventListener('resize', () => {
-				checkNavScroll();
-			});
-		});
-	</script>
+    <!-- Footer -->
+    <footer>
+      <p>© 2024 {personal.name}. Built with Astro & TypeScript.</p>
+      <button class="print-button" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Print CV
+      </button>
+    </footer>
+  </main>
 </Layout>
 
-<style is:global>
-	/* Additional styles for the new elements */
-	.icon {
-		margin-right: 0.25rem;
-	}
+<style>
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+    padding: var(--spacing-3xl) var(--spacing-2xl);
+    background: var(--color-gradient-hero);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-2xl);
+    position: relative;
+    overflow: hidden;
+    animation: heroEntrance 0.8s ease-out;
+  }
 
-	.certificate-badge {
-		display: flex;
-		justify-content: center;
-		margin-top: 1rem;
-	}
+  @keyframes heroEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-	.certificate-badge img {
-		border-radius: 8px;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	}
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: heroRotate 30s linear infinite;
+  }
 
-	/* Skills Section Styles */
-	.skills-container {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: var(--spacing-xl);
-		margin-top: var(--spacing-xl);
-	}
+  @keyframes heroRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
-	.skill-category {
-		background: var(--color-bg-secondary);
-		padding: var(--spacing-lg);
-		border-radius: var(--radius-lg);
-		border: 1px solid var(--color-border);
-		transition: all var(--transition-base);
-	}
+  .hero-name {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
 
-	.skill-category:hover {
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
-		border-color: var(--color-primary-light);
-	}
+  .hero-title {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    opacity: 0.95;
+    margin-bottom: var(--spacing-lg);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
 
-	.skill-category h3 {
-		color: var(--color-primary);
-		font-size: 1.1rem;
-		font-weight: 600;
-		margin-bottom: var(--spacing-md);
-		display: flex;
-		align-items: center;
-		gap: var(--spacing-sm);
-	}
+  .hero-summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl) auto;
+    opacity: 0.9;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+  }
 
-	.skill-category h3::before {
-		content: '⚡';
-		font-size: 1.2rem;
-	}
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-	.skill-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing-sm);
-	}
+  /* Contact Links */
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.8s both;
+  }
 
-	.skill-tag {
-		display: inline-block;
-		padding: var(--spacing-xs) var(--spacing-md);
-		background: var(--gradient-primary);
-		color: var(--color-text-inverse);
-		border-radius: var(--radius-full);
-		font-size: 0.85rem;
-		font-weight: 500;
-		transition: all var(--transition-base);
-		cursor: default;
-		position: relative;
-		overflow: hidden;
-	}
+  .contact-links a {
+    color: var(--color-text-inverse);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-weight: 500;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+  }
 
-	.skill-tag::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-		transition: left var(--transition-slow);
-	}
+  .contact-links a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width var(--transition-slow), height var(--transition-slow);
+  }
 
-	.skill-tag:hover::before {
-		left: 100%;
-	}
+  .contact-links a:hover::before {
+    width: 100%;
+    height: 100%;
+  }
 
-	.skill-tag:hover {
-		transform: translateY(-2px) scale(1.05);
-		box-shadow: var(--shadow-md);
-	}
+  .contact-links a:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
 
-	/* Enhanced Navigation Menu */
-	.nav-menu a {
-		position: relative;
-		overflow: hidden;
-	}
+  /* Navigation */
+  .nav-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--spacing-2xl);
+    transition: all var(--transition-base);
+  }
 
-	.nav-menu a span {
-		position: relative;
-		z-index: 1;
-	}
+  [data-theme="dark"] .nav-container {
+    background: rgba(15, 23, 42, 0.8);
+  }
 
-	/* Scroll Progress Indicator */
-	.scroll-progress {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 3px;
-		background: var(--gradient-primary);
-		transform-origin: left;
-		transform: scaleX(0);
-		z-index: 1001;
-		transition: transform 0.1s ease-out;
-	}
+  .nav-menu {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) var(--spacing-xl);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 
-	/* Back to Top Button */
-	.back-to-top {
-		position: fixed;
-		bottom: 30px;
-		right: 30px;
-		width: 50px;
-		height: 50px;
-		background: var(--gradient-primary);
-		color: var(--color-text-inverse);
-		border: none;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		opacity: 0;
-		visibility: hidden;
-		transition: all var(--transition-base);
-		z-index: 100;
-		box-shadow: var(--shadow-lg);
-	}
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
 
-	.back-to-top.visible {
-		opacity: 1;
-		visibility: visible;
-	}
+  .nav-menu a {
+    color: var(--color-text);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+    position: relative;
+  }
 
-	.back-to-top:hover {
-		transform: translateY(-5px);
-		box-shadow: var(--shadow-xl);
-	}
+  .nav-menu a:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-primary);
+  }
 
-	.back-to-top svg {
-		width: 20px;
-		height: 20px;
-	}
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: var(--spacing-lg);
+  }
 
-	/* Enhanced Hero Animation */
-	@keyframes float {
-		0%, 100% { transform: translateY(0px); }
-		50% { transform: translateY(-10px); }
-	}
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: var(--radius-full);
+  }
 
-	.hero h1 {
-		animation: fadeInUp 0.8s ease-out 0.2s both, float 6s ease-in-out infinite;
-	}
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
 
-	/* Typing Effect for Title */
-	@keyframes typing {
-		from { width: 0; }
-		to { width: 100%; }
-	}
+  /* Skills Grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
 
-	@keyframes blink {
-		50% { border-color: transparent; }
-	}
+  /* Education Card */
+  .education-card {
+    background: var(--color-gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-base);
+  }
 
-	/* Enhanced Certificate Badge */
-	.certificate-badge {
-		position: relative;
-		padding: var(--spacing-md);
-		background: var(--color-bg-secondary);
-		border-radius: var(--radius-lg);
-		margin: var(--spacing-lg) 0;
-	}
+  .education-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
 
-	.certificate-badge::before {
-		content: '🏆';
-		position: absolute;
-		top: -10px;
-		right: 20px;
-		font-size: 2rem;
-		animation: float 3s ease-in-out infinite;
-	}
+  .education-card h3 {
+    color: var(--color-text);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+  }
 
-	/* Status Indicators */
-	.status-badge {
-		display: inline-block;
-		padding: 2px 8px;
-		border-radius: var(--radius-full);
-		font-size: 0.75rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin-left: var(--spacing-sm);
-	}
+  .institution {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+  }
 
-	.status-badge.current {
-		background: var(--color-success);
-		color: white;
-		animation: pulse 2s infinite;
-	}
+  .education-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-lg);
+  }
 
-	@keyframes pulse {
-		0%, 100% { opacity: 1; }
-		50% { opacity: 0.7; }
-	}
+  .education-meta span {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-tertiary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+  }
 
-	/* Experience Timeline Enhancement */
-	.timeline .entry {
-		position: relative;
-	}
+  .grade {
+    background: var(--color-primary) !important;
+    color: var(--color-text-inverse) !important;
+  }
 
-	.timeline .entry.current::after {
-		content: 'CURRENT';
-		position: absolute;
-		top: 10px;
-		right: 0;
-		background: var(--gradient-primary);
-		color: white;
-		padding: 2px 10px;
-		border-radius: var(--radius-full);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.05em;
-	}
+  .modules h4 {
+    color: var(--color-text);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+  }
 
-	/* Loading Skeleton */
-	.skeleton {
-		background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-		background-size: 200% 100%;
-		animation: loading 1.5s infinite;
-	}
+  .modules ul {
+    list-style: none;
+    padding: 0;
+  }
 
-	@keyframes loading {
-		0% { background-position: 200% 0; }
-		100% { background-position: -200% 0; }
-	}
+  .modules li {
+    position: relative;
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-secondary);
+  }
 
-	/* Responsive Adjustments */
-	@media (max-width: 768px) {
-		.skills-container {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-lg);
-		}
+  .modules li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+  }
 
-		.back-to-top {
-			bottom: 20px;
-			right: 20px;
-			width: 45px;
-			height: 45px;
-		}
-	}
+  /* Certifications */
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+  }
 
-	footer {
-		text-align: center;
-		margin-top: 4rem;
-		padding: 2rem 0;
-		color: var(--text-light);
-		font-size: 0.9rem;
-	}
+  .certification-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--color-gradient-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+  }
 
-	.print-button {
-		margin-top: 1rem;
-		padding: 0.5rem 1.5rem;
-		background: var(--secondary-color);
-		color: white;
-		border: none;
-		border-radius: 30px;
-		cursor: pointer;
-		font-family: var(--font-family);
-		font-weight: 500;
-		transition: var(--transition);
-	}
+  .certification-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+    border-color: var(--color-primary-light);
+  }
 
-	.print-button:hover {
-		background: var(--primary-color);
-		transform: translateY(-2px);
-	}
+  .certification-card span {
+    color: var(--color-text);
+    font-weight: 500;
+  }
 
-	@media print {
-		footer, .print-button {
-			display: none;
-		}
-	}
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: var(--spacing-3xl);
+    padding: var(--spacing-2xl) 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .print-button {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background: var(--color-gradient-primary);
+    color: var(--color-text-inverse);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .print-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .hero-name {
+      font-size: 2.2rem;
+    }
+
+    .projects-grid,
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .nav-menu {
+      padding: var(--spacing-sm) var(--spacing-md);
+      gap: var(--spacing-xs);
+    }
+
+    .nav-menu a {
+      padding: var(--spacing-xs) var(--spacing-md);
+      font-size: 0.85rem;
+    }
+  }
 </style>
+
+<script>
+  // Add scroll effect to navigation
+  const navContainer = document.getElementById('nav-container');
+  
+  window.addEventListener('scroll', () => {
+    if (navContainer) {
+      if (window.scrollY > 100) {
+        navContainer.style.boxShadow = 'var(--shadow-md)';
+        navContainer.style.background = 'rgba(255, 255, 255, 0.95)';
+      } else {
+        navContainer.style.boxShadow = 'none';
+        navContainer.style.background = 'rgba(255, 255, 255, 0.8)';
+      }
+    }
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href')?.substring(1);
+      if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const offset = 80; // Account for sticky nav
+          const targetPosition = targetElement.offsetTop - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+</script>

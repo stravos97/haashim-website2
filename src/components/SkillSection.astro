@@ -1,0 +1,156 @@
+---
+export interface Props {
+  category: string;
+  skills: string[];
+  index: number;
+}
+
+const { category, skills, index } = Astro.props;
+---
+
+<div class="skill-category" style={`animation-delay: ${index * 0.1}s`}>
+  <h3>{category}</h3>
+  <div class="skill-tags">
+    {skills.map((skill, i) => (
+      <span 
+        class="skill-tag" 
+        style={`animation-delay: ${(index * 0.1) + (i * 0.02)}s`}
+      >
+        {skill}
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .skill-category {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .skill-category h3 {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    padding-left: var(--spacing-lg);
+  }
+
+  .skill-category h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: var(--color-gradient-primary);
+    border-radius: var(--radius-full);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .skill-tag {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-base);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    animation: skillTagEntrance 0.5s ease-out both;
+  }
+
+  @keyframes skillTagEntrance {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .skill-tag::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--color-primary);
+    opacity: 0.1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all var(--transition-slow);
+  }
+
+  .skill-tag:hover::before {
+    width: 100%;
+    height: 100%;
+  }
+
+  .skill-tag:hover {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+  }
+
+  /* Different hover colors for different categories */
+  .skill-category:nth-child(1) .skill-tag:hover {
+    background: var(--color-primary);
+  }
+
+  .skill-category:nth-child(2) .skill-tag:hover {
+    background: var(--color-secondary);
+  }
+
+  .skill-category:nth-child(3) .skill-tag:hover {
+    background: var(--color-accent);
+  }
+
+  .skill-category:nth-child(4) .skill-tag:hover {
+    background: var(--color-info);
+  }
+
+  .skill-category:nth-child(5) .skill-tag:hover {
+    background: var(--color-success);
+  }
+
+  .skill-category:nth-child(6) .skill-tag:hover {
+    background: var(--color-warning);
+  }
+
+  @media (max-width: 768px) {
+    .skill-category h3 {
+      font-size: 1rem;
+    }
+
+    .skill-tag {
+      font-size: 0.85rem;
+      padding: var(--spacing-xs) var(--spacing-sm);
+    }
+  }
+</style>
