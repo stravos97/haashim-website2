@@ -345,6 +345,12 @@ const { personal, skills, experience, projects, education, certifications } = cv
     margin-bottom: var(--spacing-2xl);
   }
 
+  /* Better contrast for section headings in dark mode */
+  [data-theme="dark"] section h2 {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
   /* Projects Grid */
   .projects-grid {
     display: grid;

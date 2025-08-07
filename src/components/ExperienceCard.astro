@@ -53,12 +53,26 @@ const { experience, index } = Astro.props;
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     transition: all var(--transition-base);
+    position: relative;
+  }
+
+  /* Better contrast in dark mode */
+  [data-theme="dark"] .experience-content {
+    background: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   .experience-content:hover {
     box-shadow: var(--shadow-lg);
     transform: translateX(4px);
     border-color: var(--color-primary-light);
+  }
+
+  [data-theme="dark"] .experience-content:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    border-color: rgba(96, 165, 250, 0.4);
+    background: linear-gradient(135deg, #242424 0%, #1f1f1f 100%);
   }
 
   .experience-header {
@@ -85,6 +99,10 @@ const { experience, index } = Astro.props;
     margin-bottom: var(--spacing-sm);
   }
 
+  [data-theme="dark"] .company {
+    color: #93bbfc;
+  }
+
   .experience-meta {
     display: flex;
     gap: var(--spacing-md);
@@ -102,6 +120,12 @@ const { experience, index } = Astro.props;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-full);
     font-weight: 500;
+  }
+
+  [data-theme="dark"] .date,
+  [data-theme="dark"] .location {
+    background: rgba(255, 255, 255, 0.08);
+    color: #a3a3a3;
   }
 
   .date::before {
@@ -131,6 +155,12 @@ const { experience, index } = Astro.props;
     transition: all var(--transition-base);
   }
 
+  /* Better readability in dark mode */
+  [data-theme="dark"] .experience-points li {
+    color: #d4d4d4;
+    font-weight: 400;
+  }
+
   .experience-points li::before {
     content: '→';
     position: absolute;
@@ -138,6 +168,10 @@ const { experience, index } = Astro.props;
     color: var(--color-primary);
     font-weight: bold;
     transition: all var(--transition-base);
+  }
+
+  [data-theme="dark"] .experience-points li::before {
+    color: #60a5fa;
   }
 
   .experience-points li:hover {

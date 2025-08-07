@@ -68,6 +68,12 @@ const { project } = Astro.props;
     flex-direction: column;
   }
 
+  [data-theme="dark"] .project-card {
+    background: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
   .project-card::before {
     content: '';
     position: absolute;
@@ -89,6 +95,12 @@ const { project } = Astro.props;
     transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
     border-color: var(--color-primary-light);
+  }
+
+  [data-theme="dark"] .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    border-color: rgba(96, 165, 250, 0.4);
+    background: linear-gradient(135deg, #242424 0%, #1f1f1f 100%);
   }
 
   .project-header {
@@ -138,6 +150,10 @@ const { project } = Astro.props;
     font-weight: 400;
     line-height: 1.6;
     margin-bottom: var(--spacing-md);
+  }
+
+  [data-theme="dark"] .project-description {
+    color: #d4d4d4;
   }
 
   .tech-stack {
@@ -197,6 +213,10 @@ const { project } = Astro.props;
     font-size: 0.92rem;
     font-weight: 400;
     line-height: 1.6;
+  }
+
+  [data-theme="dark"] .project-achievements li {
+    color: #d4d4d4;
   }
 
   .project-achievements li::before {

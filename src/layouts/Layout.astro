@@ -10,7 +10,7 @@ const { title, description = "Haashim Alvi - DevOps Engineer & Cloud Infrastruct
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -26,10 +26,9 @@ const { title, description = "Haashim Alvi - DevOps Engineer & Cloud Infrastruct
     <!-- Load fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Theme initialization script (prevent flash) -->
+    <!-- Theme initialization script (prevent flash) - Default to dark mode -->
     <script is:inline>
-      const theme = localStorage.getItem('theme') || 
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const theme = localStorage.getItem('theme') || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
     </script>
   </head>
@@ -132,19 +131,19 @@ const { title, description = "Haashim Alvi - DevOps Engineer & Cloud Infrastruct
   --color-accent: #fbbf24;
   --color-accent-light: #fcd34d;
   
-  --color-bg: #0f0f0f;
-  --color-bg-secondary: #1a1a1a;
-  --color-bg-tertiary: #262626;
+  --color-bg: #0a0a0a;
+  --color-bg-secondary: #141414;
+  --color-bg-tertiary: #1f1f1f;
   --color-surface: #1a1a1a;
-  --color-surface-hover: #262626;
+  --color-surface-hover: #242424;
   
-  --color-text: #f9fafb;
-  --color-text-secondary: #d1d5db;
-  --color-text-tertiary: #9ca3af;
-  --color-text-inverse: #111827;
+  --color-text: #ffffff;
+  --color-text-secondary: #e5e5e5;
+  --color-text-tertiary: #a3a3a3;
+  --color-text-inverse: #0a0a0a;
   
-  --color-border: #374151;
-  --color-border-light: #1f2937;
+  --color-border: #2a2a2a;
+  --color-border-light: #1f1f1f;
   
   --color-gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   --color-gradient-hero: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(139, 92, 246, 0.8) 100%);
@@ -285,9 +284,19 @@ section {
   transition: all var(--transition-base);
 }
 
+[data-theme="dark"] section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 section:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
+}
+
+[data-theme="dark"] section:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================
@@ -425,22 +434,317 @@ a:focus {
    PRINT STYLES
    ============================================ */
 @media print {
+  /* Hide non-printable elements */
   .background-pattern,
   .scroll-progress,
   .back-to-top,
-  .theme-toggle {
+  .theme-toggle,
+  .print-button,
+  .nav-container {
     display: none !important;
   }
 
-  body {
-    background: white;
-    color: black;
+  /* Reset basic styles for print */
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
   }
 
+  html {
+    font-size: 11pt !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Typography for print */
+  h1 {
+    font-size: 20pt !important;
+    font-weight: bold !important;
+    margin-bottom: 8pt !important;
+    page-break-after: avoid !important;
+  }
+
+  h2 {
+    font-size: 16pt !important;
+    font-weight: bold !important;
+    margin-top: 12pt !important;
+    margin-bottom: 6pt !important;
+    page-break-after: avoid !important;
+    border-bottom: 1px solid #ddd !important;
+    padding-bottom: 4pt !important;
+  }
+
+  h3 {
+    font-size: 12pt !important;
+    font-weight: bold !important;
+    margin-top: 8pt !important;
+    margin-bottom: 4pt !important;
+    page-break-after: avoid !important;
+  }
+
+  p, li {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  /* Section styles for print */
   section {
-    box-shadow: none;
-    border: 1px solid #ddd;
-    page-break-inside: avoid;
+    background: white !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 8pt 0 !important;
+    margin-bottom: 12pt !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Hero section for print */
+  .hero {
+    background: white !important;
+    color: black !important;
+    text-align: left !important;
+    padding: 0 0 12pt 0 !important;
+    margin-bottom: 12pt !important;
+    border-bottom: 2px solid #333 !important;
+    border-radius: 0 !important;
+  }
+
+  .hero-name {
+    font-size: 24pt !important;
+    color: black !important;
+  }
+
+  .hero-title {
+    font-size: 14pt !important;
+    color: #333 !important;
+    margin-bottom: 6pt !important;
+  }
+
+  .hero-summary {
+    font-size: 10pt !important;
+    color: #555 !important;
+    margin-bottom: 8pt !important;
+  }
+
+  /* Contact links for print */
+  .contact-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8pt !important;
+    justify-content: flex-start !important;
+  }
+
+  .contact-links a {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #999 !important;
+    padding: 2pt 6pt !important;
+    font-size: 9pt !important;
+    text-decoration: none !important;
+    border-radius: 0 !important;
+  }
+
+  .contact-links a svg {
+    display: none !important;
+  }
+
+  .contact-links a span {
+    display: inline !important;
+  }
+
+  .contact-links a::after {
+    content: " (" attr(href) ")" !important;
+    font-size: 8pt !important;
+    color: #666 !important;
+  }
+
+  /* Experience cards for print */
+  .experience-card {
+    page-break-inside: avoid !important;
+    margin-bottom: 10pt !important;
+  }
+
+  .experience-content {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    padding: 6pt !important;
+  }
+
+  .experience-header h3 {
+    font-size: 11pt !important;
+    margin-bottom: 2pt !important;
+  }
+
+  .company {
+    font-size: 10pt !important;
+    font-weight: bold !important;
+    color: #333 !important;
+  }
+
+  .experience-meta span {
+    background: white !important;
+    border: 1px solid #999 !important;
+    padding: 1pt 4pt !important;
+    font-size: 8pt !important;
+    border-radius: 0 !important;
+  }
+
+  .experience-points li {
+    font-size: 9pt !important;
+    margin-bottom: 2pt !important;
+  }
+
+  /* Project cards for print */
+  .projects-grid {
+    display: block !important;
+  }
+
+  .project-card {
+    page-break-inside: avoid !important;
+    border: 1px solid #ddd !important;
+    padding: 6pt !important;
+    margin-bottom: 8pt !important;
+    border-radius: 0 !important;
+  }
+
+  .project-header h3 {
+    font-size: 11pt !important;
+  }
+
+  .project-links {
+    display: none !important;
+  }
+
+  .project-description {
+    font-size: 9pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .tech-tag {
+    background: white !important;
+    border: 1px solid #999 !important;
+    padding: 1pt 3pt !important;
+    font-size: 8pt !important;
+    border-radius: 0 !important;
+  }
+
+  .project-achievements li {
+    font-size: 9pt !important;
+    margin-bottom: 2pt !important;
+  }
+
+  /* Skills for print */
+  .skills-grid {
+    display: block !important;
+  }
+
+  .skill-category {
+    margin-bottom: 8pt !important;
+  }
+
+  .skill-category h3 {
+    font-size: 10pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .skill-tag {
+    background: white !important;
+    border: 1px solid #999 !important;
+    padding: 1pt 4pt !important;
+    font-size: 8pt !important;
+    margin-right: 4pt !important;
+    margin-bottom: 2pt !important;
+    display: inline-block !important;
+    border-radius: 0 !important;
+  }
+
+  /* Education for print */
+  .education-card {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    padding: 6pt !important;
+    margin-bottom: 8pt !important;
+    page-break-inside: avoid !important;
+    border-radius: 0 !important;
+  }
+
+  .education-card h3 {
+    font-size: 11pt !important;
+  }
+
+  .institution {
+    font-size: 10pt !important;
+    color: #333 !important;
+  }
+
+  .education-meta span {
+    background: white !important;
+    border: 1px solid #999 !important;
+    padding: 1pt 4pt !important;
+    font-size: 8pt !important;
+    border-radius: 0 !important;
+  }
+
+  .modules li {
+    font-size: 9pt !important;
+  }
+
+  /* Certifications for print */
+  .certifications-grid {
+    display: block !important;
+  }
+
+  .certification-card {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    padding: 4pt !important;
+    margin-bottom: 4pt !important;
+    page-break-inside: avoid !important;
+    border-radius: 0 !important;
+  }
+
+  .certification-card svg {
+    display: none !important;
+  }
+
+  .certification-card span {
+    font-size: 9pt !important;
+  }
+
+  /* Footer for print */
+  footer {
+    display: none !important;
+  }
+
+  /* Links in print */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  /* Page breaks */
+  .page-break {
+    page-break-after: always !important;
+  }
+
+  .no-break {
+    page-break-inside: avoid !important;
   }
 }
 </style>
