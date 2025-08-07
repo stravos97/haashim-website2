@@ -216,8 +216,37 @@ const { project } = Astro.props;
       padding: var(--spacing-lg);
     }
 
+    .project-header h3 {
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+
+    .project-description {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      letter-spacing: 0.01em;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .project-achievements li {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .tech-tag {
+      font-size: 0.85rem;
+      padding: 0.3rem 0.6rem;
+    }
+
     .project-metrics {
       grid-template-columns: 1fr;
+    }
+
+    .metric {
+      font-size: 0.9rem;
+      padding: var(--spacing-sm) var(--spacing-md);
     }
   }
 </style>

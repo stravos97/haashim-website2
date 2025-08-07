@@ -351,6 +351,18 @@ a:hover {
    RESPONSIVE DESIGN
    ============================================ */
 @media (max-width: 768px) {
+  /* Base typography improvements for mobile */
+  html {
+    font-size: 17px; /* Slightly larger base font for mobile */
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+
   main {
     padding: var(--spacing-md);
   }
@@ -365,6 +377,19 @@ a:hover {
     height: 40px;
     bottom: 20px;
     right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even better readability on small phones */
+  html {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.85;
+    letter-spacing: 0.015em;
   }
 }
 

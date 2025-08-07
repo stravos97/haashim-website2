@@ -67,7 +67,7 @@ const { personal, skills, experience, projects, education, certifications } = cv
     <!-- Experience Section -->
     <section id="experience">
       <h2>Professional Experience</h2>
-      <div class="timeline">
+      <div class="experience-container">
         {experience.map((exp, index) => (
           <ExperienceCard experience={exp} index={index} />
         ))}
@@ -334,21 +334,15 @@ const { personal, skills, experience, projects, education, certifications } = cv
     transform: translateY(-1px);
   }
 
-  /* Timeline */
-  .timeline {
+  /* Experience Container - No timeline lines */
+  .experience-container {
     position: relative;
-    padding-left: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
   }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 6px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    border-radius: var(--radius-full);
+  /* Add more space after all section headings */
+  section h2 {
+    margin-bottom: var(--spacing-2xl);
   }
 
   /* Projects Grid */
@@ -505,26 +499,126 @@ const { personal, skills, experience, projects, education, certifications } = cv
   /* Responsive Design */
   @media (max-width: 768px) {
     .hero {
-      padding: var(--spacing-2xl) var(--spacing-lg);
+      padding: var(--spacing-xl) var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+      border-radius: var(--radius-lg);
     }
 
     .hero-name {
-      font-size: 2.2rem;
+      font-size: 2rem;
+      margin-bottom: var(--spacing-xs);
     }
 
-    .projects-grid,
+    .hero-title {
+      font-size: 1.1rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero-summary {
+      font-size: 0.95rem;
+      padding: 0 var(--spacing-sm);
+    }
+
+    .contact-links {
+      gap: var(--spacing-xs);
+      padding: 0 var(--spacing-sm);
+    }
+
+    .contact-links a {
+      padding: var(--spacing-xs) var(--spacing-md);
+      font-size: 0.9rem;
+    }
+
+    .contact-links a span {
+      display: none; /* Hide text labels on mobile, show only icons */
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
     .skills-grid {
       grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .certifications-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .nav-container {
+      margin-bottom: var(--spacing-lg);
     }
 
     .nav-menu {
-      padding: var(--spacing-sm) var(--spacing-md);
-      gap: var(--spacing-xs);
+      padding: var(--spacing-sm) var(--spacing-xs);
+      gap: 0;
+      justify-content: flex-start;
+      overflow-x: auto;
     }
 
     .nav-menu a {
-      padding: var(--spacing-xs) var(--spacing-md);
-      font-size: 0.85rem;
+      padding: var(--spacing-sm) var(--spacing-sm);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    section {
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      border-radius: var(--radius-md);
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .experience-container {
+      margin-top: var(--spacing-lg);
+    }
+
+    .education-card {
+      padding: var(--spacing-lg);
+    }
+
+    .education-card h3 {
+      font-size: 1.15rem;
+    }
+
+    .institution {
+      font-size: 1rem;
+    }
+
+    .certification-card {
+      padding: var(--spacing-md);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      padding: var(--spacing-lg) var(--spacing-md);
+      margin-top: var(--spacing-xl);
+    }
+  }
+
+  /* Extra small devices */
+  @media (max-width: 480px) {
+    .hero-name {
+      font-size: 1.75rem;
+    }
+
+    .hero-title {
+      font-size: 1rem;
+    }
+
+    .hero-summary {
+      font-size: 0.9rem;
+    }
+
+    section h2 {
+      font-size: 1.3rem;
     }
   }
 </style>
