@@ -1,666 +1,543 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import ExperienceCard from '../components/ExperienceCard.astro';
-import SkillSection from '../components/SkillSection.astro';
 import { cvData } from '../data/cvData';
 
 const { personal, skills, experience, projects, education, certifications } = cvData;
 ---
 
-<Layout title={`${personal.name} - Portfolio`}>
-  <main>
-    <!-- Hero Section -->
-    <header class="hero">
-      <h1 class="hero-name">{personal.name}</h1>
-      <p class="hero-title">{personal.title}</p>
-      <p class="hero-summary">{personal.summary}</p>
-      
-      <div class="contact-links">
-        <a href={`mailto:${personal.contact.email}`} aria-label="Email">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-10 5L2 7"/>
-          </svg>
-          <span>Email</span>
-        </a>
-        <a href={`tel:${personal.contact.phone.replace(/\s/g, '')}`} aria-label="Phone">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          <span>Call</span>
-        </a>
-        <a href={`https://${personal.contact.linkedin}`} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-          </svg>
-          <span>LinkedIn</span>
-        </a>
-        <a href={`https://${personal.contact.github}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          <span>GitHub</span>
-        </a>
-        <a href={`https://${personal.contact.website}`} target="_blank" rel="noopener noreferrer" aria-label="Website">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-          <span>Website</span>
-        </a>
+<Layout title={`${personal.name} - ${personal.title}`}>
+  <div class="govuk-width-container">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+    
+    <!-- Header with contact info -->
+    <header class="govuk-header" role="banner">
+      <div class="govuk-header__content">
+        <h1 class="govuk-heading-xl">{personal.name}</h1>
+        <p class="govuk-body-l govuk-!-margin-bottom-4">{personal.title}</p>
+        <p class="govuk-body govuk-!-margin-bottom-6">{personal.summary}</p>
+        
+        <div class="govuk-button-group">
+          <a href={`mailto:${personal.contact.email}`} class="govuk-link">
+            Email: {personal.contact.email}
+          </a>
+          <span class="govuk-!-margin-left-3 govuk-!-margin-right-3">|</span>
+          <a href={`tel:${personal.contact.phone.replace(/\s/g, '')}`} class="govuk-link">
+            Phone: {personal.contact.phone}
+          </a>
+          <span class="govuk-!-margin-left-3 govuk-!-margin-right-3">|</span>
+          <a href={`https://${personal.contact.linkedin}`} class="govuk-link">
+            LinkedIn
+          </a>
+          <span class="govuk-!-margin-left-3 govuk-!-margin-right-3">|</span>
+          <a href={`https://${personal.contact.github}`} class="govuk-link">
+            GitHub
+          </a>
+        </div>
       </div>
     </header>
 
-    <!-- Navigation -->
-    <nav class="nav-container" id="nav-container">
-      <div class="nav-menu">
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#certifications">Certifications</a>
-      </div>
-    </nav>
-
-    <!-- Experience Section -->
-    <section id="experience">
-      <h2>Professional Experience</h2>
-      <div class="experience-container">
-        {experience.map((exp, index) => (
-          <ExperienceCard experience={exp} index={index} />
+    <!-- Main content -->
+    <main class="govuk-main-wrapper" id="main-content" role="main">
+      
+      <!-- Professional Experience -->
+      <section class="govuk-section" aria-labelledby="experience-heading">
+        <h2 class="govuk-heading-l" id="experience-heading">Professional experience</h2>
+        
+        {experience.map((exp) => (
+          <article class="govuk-!-margin-bottom-8">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-2">
+              {exp.title}
+            </h3>
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">
+              {exp.company}
+            </p>
+            <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-4">
+              {exp.period} • {exp.location}
+            </p>
+            <ul class="govuk-list govuk-list--bullet">
+              {exp.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </article>
         ))}
-      </div>
-    </section>
+      </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2>Featured Projects</h2>
-      <div class="projects-grid">
+      <!-- Key Projects -->
+      <section class="govuk-section" aria-labelledby="projects-heading">
+        <h2 class="govuk-heading-l" id="projects-heading">Key projects</h2>
+        
         {projects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-      <h2>Technical Skills</h2>
-      <div class="skills-grid">
-        {Object.entries(skills).map(([category, skillList], index) => (
-          <SkillSection category={category} skills={skillList} index={index} />
-        ))}
-      </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education">
-      <h2>Education</h2>
-      <div class="education-content">
-        {education.map((edu) => (
-          <div class="education-card">
-            <h3>{edu.degree}</h3>
-            <p class="institution">{edu.institution}</p>
-            <div class="education-meta">
-              <span class="date">{edu.period}</span>
-              <span class="location">{edu.location}</span>
-              {edu.grade && <span class="grade">{edu.grade}</span>}
+          <article class="govuk-!-margin-bottom-7">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-2">
+              {project.name}
+            </h3>
+            <p class="govuk-body govuk-!-margin-bottom-3">
+              {project.description}
+            </p>
+            
+            <div class="govuk-!-margin-bottom-3">
+              <p class="govuk-body-s govuk-!-font-weight-bold govuk-!-margin-bottom-2">
+                Technologies used:
+              </p>
+              <div class="govuk-tag-list">
+                {project.techStack.map((tech) => (
+                  <span class="govuk-tag govuk-tag--grey">{tech}</span>
+                ))}
+              </div>
             </div>
-            {edu.modules && (
-              <div class="modules">
-                <h4>Key Modules:</h4>
-                <ul>
-                  {edu.modules.map((module) => (
-                    <li>{module}</li>
+            
+            {project.achievements.length > 0 && (
+              <div>
+                <p class="govuk-body-s govuk-!-font-weight-bold govuk-!-margin-bottom-2">
+                  Key achievements:
+                </p>
+                <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+                  {project.achievements.map((achievement) => (
+                    <li class="govuk-body-s">{achievement}</li>
                   ))}
                 </ul>
               </div>
             )}
-          </div>
+            
+            {project.metrics && project.metrics.length > 0 && (
+              <div class="govuk-inset-text govuk-!-margin-top-3">
+                {project.metrics.map((metric) => (
+                  <p class="govuk-body-s govuk-!-margin-bottom-1">{metric}</p>
+                ))}
+              </div>
+            )}
+          </article>
         ))}
-      </div>
-    </section>
+      </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications">
-      <h2>Certifications</h2>
-      <div class="certifications-grid">
-        {certifications.map((cert) => (
-          <div class="certification-card">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)">
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-            </svg>
-            <span>{cert}</span>
-          </div>
+      <!-- Technical Skills -->
+      <section class="govuk-section" aria-labelledby="skills-heading">
+        <h2 class="govuk-heading-l" id="skills-heading">Technical skills</h2>
+        
+        <div class="govuk-grid-row">
+          {Object.entries(skills).map(([category, skillList]) => (
+            <div class="govuk-grid-column-one-half govuk-!-margin-bottom-6">
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-3">{category}</h3>
+              <div class="govuk-tag-list">
+                {skillList.map((skill) => (
+                  <span class="govuk-tag govuk-tag--blue">{skill}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="govuk-section" aria-labelledby="education-heading">
+        <h2 class="govuk-heading-l" id="education-heading">Education</h2>
+        
+        {education.map((edu) => (
+          <article class="govuk-!-margin-bottom-6">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-2">
+              {edu.degree}
+            </h3>
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">
+              {edu.institution}
+            </p>
+            <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-3">
+              {edu.period} • {edu.location}
+            </p>
+            {edu.grade && (
+              <p class="govuk-body govuk-!-margin-bottom-3">
+                <strong>Grade:</strong> {edu.grade}
+              </p>
+            )}
+            {edu.modules && edu.modules.length > 0 && (
+              <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                    Key modules studied
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <ul class="govuk-list govuk-list--bullet">
+                    {edu.modules.map((module) => (
+                      <li>{module}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
+            )}
+          </article>
         ))}
-      </div>
-    </section>
+      </section>
+
+      <!-- Certifications -->
+      {certifications && certifications.length > 0 && (
+        <section class="govuk-section" aria-labelledby="certifications-heading">
+          <h2 class="govuk-heading-l" id="certifications-heading">Certifications</h2>
+          
+          <ul class="govuk-list govuk-list--bullet">
+            {certifications.map((cert) => (
+              <li class="govuk-!-margin-bottom-2">{cert}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </main>
 
     <!-- Footer -->
-    <footer>
-      <p>© 2024 {personal.name}. Built with Astro & TypeScript.</p>
-      <button class="print-button" onclick="window.print()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 6 2 18 2 18 9"/>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-          <rect x="6" y="14" width="12" height="8"/>
-        </svg>
-        Print CV
-      </button>
+    <footer class="govuk-footer" role="contentinfo">
+      <div class="govuk-footer__meta">
+        <div class="govuk-footer__meta-item">
+          <p class="govuk-footer__copyright">
+            © 2024 {personal.name}
+          </p>
+        </div>
+        <div class="govuk-footer__meta-item">
+          <button class="govuk-button govuk-button--secondary" onclick="window.print()">
+            Print this CV
+          </button>
+        </div>
+      </div>
     </footer>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    text-align: center;
-    margin-bottom: var(--spacing-3xl);
-    padding: var(--spacing-3xl) var(--spacing-2xl);
-    background: var(--color-gradient-hero);
-    color: var(--color-text-inverse);
-    border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-2xl);
-    position: relative;
-    overflow: hidden;
-    animation: heroEntrance 0.8s ease-out;
-  }
-
-  @keyframes heroEntrance {
-    from {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: heroRotate 30s linear infinite;
-  }
-
-  @keyframes heroRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .hero-name {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    margin-bottom: var(--spacing-sm);
-    position: relative;
-    z-index: 1;
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-  }
-
-  .hero-title {
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    opacity: 0.95;
-    margin-bottom: var(--spacing-lg);
-    animation: fadeInUp 0.8s ease-out 0.4s both;
-  }
-
-  .hero-summary {
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 800px;
-    margin: 0 auto var(--spacing-xl) auto;
-    opacity: 0.9;
-    animation: fadeInUp 0.8s ease-out 0.6s both;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Contact Links */
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease-out 0.8s both;
-  }
-
-  .contact-links a {
-    color: var(--color-text-inverse);
-    text-decoration: none;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-full);
-    font-weight: 500;
-    transition: all var(--transition-base);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-links a::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width var(--transition-slow), height var(--transition-slow);
-  }
-
-  .contact-links a:hover::before {
-    width: 100%;
-    height: 100%;
-  }
-
-  .contact-links a:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Navigation */
-  .nav-container {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: var(--spacing-2xl);
-    transition: all var(--transition-base);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  [data-theme="dark"] .nav-container {
-    background: rgba(26, 26, 26, 0.95);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-
-  .nav-menu {
-    max-width: 1280px;
+  /* GOV.UK Component Styles */
+  .govuk-width-container {
+    max-width: 1020px;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-md) var(--spacing-xl);
-    overflow-x: auto;
-    scrollbar-width: none;
+    padding: 0 15px;
   }
 
-  .nav-menu::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-menu a {
+  .govuk-skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 10px 15px;
+    background: var(--color-focus);
     color: var(--color-text);
     text-decoration: none;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    font-size: 0.95rem;
-    font-weight: 600;
-    white-space: nowrap;
-    border-radius: var(--radius-full);
-    transition: all var(--transition-base);
-    position: relative;
+    font-weight: 700;
   }
 
-  .nav-menu a:hover {
-    background: var(--color-bg-secondary);
-    color: var(--color-primary);
-    transform: translateY(-1px);
-  }
-
-  /* Experience Container - No timeline lines */
-  .experience-container {
-    position: relative;
-    margin-top: var(--spacing-2xl);
-  }
-
-  /* Add more space after all section headings */
-  section h2 {
-    margin-bottom: var(--spacing-2xl);
-  }
-
-  /* Better contrast for section headings in dark mode */
-  [data-theme="dark"] section h2 {
-    color: #ffffff;
-    font-weight: 800;
-  }
-
-  /* Projects Grid */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: var(--spacing-xl);
-    margin-top: var(--spacing-xl);
-  }
-
-  /* Skills Grid */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-xl);
-    margin-top: var(--spacing-xl);
-  }
-
-  /* Education Card */
-  .education-card {
-    background: var(--color-gradient-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    transition: all var(--transition-base);
-  }
-
-  .education-card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-  }
-
-  .education-card h3 {
-    color: var(--color-text);
-    font-size: 1.3rem;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .institution {
-    color: var(--color-primary);
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: var(--spacing-md);
-  }
-
-  .education-meta {
-    display: flex;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .education-meta span {
-    background: var(--color-bg-secondary);
-    color: var(--color-text-tertiary);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--radius-full);
-    font-size: 0.9rem;
-  }
-
-  .grade {
-    background: var(--color-primary) !important;
-    color: var(--color-text-inverse) !important;
-  }
-
-  .modules h4 {
-    color: var(--color-text);
-    font-size: 1rem;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .modules ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .modules li {
-    position: relative;
-    padding-left: var(--spacing-lg);
-    margin-bottom: var(--spacing-xs);
-    color: var(--color-text-secondary);
-  }
-
-  .modules li::before {
-    content: '•';
-    position: absolute;
+  .govuk-skip-link:focus {
     left: 0;
-    color: var(--color-primary);
   }
 
-  /* Certifications */
-  .certifications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
+  .govuk-header {
+    padding: var(--spacing-6) 0;
+    border-bottom: 10px solid var(--color-primary);
+    margin-bottom: var(--spacing-6);
   }
 
-  .certification-card {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-lg);
-    background: var(--color-gradient-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+  .govuk-heading-xl {
+    font-size: var(--font-size-48);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-4) 0;
+    line-height: var(--line-height-tight);
   }
 
-  .certification-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateX(4px);
-    border-color: var(--color-primary-light);
+  .govuk-heading-l {
+    font-size: var(--font-size-36);
+    font-weight: 700;
+    margin: var(--spacing-8) 0 var(--spacing-4) 0;
+    line-height: var(--line-height-tight);
   }
 
-  .certification-card span {
+  .govuk-heading-m {
+    font-size: var(--font-size-24);
+    font-weight: 700;
+    margin: var(--spacing-6) 0 var(--spacing-3) 0;
+    line-height: var(--line-height-tight);
+  }
+
+  .govuk-heading-s {
+    font-size: var(--font-size-19);
+    font-weight: 700;
+    margin: var(--spacing-4) 0 var(--spacing-2) 0;
+    line-height: var(--line-height-tight);
+  }
+
+  .govuk-body {
+    font-size: var(--font-size-19);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .govuk-body-l {
+    font-size: var(--font-size-24);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .govuk-body-s {
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .govuk-link {
+    color: var(--color-link);
+    text-underline-offset: 0.1em;
+  }
+
+  .govuk-link:visited {
+    color: var(--color-link-visited);
+  }
+
+  .govuk-link:hover {
+    color: var(--color-link-hover);
+    text-decoration-thickness: 3px;
+  }
+
+  .govuk-link:focus {
+    background-color: var(--color-focus);
     color: var(--color-text);
-    font-weight: 500;
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 0;
+    text-decoration: none;
+    box-shadow: 0 -2px var(--color-focus), 0 4px var(--color-text);
   }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    margin-top: var(--spacing-3xl);
-    padding: var(--spacing-2xl) 0;
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
-    border-top: 1px solid var(--color-border);
+  .govuk-list {
+    padding-left: 20px;
+    margin-bottom: var(--spacing-4);
   }
 
-  .print-button {
-    margin-top: var(--spacing-md);
-    padding: var(--spacing-sm) var(--spacing-xl);
-    background: var(--color-gradient-primary);
-    color: var(--color-text-inverse);
-    border: none;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all var(--transition-base);
-    box-shadow: var(--shadow-md);
-    display: inline-flex;
+  .govuk-list--bullet {
+    list-style-type: disc;
+  }
+
+  .govuk-list--spaced li {
+    margin-bottom: var(--spacing-2);
+  }
+
+  .govuk-section {
+    margin-bottom: var(--spacing-8);
+    padding-bottom: var(--spacing-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .govuk-section:last-child {
+    border-bottom: none;
+  }
+
+  .govuk-button-group {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 0;
   }
 
-  .print-button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-xl);
+  .govuk-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
+    font-size: var(--font-size-16);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid currentColor;
   }
 
-  /* Responsive Design */
+  .govuk-tag--blue {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .govuk-tag--grey {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  .govuk-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .govuk-inset-text {
+    padding: var(--spacing-3);
+    border-left: 5px solid var(--color-border);
+    background: var(--color-bg-secondary);
+  }
+
+  .govuk-details {
+    margin-bottom: var(--spacing-4);
+  }
+
+  .govuk-details__summary {
+    cursor: pointer;
+    color: var(--color-link);
+    text-underline-offset: 0.1em;
+    display: inline-block;
+    padding: var(--spacing-2) 0;
+  }
+
+  .govuk-details__summary:hover {
+    color: var(--color-link-hover);
+    text-decoration-thickness: 3px;
+  }
+
+  .govuk-details__summary:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 0;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+  }
+
+  .govuk-details__text {
+    padding: var(--spacing-3) 0 var(--spacing-3) var(--spacing-4);
+    border-left: 5px solid var(--color-border);
+  }
+
+  .govuk-footer {
+    padding: var(--spacing-6) 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--spacing-8);
+  }
+
+  .govuk-footer__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .govuk-button {
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-19);
+    font-weight: 700;
+    background: var(--color-success);
+    color: white;
+    border: 2px solid var(--color-success);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .govuk-button:hover {
+    background: #00572e;
+    border-color: #00572e;
+  }
+
+  .govuk-button:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 0;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+    border-color: var(--color-text);
+  }
+
+  .govuk-button--secondary {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+    border-color: var(--color-text);
+  }
+
+  .govuk-button--secondary:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  /* GOV.UK Utility Classes */
+  .govuk-!-margin-bottom-1 { margin-bottom: var(--spacing-1) !important; }
+  .govuk-!-margin-bottom-2 { margin-bottom: var(--spacing-2) !important; }
+  .govuk-!-margin-bottom-3 { margin-bottom: var(--spacing-3) !important; }
+  .govuk-!-margin-bottom-4 { margin-bottom: var(--spacing-4) !important; }
+  .govuk-!-margin-bottom-6 { margin-bottom: var(--spacing-6) !important; }
+  .govuk-!-margin-bottom-7 { margin-bottom: var(--spacing-7) !important; }
+  .govuk-!-margin-bottom-8 { margin-bottom: var(--spacing-8) !important; }
+  
+  .govuk-!-margin-top-3 { margin-top: var(--spacing-3) !important; }
+  
+  .govuk-!-margin-left-3 { margin-left: var(--spacing-3) !important; }
+  .govuk-!-margin-right-3 { margin-right: var(--spacing-3) !important; }
+  
+  .govuk-!-font-weight-bold { font-weight: 700 !important; }
+  
+  .govuk-text-colour--secondary { 
+    color: var(--color-text-secondary) !important; 
+  }
+
+  .govuk-grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+  }
+
+  .govuk-grid-column-one-half {
+    padding: 0 15px;
+    width: 50%;
+  }
+
+  /* Mobile Responsive */
   @media (max-width: 768px) {
-    .hero {
-      padding: var(--spacing-xl) var(--spacing-md);
-      margin-bottom: var(--spacing-xl);
-      border-radius: var(--radius-lg);
+    .govuk-heading-xl {
+      font-size: var(--font-size-36);
     }
 
-    .hero-name {
-      font-size: 2rem;
-      margin-bottom: var(--spacing-xs);
+    .govuk-heading-l {
+      font-size: var(--font-size-27);
     }
 
-    .hero-title {
-      font-size: 1.1rem;
-      margin-bottom: var(--spacing-md);
+    .govuk-heading-m {
+      font-size: var(--font-size-19);
     }
 
-    .hero-summary {
-      font-size: 0.95rem;
-      padding: 0 var(--spacing-sm);
+    .govuk-body-l {
+      font-size: var(--font-size-19);
     }
 
-    .contact-links {
-      gap: var(--spacing-xs);
-      padding: 0 var(--spacing-sm);
+    .govuk-body {
+      font-size: var(--font-size-16);
     }
 
-    .contact-links a {
-      padding: var(--spacing-xs) var(--spacing-md);
-      font-size: 0.9rem;
+    .govuk-grid-column-one-half {
+      width: 100%;
     }
 
-    .contact-links a span {
-      display: none; /* Hide text labels on mobile, show only icons */
+    .govuk-button-group {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
-    .projects-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
+    .govuk-button-group span {
+      display: none;
     }
 
-    .skills-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
-    }
-
-    .certifications-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-md);
-    }
-
-    .nav-container {
-      margin-bottom: var(--spacing-lg);
-    }
-
-    .nav-menu {
-      padding: var(--spacing-sm) var(--spacing-xs);
-      gap: 0;
-      justify-content: flex-start;
-      overflow-x: auto;
-    }
-
-    .nav-menu a {
-      padding: var(--spacing-sm) var(--spacing-sm);
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-
-    section {
-      padding: var(--spacing-lg);
-      margin-bottom: var(--spacing-lg);
-      border-radius: var(--radius-md);
-    }
-
-    section h2 {
-      font-size: 1.5rem;
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .experience-container {
-      margin-top: var(--spacing-lg);
-    }
-
-    .education-card {
-      padding: var(--spacing-lg);
-    }
-
-    .education-card h3 {
-      font-size: 1.15rem;
-    }
-
-    .institution {
-      font-size: 1rem;
-    }
-
-    .certification-card {
-      padding: var(--spacing-md);
-      font-size: 0.9rem;
-    }
-
-    footer {
-      padding: var(--spacing-lg) var(--spacing-md);
-      margin-top: var(--spacing-xl);
+    .govuk-footer__meta {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
-  /* Extra small devices */
-  @media (max-width: 480px) {
-    .hero-name {
-      font-size: 1.75rem;
+  /* Print styles */
+  @media print {
+    .govuk-skip-link,
+    .govuk-button,
+    .govuk-details__summary {
+      display: none !important;
     }
 
-    .hero-title {
-      font-size: 1rem;
+    .govuk-details__text {
+      display: block !important;
+      border: none !important;
+      padding-left: 0 !important;
     }
 
-    .hero-summary {
-      font-size: 0.9rem;
+    .govuk-header {
+      border-bottom: 2px solid black !important;
     }
 
-    section h2 {
-      font-size: 1.3rem;
+    .govuk-tag {
+      border: 1px solid black !important;
+      background: white !important;
+      color: black !important;
     }
   }
 </style>
-
-<script>
-  // Add scroll effect to navigation
-  const navContainer = document.getElementById('nav-container');
-  
-  window.addEventListener('scroll', () => {
-    if (navContainer) {
-      if (window.scrollY > 100) {
-        navContainer.style.boxShadow = 'var(--shadow-md)';
-        navContainer.style.background = 'rgba(255, 255, 255, 0.95)';
-      } else {
-        navContainer.style.boxShadow = 'none';
-        navContainer.style.background = 'rgba(255, 255, 255, 0.8)';
-      }
-    }
-  });
-
-  // Smooth scroll for navigation links
-  document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href')?.substring(1);
-      if (targetId) {
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          const offset = 80; // Account for sticky nav
-          const targetPosition = targetElement.offsetTop - offset;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }
-    });
-  });
-</script>

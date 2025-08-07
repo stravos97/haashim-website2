@@ -28,84 +28,45 @@ const { experience, index } = Astro.props;
 </article>
 
 <style>
+  /* GOV.UK Experience Card Styles */
   .experience-card {
-    position: relative;
-    margin-bottom: var(--spacing-xl);
-    animation: slideInLeft 0.6s ease-out both;
+    margin-bottom: var(--spacing-8);
   }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  /* Removed timeline markers and lines for cleaner design */
 
   .experience-content {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-6);
+    background: var(--color-bg);
+    border-left: 5px solid var(--color-primary);
     transition: all var(--transition-base);
-    position: relative;
-  }
-
-  /* Better contrast in dark mode */
-  [data-theme="dark"] .experience-content {
-    background: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   .experience-content:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateX(4px);
-    border-color: var(--color-primary-light);
-  }
-
-  [data-theme="dark"] .experience-content:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-    border-color: rgba(96, 165, 250, 0.4);
-    background: linear-gradient(135deg, #242424 0%, #1f1f1f 100%);
+    background: var(--color-bg-secondary);
   }
 
   .experience-header {
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-4);
   }
 
   .experience-header h3 {
     color: var(--color-text);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 var(--spacing-xs) 0;
-    transition: color var(--transition-base);
-  }
-
-  .experience-content:hover h3 {
-    color: var(--color-primary);
+    font-size: var(--font-size-24);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-2) 0;
+    line-height: var(--line-height-tight);
   }
 
   .company {
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: 1.1rem;
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: var(--font-size-19);
     display: block;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  [data-theme="dark"] .company {
-    color: #93bbfc;
+    margin-bottom: var(--spacing-2);
   }
 
   .experience-meta {
     display: flex;
-    gap: var(--spacing-md);
+    gap: var(--spacing-3);
     flex-wrap: wrap;
   }
 
@@ -113,74 +74,29 @@ const { experience, index } = Astro.props;
   .location {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--color-text-tertiary);
-    font-size: 0.9rem;
-    background: var(--color-bg-secondary);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--radius-full);
-    font-weight: 500;
+    gap: var(--spacing-1);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-16);
+    font-weight: 400;
   }
 
-  [data-theme="dark"] .date,
-  [data-theme="dark"] .location {
-    background: rgba(255, 255, 255, 0.08);
-    color: #a3a3a3;
-  }
-
-  .date::before {
-    content: '📅';
-    font-size: 0.8em;
-  }
-
+  .date::before,
   .location::before {
-    content: '📍';
-    font-size: 0.8em;
+    display: none; /* Remove emojis for cleaner GOV.UK style */
   }
 
   .experience-points {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    list-style: disc;
+    padding-left: var(--spacing-4);
+    margin: var(--spacing-3) 0 0 0;
   }
 
   .experience-points li {
-    position: relative;
-    padding-left: var(--spacing-xl);
-    margin-bottom: var(--spacing-md);
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
-    font-weight: 400;
-    line-height: 1.7;
-    transition: all var(--transition-base);
-  }
-
-  /* Better readability in dark mode */
-  [data-theme="dark"] .experience-points li {
-    color: #d4d4d4;
-    font-weight: 400;
-  }
-
-  .experience-points li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
-    font-weight: bold;
-    transition: all var(--transition-base);
-  }
-
-  [data-theme="dark"] .experience-points li::before {
-    color: #60a5fa;
-  }
-
-  .experience-points li:hover {
+    padding-left: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
     color: var(--color-text);
-    transform: translateX(4px);
-  }
-
-  .experience-points li:hover::before {
-    transform: translateX(-4px);
+    font-size: var(--font-size-19);
+    line-height: var(--line-height-normal);
   }
 
   .experience-points li:last-child {
@@ -189,51 +105,24 @@ const { experience, index } = Astro.props;
 
   @media (max-width: 768px) {
     .experience-card {
-      margin-bottom: var(--spacing-lg);
+      margin-bottom: var(--spacing-6);
     }
 
     .experience-content {
-      padding: var(--spacing-md);
-      border-radius: var(--radius-md);
-    }
-
-    .experience-header {
-      margin-bottom: var(--spacing-md);
+      padding: var(--spacing-4);
     }
 
     .experience-header h3 {
-      font-size: 1.15rem;
-      line-height: 1.3;
-      margin-bottom: var(--spacing-xs);
+      font-size: var(--font-size-19);
     }
 
     .company {
-      font-size: 1rem;
-      line-height: 1.3;
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .experience-meta {
-      gap: var(--spacing-xs);
-      margin-bottom: var(--spacing-md);
-    }
-
-    .date,
-    .location {
-      font-size: 0.85rem;
-      padding: 0.15rem 0.5rem;
-    }
-
-    .experience-points {
-      margin-top: var(--spacing-md);
+      font-size: var(--font-size-16);
     }
 
     .experience-points li {
-      font-size: 0.95rem;
-      line-height: 1.75;
-      margin-bottom: var(--spacing-md);
-      padding-left: var(--spacing-lg);
-      letter-spacing: 0.01em;
+      font-size: var(--font-size-16);
+      margin-bottom: var(--spacing-3);
     }
   }
 </style>
