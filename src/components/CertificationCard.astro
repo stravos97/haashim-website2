@@ -16,7 +16,6 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   class={`certification-card ${isPlanned ? 'certification-planned' : 'certification-earned'}`}>
   
   <h3 class="govuk-heading-m mb-2" id={`cert-${index}`}>
-    {!isPlanned && <span class="cert-badge-earned" aria-label="Earned">✓</span>}
     {certification.name}
     {isPlanned && <span class="govuk-tag govuk-tag--grey ml-2">Planned</span>}
   </h3>
@@ -66,8 +65,15 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   
   .certification-earned {
     background: var(--cert-earned-bg);
-    border-left: 4px solid var(--govuk-colour-green);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--govuk-colour-green);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  
+  .certification-earned:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    transform: translateX(2px);
   }
   
   .certification-planned {
@@ -76,19 +82,16 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
     opacity: 0.85;
   }
   
-  .cert-badge-earned {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+  .certification-earned::before {
+    content: '';
+    position: absolute;
+    top: var(--govuk-spacing-4);
+    left: -5px;
+    width: 10px;
+    height: 10px;
     background: var(--govuk-colour-green);
-    color: white;
-    font-weight: bold;
-    margin-right: 10px;
-    font-size: 14px;
-    flex-shrink: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--cert-earned-bg);
   }
   
   .ml-2 {
@@ -102,12 +105,12 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   
   /* Dark mode */
   :root[data-theme="dark"] {
-    --cert-earned-bg: rgba(0, 112, 60, 0.1);
+    --cert-earned-bg: rgba(0, 112, 60, 0.08);
   }
   
   /* Light mode */
   :root[data-theme="light"] {
-    --cert-earned-bg: rgba(0, 112, 60, 0.05);
+    --cert-earned-bg: rgba(0, 112, 60, 0.03);
   }
   
   @media print {
@@ -117,9 +120,8 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
       padding: 10px;
     }
     
-    .cert-badge-earned {
-      print-color-adjust: exact;
-      -webkit-print-color-adjust: exact;
+    .certification-earned::before {
+      display: none;
     }
   }
 </style>

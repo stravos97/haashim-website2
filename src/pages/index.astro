@@ -230,29 +230,12 @@ const plannedCerts = cvUtils.getPlannedCertifications();
       <!-- Certifications -->
       {certifications && certifications.length > 0 && (
         <section class="govuk-section" id="certifications" aria-labelledby="certifications-heading" role="region">
-          <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications & Professional Development</h2>
+          <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications</h2>
           
           {earnedCerts.length > 0 && (
             <div class="certification-section earned-section">
-              <h3 class="govuk-heading-m mb-4">
-                <span class="section-icon">🏆</span> Earned Certifications
-              </h3>
               {earnedCerts.map((cert, idx) => (
                 <CertificationCard certification={cert} index={idx} />
-              ))}
-            </div>
-          )}
-          
-          {plannedCerts.length > 0 && (
-            <div class="certification-section planned-section">
-              <h3 class="govuk-heading-m mb-3">
-                <span class="section-icon">📚</span> Professional Development Roadmap
-              </h3>
-              <p class="govuk-body-s govuk-text-colour--secondary mb-4">
-                Upcoming certifications to expand expertise
-              </p>
-              {plannedCerts.map((cert, idx) => (
-                <CertificationCard certification={cert} index={earnedCerts.length + idx} />
               ))}
             </div>
           )}
