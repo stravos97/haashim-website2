@@ -20,30 +20,46 @@ const { personal, skills, experience, projects, education, certifications, commu
     <header class="govuk-header" role="banner" aria-label="Site header">
       <div class="govuk-header__content">
         <h1 class="govuk-heading-xl" id="site-title">{personal.name}</h1>
-        <p class="govuk-body-l mb-4" role="doc-subtitle">{personal.title}</p>
-        <p class="govuk-body mb-6" aria-label="Professional summary">{personal.summary}</p>
+        <p class="govuk-body-l mb-3" role="doc-subtitle">{personal.title}</p>
         
-        <nav class="govuk-button-group" role="navigation" aria-label="Contact information">
+        <div class="summary-section">
+          <p class="summary-text" aria-label="Professional summary">
+            Junior DevOps engineer with hands-on experience automating deployments and managing infrastructure.
+            Currently at <strong>Sparta Global</strong> developing enterprise DevOps skills through intensive training projects.
+            Passionate about automation and continuously learning modern DevOps practices.
+          </p>
+          <div class="skills-highlight">
+            <span class="skill-badge">Azure</span>
+            <span class="skill-badge">Terraform</span>
+            <span class="skill-badge">Kubernetes</span>
+            <span class="skill-badge">CI/CD</span>
+            <span class="skill-badge">Docker</span>
+            <span class="skill-badge">Python</span>
+          </div>
+        </div>
+        
+        <nav class="contact-links" role="navigation" aria-label="Contact information">
           <a href={`mailto:${personal.contact.email}`} 
-             class="govuk-link touch-target"
+             class="contact-link"
              aria-label={`Send email to ${personal.name}`}>
-            <span aria-hidden="true">📧</span> Email: {personal.contact.email}
+            <span class="contact-icon">📧</span>
+            <span class="contact-text">Email</span>
           </a>
-          <span class="separator" aria-hidden="true">|</span>
           <a href={`https://${personal.contact.linkedin}`} 
-             class="govuk-link touch-target"
+             class="contact-link"
              rel="noopener noreferrer"
              target="_blank"
              aria-label={`View ${personal.name}'s LinkedIn profile (opens in new tab)`}>
-            LinkedIn <span class="visually-hidden">(opens in new tab)</span>
+            <span class="contact-icon">🔗</span>
+            <span class="contact-text">LinkedIn</span>
           </a>
-          <span class="separator" aria-hidden="true">|</span>
           <a href={`https://${personal.contact.github}`} 
-             class="govuk-link touch-target"
+             class="contact-link"
              rel="noopener noreferrer"
              target="_blank"
              aria-label={`View ${personal.name}'s GitHub profile (opens in new tab)`}>
-            GitHub <span class="visually-hidden">(opens in new tab)</span>
+            <span class="contact-icon">💻</span>
+            <span class="contact-text">GitHub</span>
           </a>
         </nav>
       </div>
@@ -344,7 +360,7 @@ const { personal, skills, experience, projects, education, certifications, commu
     border-bottom: 1px solid var(--color-border);
     padding: var(--spacing-2) 0;
     z-index: 50;
-    margin-bottom: 0;
+    margin-bottom: var(--spacing-6);
   }
 
   .progress-bar {
@@ -363,16 +379,127 @@ const { personal, skills, experience, projects, education, certifications, commu
   }
 
   .govuk-header {
-    padding: var(--spacing-6) 0;
-    border-bottom: 10px solid var(--color-primary);
-    margin-bottom: var(--spacing-6);
+    padding: var(--spacing-8) 0 var(--spacing-6) 0;
+    border-bottom: 3px solid var(--color-primary);
+    margin-bottom: var(--spacing-8);
+    text-align: center;
+  }
+
+  .govuk-header__content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .summary-section {
+    max-width: 750px;
+    margin: 0 auto var(--spacing-6) auto;
+  }
+
+  .summary-text {
+    font-size: var(--font-size-19);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-5);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .summary-text .highlight {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .skills-highlight {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-4);
+    justify-content: center;
+  }
+
+  .skill-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-16);
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--color-link);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-height: var(--target-size-recommended);
+    position: relative;
+  }
+
+  .contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .contact-link:hover::after {
+    width: 80%;
+  }
+
+  .contact-link:hover {
+    color: var(--color-primary);
+  }
+
+  .contact-link:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 2px;
+    background: var(--color-focus);
+    color: var(--color-text);
+  }
+
+  .contact-icon {
+    font-size: 20px;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .contact-text {
+    font-size: var(--font-size-16);
   }
 
   .govuk-heading-xl {
-    font-size: var(--font-size-48);
+    font-size: 56px;
     font-weight: 700;
-    margin: 0 0 var(--spacing-4) 0;
-    line-height: var(--line-height-tight);
+    margin: 0 0 var(--spacing-3) 0;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
   }
 
   .govuk-heading-l {
@@ -406,6 +533,12 @@ const { personal, skills, experience, projects, education, certifications, commu
     font-size: var(--font-size-24);
     line-height: var(--line-height-normal);
     margin-bottom: var(--spacing-4);
+  }
+  
+  .govuk-header .govuk-body-l {
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    opacity: 0.9;
   }
 
   .govuk-body-s {
@@ -703,6 +836,33 @@ const { personal, skills, experience, projects, education, certifications, commu
     .govuk-footer__meta {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .govuk-heading-xl {
+      font-size: 42px;
+    }
+
+    .summary-text {
+      font-size: var(--font-size-16);
+      line-height: 1.6;
+    }
+
+    .skills-highlight {
+      gap: var(--spacing-1);
+    }
+
+    .skill-badge {
+      font-size: 14px;
+      padding: 4px 10px;
+    }
+
+    .contact-links {
+      flex-wrap: wrap;
+      gap: var(--spacing-2);
+    }
+
+    .contact-link {
+      padding: var(--spacing-2) var(--spacing-3);
     }
   }
 
