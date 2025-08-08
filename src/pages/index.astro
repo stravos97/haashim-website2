@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PDFGenerator from '../components/PDFGenerator.astro';
-import CertificationCard from '../components/CertificationCard.astro';
 import { cvData, cvUtils } from '../data';
 
 const { personal, skills, experience, projects, education, certifications, community } = cvData;
@@ -230,8 +229,65 @@ const { personal, skills, experience, projects, education, certifications, commu
         <section class="govuk-section" id="certifications" aria-labelledby="certifications-heading" role="region">
           <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications</h2>
           
-          {certifications.map((cert, idx) => (
-            <CertificationCard certification={cert} index={idx} />
+          {certifications.map((cert) => (
+            <article aria-label={`${cert.name} certification`}
+                     role="article">
+              <h3 class="govuk-heading-m mb-2" id={`cert-${cert.name.replace(/\s+/g, '-').toLowerCase()}`}>
+                {cert.name}
+              </h3>
+              <p class="govuk-body font-bold mb-1"
+                 aria-describedby={`cert-${cert.name.replace(/\s+/g, '-').toLowerCase()}`}>
+                {cert.issuer}
+              </p>
+              <p class="govuk-body-s govuk-text-colour--secondary mb-3">
+                <time datetime={cert.date}>{cert.date}</time>
+              </p>
+              {cert.credentialId && (
+                <p class="govuk-body mb-3">
+                  <strong>ID:</strong> {cert.credentialId}
+                </p>
+              )}
+              {(cert.description || cert.skills || cert.verificationUrl) && (
+                <details class="govuk-details" data-module="govuk-details"
+                         aria-label="Expand to view certification details">
+                  <summary class="govuk-details__summary touch-target"
+                           role="button"
+                           aria-expanded="false">
+                    <span class="govuk-details__summary-text">
+                      Certification details
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                    {cert.description && (
+                      <p class="govuk-body mb-3">
+                        {cert.description}
+                      </p>
+                    )}
+                    {cert.skills && cert.skills.length > 0 && (
+                      <>
+                        <p class="govuk-body font-bold mb-2">Skills covered:</p>
+                        <ul class="govuk-list govuk-list--bullet" role="list">
+                          {cert.skills.map((skill) => (
+                            <li role="listitem">{skill}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                    {cert.verificationUrl && (
+                      <p class="govuk-body-s mt-4">
+                        <a href={cert.verificationUrl} 
+                           class="govuk-link"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label={`Verify ${cert.name} certification (opens in new tab)`}>
+                          Verify certificate →
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                </details>
+              )}
+            </article>
           ))}
         </section>
       )}
@@ -854,6 +910,7 @@ const { personal, skills, experience, projects, education, certifications, commu
   .mb-8 { margin-bottom: var(--spacing-8); }
   
   .mt-3 { margin-top: var(--spacing-3); }
+  .mt-4 { margin-top: var(--spacing-4); }
   
   .ml-3 { margin-left: var(--spacing-3); }
   .mr-3 { margin-right: var(--spacing-3); }
