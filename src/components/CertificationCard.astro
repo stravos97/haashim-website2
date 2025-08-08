@@ -14,18 +14,22 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   aria-label={`${certification.name} certification`} 
   role="article">
   
-  <h3 class="govuk-heading-m mb-2" id={`cert-${index}`}>
+  <h3 class="govuk-heading-m cert-title" id={`cert-${index}`}>
     {certification.name}
   </h3>
   
-  <p class="govuk-body font-bold mb-2" aria-describedby={`cert-${index}`}>
-    {certification.issuer}
+  <p class="govuk-body cert-issuer" aria-describedby={`cert-${index}`}>
+    <strong>{certification.issuer}</strong>
   </p>
   
-  <p class="govuk-body-s govuk-text-colour--secondary mb-4">
+  <p class="govuk-body-s govuk-text-colour--secondary cert-date">
     <time datetime={certification.date}>{certification.date}</time>
-    {certification.credentialId && <span> • ID: {certification.credentialId}</span>}
   </p>
+  {certification.credentialId && (
+    <p class="govuk-body cert-id">
+      <strong>ID:</strong> {certification.credentialId}
+    </p>
+  )}
   
   {(certification.description || certification.skills || certification.verificationUrl) && (
     <details class="govuk-details" data-module="govuk-details"
@@ -39,24 +43,24 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
       </summary>
       <div class="govuk-details__text">
         {certification.description && (
-          <p class="govuk-body mb-3">
+          <p class="govuk-body cert-description">
             {certification.description}
           </p>
         )}
         
         {certification.skills && certification.skills.length > 0 && (
-          <>
-            <p class="govuk-body-s font-bold mb-2">Skills covered:</p>
-            <ul class="govuk-list govuk-list--bullet" role="list">
+          <div class="skills-section">
+            <p class="govuk-body font-bold skills-heading">Skills covered:</p>
+            <ul class="govuk-list govuk-list--bullet cert-skills-list" role="list">
               {certification.skills.map((skill) => (
-                <li role="listitem">{skill}</li>
+                <li role="listitem" class="skill-item">{skill}</li>
               ))}
             </ul>
-          </>
+          </div>
         )}
         
         {certification.verificationUrl && (
-          <p class="govuk-body-s mt-3">
+          <p class="govuk-body-s verify-link">
             <a href={certification.verificationUrl} 
                class="govuk-link"
                target="_blank"
@@ -83,6 +87,30 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
     background: var(--color-bg-secondary);
     border-left-width: 6px;
     padding-left: calc(var(--spacing-4) - 2px);
+  }
+  
+  .cert-title {
+    margin-bottom: var(--govuk-spacing-2);
+    font-size: var(--font-size-24);
+    line-height: 1.3;
+  }
+  
+  .cert-issuer {
+    margin-bottom: var(--govuk-spacing-2);
+    font-size: var(--font-size-19);
+    line-height: 1.4;
+  }
+  
+  .cert-date {
+    margin-bottom: var(--govuk-spacing-3);
+    font-size: var(--font-size-16);
+    line-height: 1.5;
+  }
+  
+  .cert-id {
+    margin-bottom: var(--govuk-spacing-4);
+    font-size: var(--font-size-19);
+    line-height: 1.5;
   }
   
   .mb-1 {
@@ -134,8 +162,46 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   }
 
   .govuk-details__text {
-    padding: var(--govuk-spacing-3) 0 var(--govuk-spacing-3) var(--govuk-spacing-4);
+    padding: var(--govuk-spacing-4) 0 var(--govuk-spacing-4) var(--govuk-spacing-5);
     border-left: 5px solid var(--color-border);
+    line-height: 1.6;
+  }
+  
+  .cert-description {
+    margin-bottom: var(--govuk-spacing-5);
+    line-height: 1.7;
+    font-size: var(--font-size-19);
+  }
+  
+  .skills-section {
+    margin-top: var(--govuk-spacing-4);
+  }
+  
+  .skills-heading {
+    margin-bottom: var(--govuk-spacing-3);
+    font-size: var(--font-size-19);
+  }
+  
+  .cert-skills-list {
+    margin-top: var(--govuk-spacing-2);
+    margin-bottom: var(--govuk-spacing-4);
+    margin-left: var(--govuk-spacing-4);
+  }
+  
+  .cert-skills-list li {
+    margin-bottom: var(--govuk-spacing-2);
+    line-height: 1.6;
+    font-size: var(--font-size-19);
+  }
+  
+  .cert-skills-list li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .verify-link {
+    margin-top: var(--govuk-spacing-5);
+    padding-top: var(--govuk-spacing-3);
+    border-top: 1px solid var(--color-border-light);
   }
   
   .govuk-details__summary-text {
