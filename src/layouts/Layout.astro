@@ -1,23 +1,60 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
+import { metaData } from '../data';
 
 interface Props {
   title: string;
   description?: string;
+  ogType?: string;
 }
 
-const { title, description = "Haashim Alvi - DevOps Engineer & Cloud Infrastructure Specialist" } = Astro.props;
+const { 
+  title, 
+  description = metaData.description,
+  ogType = 'website' 
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://haashim-alvi.netlify.app');
 ---
 
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={metaData.keywords} />
+    <meta name="author" content={metaData.author} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content={metaData.og.locale} />
+    <meta property="og:site_name" content={metaData.author} />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(metaData.jsonLd)} />
+    
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title={`${metaData.author} - Projects RSS`} href="/rss.xml" />
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
     
     <!-- Preconnect to font providers -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

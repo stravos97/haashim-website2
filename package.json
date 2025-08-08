@@ -25,7 +25,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "clean": "rm -rf dist .astro node_modules/.vite",
-    "validate": "astro check && tsc --noEmit"
+    "validate": "astro check && tsc --noEmit",
+    "validate:data": "node -e \"import('./src/data/index.ts').then(() => console.log('✅ Data validation passed'))\"",
+    "build:verbose": "npm run validate:data && npm run build"
   },
   "dependencies": {
     "astro": "^4.15.3",

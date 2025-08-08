@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://haashim-alvi.netlify.app/sitemap.xml

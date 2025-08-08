@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { cvData, type Project } from '../../data';
+import { cvData, cvUtils, type Project } from '../../data';
 
 export function getStaticPaths() {
   return cvData.projects.map((project) => ({
@@ -10,6 +10,12 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props as { project: Project };
+
+// Get related projects (same tech stack)
+const relatedProjects = cvData.projects
+  .filter(p => p.slug !== project.slug)
+  .filter(p => p.techStack.some(tech => project.techStack.includes(tech)))
+  .slice(0, 3);
 ---
 
 <Layout title={`${project.name} - Haashim Alvi`}>
