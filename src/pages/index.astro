@@ -19,8 +19,8 @@ const { personal, skills, experience, projects, education, certifications } = cv
     <header class="govuk-header" role="banner" aria-label="Site header">
       <div class="govuk-header__content">
         <h1 class="govuk-heading-xl" id="site-title">{personal.name}</h1>
-        <p class="govuk-body-l govuk-!-margin-bottom-4" role="doc-subtitle">{personal.title}</p>
-        <p class="govuk-body govuk-!-margin-bottom-6" aria-label="Professional summary">{personal.summary}</p>
+        <p class="govuk-body-l mb-4" role="doc-subtitle">{personal.title}</p>
+        <p class="govuk-body mb-6" aria-label="Professional summary">{personal.summary}</p>
         
         <nav class="govuk-button-group" role="navigation" aria-label="Contact information">
           <a href={`mailto:${personal.contact.email}`} 
@@ -91,17 +91,16 @@ const { personal, skills, experience, projects, education, certifications } = cv
         <h2 class="govuk-heading-l" id="experience-heading" tabindex="-1">Professional experience</h2>
         
         {experience.map((exp, index) => (
-          <article class="govuk-!-margin-bottom-8" 
-                   aria-label={`${exp.title} at ${exp.company}`}
+          <article aria-label={`${exp.title} at ${exp.company}`}
                    role="article">
-            <h3 class="govuk-heading-m govuk-!-margin-bottom-2" id={`exp-${index}`}>
+            <h3 class="govuk-heading-m mb-2" id={`exp-${index}`}>
               {exp.title}
             </h3>
-            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1"
+            <p class="govuk-body font-bold mb-1"
                aria-describedby={`exp-${index}`}>
               {exp.company}
             </p>
-            <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-4">
+            <p class="govuk-body-s govuk-text-colour--secondary mb-4">
               <time datetime={exp.period}>{exp.period}</time> • 
               <span aria-label="Location">{exp.location}</span>
             </p>
@@ -119,17 +118,16 @@ const { personal, skills, experience, projects, education, certifications } = cv
         <h2 class="govuk-heading-l" id="projects-heading" tabindex="-1">Key projects</h2>
         
         {projects.map((project, index) => (
-          <article class="govuk-!-margin-bottom-8"
-                   aria-label={`Project: ${project.name}`}
+          <article aria-label={`Project: ${project.name}`}
                    role="article">
-            <h3 class="govuk-heading-m govuk-!-margin-bottom-2" id={`proj-${index}`}>
+            <h3 class="govuk-heading-m mb-2" id={`proj-${index}`}>
               {project.name}
             </h3>
-            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1"
+            <p class="govuk-body font-bold mb-1"
                aria-describedby={`proj-${index}`}>
               {project.description}
             </p>
-            <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-4">
+            <p class="govuk-body-s govuk-text-colour--secondary mb-4">
               <span>{project.techStack.slice(0, 3).join(' • ')}</span>
               {project.techStack.length > 3 && <span> • +{project.techStack.length - 3} more</span>}
             </p>
@@ -157,8 +155,8 @@ const { personal, skills, experience, projects, education, certifications } = cv
         
         <div class="govuk-grid-row" role="list" aria-label="Skills by category">
           {Object.entries(skills).map(([category, skillList]) => (
-            <div class="govuk-grid-column-one-half govuk-!-margin-bottom-6" role="listitem">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-3" id={`skills-${category.replace(/\s+/g, '-').toLowerCase()}`}>
+            <div class="govuk-grid-column-one-half mb-6" role="listitem">
+              <h3 class="govuk-heading-s mb-3" id={`skills-${category.replace(/\s+/g, '-').toLowerCase()}`}>
                 {category}
               </h3>
               <div class="govuk-tag-list" role="list" aria-labelledby={`skills-${category.replace(/\s+/g, '-').toLowerCase()}`}>
@@ -176,22 +174,21 @@ const { personal, skills, experience, projects, education, certifications } = cv
         <h2 class="govuk-heading-l" id="education-heading" tabindex="-1">Education</h2>
         
         {education.map((edu) => (
-          <article class="govuk-!-margin-bottom-6" 
-                   aria-label={`${edu.degree} from ${edu.institution}`}
+          <article aria-label={`${edu.degree} from ${edu.institution}`}
                    role="article">
-            <h3 class="govuk-heading-m govuk-!-margin-bottom-2" id={`edu-${edu.degree.replace(/\s+/g, '-').toLowerCase()}`}>
+            <h3 class="govuk-heading-m mb-2" id={`edu-${edu.degree.replace(/\s+/g, '-').toLowerCase()}`}>
               {edu.degree}
             </h3>
-            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1"
+            <p class="govuk-body font-bold mb-1"
                aria-describedby={`edu-${edu.degree.replace(/\s+/g, '-').toLowerCase()}`}>
               {edu.institution}
             </p>
-            <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-3">
+            <p class="govuk-body-s govuk-text-colour--secondary mb-3">
               <time datetime={edu.period}>{edu.period}</time> • 
               <span aria-label="Location">{edu.location}</span>
             </p>
             {edu.grade && (
-              <p class="govuk-body govuk-!-margin-bottom-3">
+              <p class="govuk-body mb-3">
                 <strong>Grade:</strong> {edu.grade}
               </p>
             )}
@@ -225,7 +222,7 @@ const { personal, skills, experience, projects, education, certifications } = cv
           
           <ul class="govuk-list govuk-list--bullet">
             {certifications.map((cert) => (
-              <li class="govuk-!-margin-bottom-2">{cert}</li>
+              <li class="mb-2">{cert}</li>
             ))}
           </ul>
         </section>
@@ -658,21 +655,21 @@ const { personal, skills, experience, projects, education, certifications } = cv
     color: var(--color-bg);
   }
 
-  /* GOV.UK Utility Classes */
-  .govuk-!-margin-bottom-1 { margin-bottom: var(--spacing-1) !important; }
-  .govuk-!-margin-bottom-2 { margin-bottom: var(--spacing-2) !important; }
-  .govuk-!-margin-bottom-3 { margin-bottom: var(--spacing-3) !important; }
-  .govuk-!-margin-bottom-4 { margin-bottom: var(--spacing-4) !important; }
-  .govuk-!-margin-bottom-6 { margin-bottom: var(--spacing-6) !important; }
-  .govuk-!-margin-bottom-7 { margin-bottom: var(--spacing-7) !important; }
-  .govuk-!-margin-bottom-8 { margin-bottom: var(--spacing-8) !important; }
+  /* Spacing utilities */
+  .mb-1 { margin-bottom: var(--spacing-1); }
+  .mb-2 { margin-bottom: var(--spacing-2); }
+  .mb-3 { margin-bottom: var(--spacing-3); }
+  .mb-4 { margin-bottom: var(--spacing-4); }
+  .mb-6 { margin-bottom: var(--spacing-6); }
+  .mb-7 { margin-bottom: var(--spacing-7); }
+  .mb-8 { margin-bottom: var(--spacing-8); }
   
-  .govuk-!-margin-top-3 { margin-top: var(--spacing-3) !important; }
+  .mt-3 { margin-top: var(--spacing-3); }
   
-  .govuk-!-margin-left-3 { margin-left: var(--spacing-3) !important; }
-  .govuk-!-margin-right-3 { margin-right: var(--spacing-3) !important; }
+  .ml-3 { margin-left: var(--spacing-3); }
+  .mr-3 { margin-right: var(--spacing-3); }
   
-  .govuk-!-font-weight-bold { font-weight: 700 !important; }
+  .font-bold { font-weight: 700; }
   
   .govuk-text-colour--secondary { 
     color: var(--color-text-secondary) !important; 
