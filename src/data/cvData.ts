@@ -225,6 +225,47 @@ export const cvData: CVData = {
         "Wrote health check scripts to monitor service status and send alerts"
       ],
       github: "github.com/stravos97/Bash-Scripts"
+    },
+    {
+      name: "Smart Meter Data Pipeline",
+      description: "Python application for processing and analyzing energy consumption data",
+      techStack: ["Python", "Pandas", "NumPy", "Matplotlib"],
+      achievements: [
+        "Built data pipeline processing 10,000+ daily meter readings",
+        "Implemented anomaly detection algorithms for usage patterns",
+        "Created visualization dashboards for consumption trends",
+        "Optimized data processing reducing runtime by 60%"
+      ],
+      github: "github.com/stravos97/smart_meter"
+    },
+    {
+      name: "Infrastructure Automation Suite",
+      description: "Collection of Terraform modules and Ansible playbooks for cloud automation",
+      techStack: ["Terraform", "Ansible", "Azure", "Bash", "Python"],
+      metrics: [
+        "53KB of Terraform configurations",
+        "30+ Ansible playbooks",
+        "365KB of automation scripts"
+      ],
+      achievements: [
+        "Developed reusable Terraform modules for Azure resource provisioning",
+        "Created Ansible playbooks for Windows and Linux server configuration",
+        "Built Python scripts for cloud resource monitoring and cost analysis",
+        "Implemented automated backup and disaster recovery procedures"
+      ],
+      github: "github.com/stravos97/terraform-azure"
+    },
+    {
+      name: "React Charity Dashboard",
+      description: "Real-time event management dashboard for charity dinner visualization",
+      techStack: ["React", "TypeScript", "Chart.js", "Tailwind CSS", "Vite"],
+      achievements: [
+        "Built interactive dashboard with real-time data updates and responsive charts",
+        "Implemented table management system with drag-and-drop seating arrangements",
+        "Created donation tracking with visual progress indicators and analytics",
+        "Designed mobile-responsive UI with Tailwind CSS utility classes"
+      ],
+      github: "github.com/stravos97/anoosh-charity-dashboard"
     }
   ],
   education: [
