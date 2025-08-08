@@ -112,7 +112,7 @@ const { personal, skills, experience, projects, education, certifications, commu
           <article aria-label={`Project: ${project.name}`}
                    role="article">
             <h3 class="govuk-heading-m mb-2" id={`proj-${index}`}>
-              {project.name}
+              <a href={`/projects/${project.slug}`} class="project-title-link">{project.name}</a>
             </h3>
             <p class="govuk-body font-bold mb-1"
                aria-describedby={`proj-${index}`}>
@@ -148,6 +148,12 @@ const { personal, skills, experience, projects, education, certifications, commu
                 </div>
               </details>
             )}
+            
+            <div class="project-footer">
+              <a href={`/projects/${project.slug}`} class="view-details-link">
+                View project details →
+              </a>
+            </div>
           </article>
         ))}
       </section>
@@ -274,6 +280,56 @@ const { personal, skills, experience, projects, education, certifications, commu
 
 <style>
   /* WCAG 2.2 Component Styles */
+  .project-title-link {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition-base);
+    display: inline-block;
+  }
+
+  .project-title-link:hover {
+    color: var(--color-link);
+    border-bottom-color: var(--color-link);
+  }
+
+  .project-title-link:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 2px;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+    padding: 0 var(--spacing-1);
+  }
+
+  .project-footer {
+    margin-top: var(--spacing-4);
+    padding-top: var(--spacing-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .view-details-link {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-19);
+    display: inline-flex;
+    align-items: center;
+    transition: all var(--transition-base);
+  }
+
+  .view-details-link:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+  }
+
+  .view-details-link:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 2px;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+
   .govuk-width-container {
     max-width: var(--max-width-page);
     margin: 0 auto;
