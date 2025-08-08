@@ -233,8 +233,10 @@ const plannedCerts = cvUtils.getPlannedCertifications();
           <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications & Professional Development</h2>
           
           {earnedCerts.length > 0 && (
-            <div class="mb-6">
-              <h3 class="govuk-heading-m mb-4">Earned Certifications</h3>
+            <div class="certification-section earned-section">
+              <h3 class="govuk-heading-m mb-4">
+                <span class="section-icon">🏆</span> Earned Certifications
+              </h3>
               {earnedCerts.map((cert, idx) => (
                 <CertificationCard certification={cert} index={idx} />
               ))}
@@ -242,10 +244,12 @@ const plannedCerts = cvUtils.getPlannedCertifications();
           )}
           
           {plannedCerts.length > 0 && (
-            <div>
-              <h3 class="govuk-heading-m mb-3">Planned Certifications</h3>
+            <div class="certification-section planned-section">
+              <h3 class="govuk-heading-m mb-3">
+                <span class="section-icon">📚</span> Professional Development Roadmap
+              </h3>
               <p class="govuk-body-s govuk-text-colour--secondary mb-4">
-                Continuing education roadmap for professional development
+                Upcoming certifications to expand expertise
               </p>
               {plannedCerts.map((cert, idx) => (
                 <CertificationCard certification={cert} index={earnedCerts.length + idx} />
@@ -298,6 +302,32 @@ const plannedCerts = cvUtils.getPlannedCertifications();
 </Layout>
 
 <style>
+  /* Certification Section Styles */
+  .certification-section {
+    position: relative;
+    padding-top: var(--govuk-spacing-6);
+  }
+  
+  .earned-section {
+    margin-bottom: var(--govuk-spacing-8);
+  }
+  
+  .planned-section {
+    padding-top: var(--govuk-spacing-6);
+    border-top: 2px solid var(--govuk-colour-light-grey);
+  }
+  
+  .section-icon {
+    margin-right: 8px;
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  
+  /* Dark mode adjustments */
+  :root[data-theme="dark"] .planned-section {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+  
   /* WCAG 2.2 Component Styles */
   .project-title-link {
     color: var(--color-text);

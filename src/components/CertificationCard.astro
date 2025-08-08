@@ -10,10 +10,15 @@ const { certification, index } = Astro.props;
 const isPlanned = certification.date.toLowerCase().includes('planned');
 ---
 
-<article aria-label={`${certification.name} certification`} role="article">
+<article 
+  aria-label={`${certification.name} certification`} 
+  role="article"
+  class={`certification-card ${isPlanned ? 'certification-planned' : 'certification-earned'}`}>
+  
   <h3 class="govuk-heading-m mb-2" id={`cert-${index}`}>
+    {!isPlanned && <span class="cert-badge-earned" aria-label="Earned">✓</span>}
     {certification.name}
-    {isPlanned && <span class="govuk-tag govuk-tag--yellow ml-2">Planned</span>}
+    {isPlanned && <span class="govuk-tag govuk-tag--grey ml-2">Planned</span>}
   </h3>
   
   <p class="govuk-body font-bold mb-1" aria-describedby={`cert-${index}`}>
@@ -52,20 +57,69 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
 </article>
 
 <style>
+  .certification-card {
+    margin-bottom: var(--govuk-spacing-6);
+    padding: var(--govuk-spacing-4);
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .certification-earned {
+    background: var(--cert-earned-bg);
+    border-left: 4px solid var(--govuk-colour-green);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .certification-planned {
+    background: transparent;
+    border-left: 4px solid var(--govuk-colour-mid-grey);
+    opacity: 0.85;
+  }
+  
+  .cert-badge-earned {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--govuk-colour-green);
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  
   .ml-2 {
     margin-left: 8px;
   }
   
-  .govuk-tag--yellow {
-    background-color: var(--govuk-colour-yellow);
-    color: var(--govuk-colour-black);
+  .govuk-tag--grey {
+    background-color: var(--govuk-colour-mid-grey);
+    color: var(--govuk-colour-white);
   }
   
-  article {
-    margin-bottom: var(--govuk-spacing-8);
+  /* Dark mode */
+  :root[data-theme="dark"] {
+    --cert-earned-bg: rgba(0, 112, 60, 0.1);
   }
   
-  article:last-child {
-    margin-bottom: 0;
+  /* Light mode */
+  :root[data-theme="light"] {
+    --cert-earned-bg: rgba(0, 112, 60, 0.05);
+  }
+  
+  @media print {
+    .certification-card {
+      page-break-inside: avoid;
+      border-left-width: 2px;
+      padding: 10px;
+    }
+    
+    .cert-badge-earned {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
   }
 </style>
