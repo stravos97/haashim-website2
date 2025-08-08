@@ -12,116 +12,138 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
 
 <article 
   aria-label={`${certification.name} certification`} 
-  role="article"
-  class={`certification-card ${isPlanned ? 'certification-planned' : 'certification-earned'}`}>
+  role="article">
   
   <h3 class="govuk-heading-m mb-2" id={`cert-${index}`}>
     {certification.name}
-    {isPlanned && <span class="govuk-tag govuk-tag--grey ml-2">Planned</span>}
   </h3>
   
   <p class="govuk-body font-bold mb-1" aria-describedby={`cert-${index}`}>
     {certification.issuer}
   </p>
   
-  <p class="govuk-body-s govuk-text-colour--secondary mb-4">
+  <p class="govuk-body-s govuk-text-colour--secondary mb-3">
     <time datetime={certification.date}>{certification.date}</time>
     {certification.credentialId && <span> • ID: {certification.credentialId}</span>}
-    {certification.expiryDate && <span> • Expires: {certification.expiryDate}</span>}
   </p>
   
-  {certification.description && (
-    <p class="govuk-body mb-3">
-      {certification.description}
-    </p>
-  )}
-  
-  {certification.skills && certification.skills.length > 0 && (
-    <p class="govuk-body-s govuk-text-colour--secondary mb-3">
-      <strong>Skills:</strong> {certification.skills.join(' • ')}
-    </p>
-  )}
-  
-  {certification.verificationUrl && !isPlanned && (
-    <p class="govuk-body-s">
-      <a href={certification.verificationUrl} 
-         class="govuk-link"
-         target="_blank"
-         rel="noopener noreferrer"
-         aria-label={`Verify ${certification.name} certification (opens in new tab)`}>
-        Verify certificate →
-      </a>
-    </p>
+  {(certification.description || certification.skills || certification.verificationUrl) && (
+    <details class="govuk-details" data-module="govuk-details"
+             aria-label="Expand to view certification details">
+      <summary class="govuk-details__summary touch-target"
+               role="button"
+               aria-expanded="false">
+        <span class="govuk-details__summary-text">
+          Certification details
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        {certification.description && (
+          <p class="govuk-body mb-3">
+            {certification.description}
+          </p>
+        )}
+        
+        {certification.skills && certification.skills.length > 0 && (
+          <>
+            <p class="govuk-body-s font-bold mb-2">Skills covered:</p>
+            <ul class="govuk-list govuk-list--bullet" role="list">
+              {certification.skills.map((skill) => (
+                <li role="listitem">{skill}</li>
+              ))}
+            </ul>
+          </>
+        )}
+        
+        {certification.verificationUrl && (
+          <p class="govuk-body-s mt-3">
+            <a href={certification.verificationUrl} 
+               class="govuk-link"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label={`Verify ${certification.name} certification (opens in new tab)`}>
+              Verify certificate →
+            </a>
+          </p>
+        )}
+      </div>
+    </details>
   )}
 </article>
 
 <style>
-  .certification-card {
+  article {
     margin-bottom: var(--govuk-spacing-6);
-    padding: var(--govuk-spacing-4);
-    border-radius: 4px;
-    position: relative;
   }
   
-  .certification-earned {
-    background: var(--cert-earned-bg);
-    border-left: 5px solid var(--govuk-colour-green);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    position: relative;
-    transition: all 0.2s ease;
+  .mb-1 {
+    margin-bottom: var(--govuk-spacing-1);
   }
   
-  .certification-earned:hover {
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-    transform: translateX(2px);
+  .mb-2 {
+    margin-bottom: var(--govuk-spacing-2);
   }
   
-  .certification-planned {
-    background: transparent;
-    border-left: 4px solid var(--govuk-colour-mid-grey);
-    opacity: 0.85;
+  .mb-3 {
+    margin-bottom: var(--govuk-spacing-3);
   }
   
-  .certification-earned::before {
-    content: '';
-    position: absolute;
-    top: var(--govuk-spacing-4);
-    left: -5px;
-    width: 10px;
-    height: 10px;
-    background: var(--govuk-colour-green);
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--cert-earned-bg);
+  .mt-3 {
+    margin-top: var(--govuk-spacing-3);
   }
   
-  .ml-2 {
-    margin-left: 8px;
+  .font-bold {
+    font-weight: bold;
   }
   
-  .govuk-tag--grey {
-    background-color: var(--govuk-colour-mid-grey);
-    color: var(--govuk-colour-white);
+  .govuk-details {
+    margin-bottom: var(--govuk-spacing-4);
+  }
+
+  .govuk-details__summary {
+    cursor: pointer;
+    color: var(--color-link);
+    text-underline-offset: 0.1em;
+    text-decoration: underline;
+    padding: var(--govuk-spacing-2) 0;
+  }
+
+  .govuk-details__summary:hover {
+    color: var(--color-link-hover);
+    text-decoration-thickness: 3px;
+  }
+
+  .govuk-details__summary:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 0;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+  }
+
+  .govuk-details__text {
+    padding: var(--govuk-spacing-3) 0 var(--govuk-spacing-3) var(--govuk-spacing-4);
+    border-left: 5px solid var(--color-border);
   }
   
-  /* Dark mode */
-  :root[data-theme="dark"] {
-    --cert-earned-bg: rgba(0, 112, 60, 0.08);
+  .govuk-details__summary-text {
+    text-decoration: underline;
   }
   
-  /* Light mode */
-  :root[data-theme="light"] {
-    --cert-earned-bg: rgba(0, 112, 60, 0.03);
+  .touch-target {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
   
   @media print {
-    .certification-card {
-      page-break-inside: avoid;
-      border-left-width: 2px;
-      padding: 10px;
+    .govuk-details__summary {
+      display: none !important;
     }
     
-    .certification-earned::before {
-      display: none;
+    .govuk-details__text {
+      display: block !important;
+      border: none !important;
+      padding-left: 0 !important;
     }
   }
 </style>

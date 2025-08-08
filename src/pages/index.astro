@@ -5,8 +5,6 @@ import CertificationCard from '../components/CertificationCard.astro';
 import { cvData, cvUtils } from '../data';
 
 const { personal, skills, experience, projects, education, certifications, community } = cvData;
-const earnedCerts = cvUtils.getEarnedCertifications();
-const plannedCerts = cvUtils.getPlannedCertifications();
 ---
 
 <Layout title={`${personal.name} - ${personal.title}`}>
@@ -232,13 +230,9 @@ const plannedCerts = cvUtils.getPlannedCertifications();
         <section class="govuk-section" id="certifications" aria-labelledby="certifications-heading" role="region">
           <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications</h2>
           
-          {earnedCerts.length > 0 && (
-            <div class="certification-section earned-section">
-              {earnedCerts.map((cert, idx) => (
-                <CertificationCard certification={cert} index={idx} />
-              ))}
-            </div>
-          )}
+          {certifications.map((cert, idx) => (
+            <CertificationCard certification={cert} index={idx} />
+          ))}
         </section>
       )}
 
