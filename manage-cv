@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# CV Manager Launcher Script
+# Automatically selects the best available manager
+
+echo "🚀 Starting CV Manager..."
+echo ""
+
+# Check if we're in the right directory
+if [ ! -f "package.json" ]; then
+    echo "❌ Error: Not in the haashim-website2 directory"
+    echo "Please run this script from the website directory"
+    exit 1
+fi
+
+# Try different managers in order of preference
+if command -v python3 &> /dev/null; then
+    echo "Using Python CV Manager (most features)"
+    echo "────────────────────────────────────"
+    python3 cv_manager.py
+elif command -v node &> /dev/null; then
+    echo "Using Node.js CV Manager"
+    echo "────────────────────────────────────"
+    node cv-manager.mjs
+else
+    echo "❌ Error: Neither Python 3 nor Node.js found"
+    echo "Please install Python 3 or Node.js to use the CV manager"
+    exit 1
+fi
