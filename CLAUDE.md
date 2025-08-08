@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is Haashim Alvi's personal CV/Resume website built with Astro framework. The website has been comprehensively redesigned to follow GOV.UK Design System principles and WCAG 2.2 accessibility standards for maximum readability and accessibility.
+This is Haashim Alvi's personal CV/Resume website built with Astro framework. The website follows GOV.UK Design System principles and WCAG 2.2 accessibility standards for maximum readability and accessibility. The site is deployed to Netlify and features both a main CV page and individual project detail pages.
 
 ## Development Commands
 
@@ -23,7 +23,27 @@ npm run preview
 
 # Run Astro CLI commands
 npm run astro -- --help
+
+# Clear Astro cache (if experiencing build issues)
+rm -rf .astro dist node_modules/.vite
 ```
+
+## Common Development Tasks
+
+### Adding a New Project
+1. Add project data to `cvData.ts` with required `slug` field
+2. Include optional fields: `detailedDescription`, `features`, `challenges`, `architecture`, `gallery`
+3. Build site to generate new project page at `/projects/[slug]`
+
+### Modifying Project Links
+- Project links on main page are in `index.astro` (lines 114-156)
+- NOT in `ProjectCard.astro` component (which is currently unused)
+- Add link styles to the `<style>` section in `index.astro`
+
+### Adding Images for Project Galleries
+1. Place images in `public/images/` directory
+2. Reference in `cvData.ts` gallery array with `src`, `alt`, and optional `caption`
+3. Images are displayed on individual project pages
 
 ## Architecture & Design Principles
 
@@ -64,7 +84,7 @@ The website follows **GOV.UK Design System** and **WCAG 2.2 AA** standards:
 src/
 ├── components/       # Reusable Astro components
 │   ├── ExperienceCard.astro  # Work experience display
-│   ├── ProjectCard.astro     # Project showcase cards
+│   ├── ProjectCard.astro     # Project showcase cards (not currently used in index.astro)
 │   ├── ThemeToggle.astro     # Dark/light mode switch
 │   └── SkillSection.astro    # Skills categorization
 ├── data/
@@ -72,17 +92,42 @@ src/
 ├── layouts/
 │   └── Layout.astro # Main layout with WCAG 2.2 CSS system
 ├── pages/
-│   └── index.astro  # Main page with GOV.UK component patterns
+│   ├── index.astro          # Main CV page with inline project rendering
+│   ├── cv-print.astro       # Print-optimized CV version
+│   └── projects/
+│       └── [slug].astro     # Dynamic project detail pages
 └── utils/
     └── theme.ts     # Theme management utilities
 ```
 
+### Project Pages Architecture
+
+The site includes dynamic project detail pages generated from project data:
+
+1. **Project Data Structure** (`cvData.ts`):
+   - `slug`: URL-friendly identifier for routing
+   - `detailedDescription`: Extended project description
+   - `features`: List of key features
+   - `challenges`: Technical challenges overcome
+   - `architecture`: System architecture description
+   - `gallery`: Array of image objects with src, alt, and caption
+
+2. **Dynamic Routing**: 
+   - Uses Astro's `getStaticPaths()` to generate pages at build time
+   - Each project gets its own page at `/projects/[slug]`
+   - All pages are statically generated, no server-side rendering needed
+
+3. **Important Note**: 
+   - The main page (`index.astro`) renders projects inline, NOT using `ProjectCard.astro`
+   - Project links must be added directly to `index.astro` when modifying navigation
+
 ### Key Design Patterns
 
 1. **Data-Driven**: All CV content is centralized in `src/data/cvData.ts` with TypeScript interfaces
-2. **Component-Based**: Modular Astro components for maintainability
+2. **Component-Based**: Modular Astro components for maintainability (note: index.astro uses inline rendering for projects)
 3. **Progressive Enhancement**: Core functionality works without JavaScript
 4. **Mobile-First**: Responsive design with proper text scaling
+5. **Static Generation**: All pages are built at compile time, including dynamic project pages
 
 ### CSS Architecture
 
@@ -110,4 +155,31 @@ When making changes, ensure:
 
 ## Building and Deployment
 
-The site builds to static HTML/CSS/JS files in the `dist/` directory. No server-side rendering or API endpoints are required. The build output can be deployed to any static hosting service.
+### Netlify Deployment
+
+The site is configured for Netlify deployment with automatic builds on git push:
+
+```bash
+# Build command (configured in netlify.toml)
+npm run build
+
+# Output directory
+dist/
+
+# Node version
+18 (specified in netlify.toml)
+```
+
+### Build Process
+
+1. Astro generates static HTML for all pages including dynamic project pages
+2. CSS is inlined or bundled based on usage
+3. JavaScript is minimal (only theme toggle functionality)
+4. All project pages are pre-generated at build time from `cvData.ts`
+
+### Important Deployment Notes
+
+- The site builds to static HTML/CSS/JS files in the `dist/` directory
+- No server-side rendering or API endpoints are required
+- Netlify automatically rebuilds on push to the repository
+- Security headers are configured in `netlify.toml` (X-Frame-Options, CSP, etc.)

@@ -126,18 +126,21 @@ const { project } = Astro.props as { project: Project };
 
 <style>
   main {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-8) 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
   }
 
   .govuk-width-container {
-    max-width: var(--max-width-container);
+    max-width: var(--max-width-page);
     margin: 0 auto;
-    padding: 0 var(--spacing-m);
+    padding: 0 var(--spacing-4);
   }
 
   .govuk-back-link {
     display: inline-block;
-    margin-bottom: var(--spacing-l);
+    margin-bottom: var(--spacing-6);
     color: var(--color-link);
     text-decoration: none;
     border-bottom: 2px solid transparent;
@@ -153,36 +156,36 @@ const { project } = Astro.props as { project: Project };
   }
 
   .project-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-8);
   }
 
   .govuk-heading-xl {
-    font-size: var(--font-size-xxl);
+    font-size: var(--font-size-48);
     font-weight: 700;
     line-height: 1.2;
-    margin: 0 0 var(--spacing-m) 0;
-    color: var(--color-heading);
+    margin: 0 0 var(--spacing-4) 0;
+    color: var(--color-text);
   }
 
   .govuk-body-l {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-24);
     line-height: 1.6;
     color: var(--color-text);
-    margin: 0 0 var(--spacing-l) 0;
+    margin: 0 0 var(--spacing-6) 0;
   }
 
   .project-links {
     display: flex;
-    gap: var(--spacing-m);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-8);
     flex-wrap: wrap;
   }
 
   .govuk-button {
     display: inline-block;
-    padding: var(--spacing-s) var(--spacing-l);
+    padding: var(--spacing-3) var(--spacing-6);
     background: var(--color-primary);
-    color: var(--color-background);
+    color: #ffffff;
     text-decoration: none;
     border: 2px solid var(--color-primary);
     border-radius: 4px;
@@ -203,14 +206,14 @@ const { project } = Astro.props as { project: Project };
 
   .govuk-button--secondary:hover {
     background: var(--color-primary);
-    color: var(--color-background);
+    color: #ffffff;
   }
 
   .govuk-grid-row {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-8);
+    margin-bottom: var(--spacing-8);
   }
 
   @media (max-width: 768px) {
@@ -220,21 +223,21 @@ const { project } = Astro.props as { project: Project };
   }
 
   .project-section {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-8);
   }
 
   .govuk-heading-l {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-36);
     font-weight: 700;
-    margin: 0 0 var(--spacing-m) 0;
-    color: var(--color-heading);
+    margin: 0 0 var(--spacing-4) 0;
+    color: var(--color-text);
   }
 
   .govuk-heading-m {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-24);
     font-weight: 700;
-    margin: 0 0 var(--spacing-m) 0;
-    color: var(--color-heading);
+    margin: 0 0 var(--spacing-4) 0;
+    color: var(--color-text);
   }
 
   .govuk-list {
@@ -244,12 +247,12 @@ const { project } = Astro.props as { project: Project };
   }
 
   .govuk-list--bullet {
-    padding-left: var(--spacing-l);
+    padding-left: var(--spacing-6);
     list-style: disc;
   }
 
   .govuk-list--bullet li {
-    margin-bottom: var(--spacing-s);
+    margin-bottom: var(--spacing-3);
     line-height: 1.6;
     color: var(--color-text);
   }
@@ -260,48 +263,48 @@ const { project } = Astro.props as { project: Project };
   }
 
   .project-sidebar {
-    background: var(--color-surface);
-    padding: var(--spacing-l);
+    background: var(--color-bg-secondary);
+    padding: var(--spacing-6);
     border-radius: 8px;
     position: sticky;
-    top: var(--spacing-l);
+    top: var(--spacing-6);
   }
 
   .tech-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-s);
-    margin-bottom: var(--spacing-l);
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-6);
   }
 
   .tech-badge {
     display: inline-block;
-    padding: var(--spacing-xs) var(--spacing-s);
+    padding: var(--spacing-1) var(--spacing-3);
     background: var(--color-primary);
-    color: var(--color-background);
+    color: #ffffff;
     border-radius: 4px;
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-16);
     font-weight: 600;
   }
 
   .project-gallery {
-    margin-top: var(--spacing-xxl);
-    padding-top: var(--spacing-xl);
+    margin-top: var(--spacing-9);
+    padding-top: var(--spacing-8);
     border-top: 2px solid var(--color-border);
   }
 
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-l);
-    margin-top: var(--spacing-l);
+    gap: var(--spacing-6);
+    margin-top: var(--spacing-6);
   }
 
   .gallery-item {
     margin: 0;
     border-radius: 8px;
     overflow: hidden;
-    background: var(--color-surface);
+    background: var(--color-bg-secondary);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
   }
@@ -318,10 +321,10 @@ const { project } = Astro.props as { project: Project };
   }
 
   .gallery-item figcaption {
-    padding: var(--spacing-m);
-    background: var(--color-surface);
+    padding: var(--spacing-4);
+    background: var(--color-bg-secondary);
     color: var(--color-text-secondary);
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-16);
   }
 
   @media print {
