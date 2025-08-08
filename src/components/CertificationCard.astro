@@ -18,11 +18,11 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
     {certification.name}
   </h3>
   
-  <p class="govuk-body font-bold mb-1" aria-describedby={`cert-${index}`}>
+  <p class="govuk-body font-bold mb-2" aria-describedby={`cert-${index}`}>
     {certification.issuer}
   </p>
   
-  <p class="govuk-body-s govuk-text-colour--secondary mb-3">
+  <p class="govuk-body-s govuk-text-colour--secondary mb-4">
     <time datetime={certification.date}>{certification.date}</time>
     {certification.credentialId && <span> • ID: {certification.credentialId}</span>}
   </p>
@@ -95,6 +95,10 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   
   .mb-3 {
     margin-bottom: var(--govuk-spacing-3);
+  }
+  
+  .mb-4 {
+    margin-bottom: var(--govuk-spacing-4);
   }
   
   .mt-3 {
