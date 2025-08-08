@@ -7,66 +7,116 @@ const { personal, skills, experience, projects, education, certifications } = cv
 
 <Layout title={`${personal.name} - ${personal.title}`}>
   <div class="govuk-width-container">
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+    <!-- Skip Navigation Links (WCAG 2.2) -->
+    <div class="skip-links">
+      <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+      <a href="#experience" class="govuk-skip-link">Skip to experience</a>
+      <a href="#projects" class="govuk-skip-link">Skip to projects</a>
+      <a href="#skills" class="govuk-skip-link">Skip to skills</a>
+    </div>
     
-    <!-- Header with contact info -->
-    <header class="govuk-header" role="banner">
+    <!-- Header with ARIA Landmarks -->
+    <header class="govuk-header" role="banner" aria-label="Site header">
       <div class="govuk-header__content">
-        <h1 class="govuk-heading-xl">{personal.name}</h1>
-        <p class="govuk-body-l govuk-!-margin-bottom-4">{personal.title}</p>
-        <p class="govuk-body govuk-!-margin-bottom-6">{personal.summary}</p>
+        <h1 class="govuk-heading-xl" id="site-title">{personal.name}</h1>
+        <p class="govuk-body-l govuk-!-margin-bottom-4" role="doc-subtitle">{personal.title}</p>
+        <p class="govuk-body govuk-!-margin-bottom-6" aria-label="Professional summary">{personal.summary}</p>
         
-        <div class="govuk-button-group">
-          <a href={`mailto:${personal.contact.email}`} class="govuk-link">
-            Email: {personal.contact.email}
+        <nav class="govuk-button-group" role="navigation" aria-label="Contact information">
+          <a href={`mailto:${personal.contact.email}`} 
+             class="govuk-link touch-target"
+             aria-label={`Send email to ${personal.name}`}>
+            <span aria-hidden="true">📧</span> Email: {personal.contact.email}
           </a>
-          <span class="govuk-!-margin-left-3 govuk-!-margin-right-3">|</span>
-          <a href={`tel:${personal.contact.phone.replace(/\s/g, '')}`} class="govuk-link">
-            Phone: {personal.contact.phone}
+          <span class="separator" aria-hidden="true">|</span>
+          <a href={`tel:${personal.contact.phone.replace(/\s/g, '')}`} 
+             class="govuk-link touch-target"
+             aria-label={`Call ${personal.name}`}>
+            <span aria-hidden="true">📱</span> Phone: {personal.contact.phone}
           </a>
-          <span class="govuk-!-margin-left-3 govuk-!-margin-right-3">|</span>
-          <a href={`https://${personal.contact.linkedin}`} class="govuk-link">
-            LinkedIn
+          <span class="separator" aria-hidden="true">|</span>
+          <a href={`https://${personal.contact.linkedin}`} 
+             class="govuk-link touch-target"
+             rel="noopener noreferrer"
+             target="_blank"
+             aria-label={`View ${personal.name}'s LinkedIn profile (opens in new tab)`}>
+            LinkedIn <span class="visually-hidden">(opens in new tab)</span>
           </a>
-          <span class="govuk-!-margin-left-3 govuk-!-margin-right-3">|</span>
-          <a href={`https://${personal.contact.github}`} class="govuk-link">
-            GitHub
+          <span class="separator" aria-hidden="true">|</span>
+          <a href={`https://${personal.contact.github}`} 
+             class="govuk-link touch-target"
+             rel="noopener noreferrer"
+             target="_blank"
+             aria-label={`View ${personal.name}'s GitHub profile (opens in new tab)`}>
+            GitHub <span class="visually-hidden">(opens in new tab)</span>
           </a>
-        </div>
+        </nav>
       </div>
     </header>
 
-    <!-- Main content -->
-    <main class="govuk-main-wrapper" id="main-content" role="main">
+    <!-- Help Section (WCAG 2.2 Consistent Help) -->
+    <aside class="help-section" role="complementary" aria-label="Help and accessibility">
+      <details class="help-details">
+        <summary class="help-summary touch-target" role="button">
+          <span aria-hidden="true">ℹ️</span> Help & Accessibility Options
+        </summary>
+        <div class="help-content">
+          <h2 class="govuk-heading-s">Accessibility Features</h2>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>Press Tab to navigate through interactive elements</li>
+            <li>Press Ctrl + Plus/Minus to zoom in/out</li>
+            <li>This page is screen reader optimized</li>
+            <li>All images have descriptive text alternatives</li>
+          </ul>
+          <h2 class="govuk-heading-s">Quick Navigation</h2>
+          <p class="govuk-body-s">Estimated reading time: 5 minutes</p>
+          <p class="govuk-body-s">Number of sections: 5</p>
+        </div>
+      </details>
+    </aside>
+
+    <!-- Progress Indicator for Page Sections -->
+    <nav class="progress-indicator" role="navigation" aria-label="Page sections">
+      <p class="govuk-body-s">You are viewing: <strong id="current-section">Introduction</strong></p>
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-fill"></div>
+      </div>
+    </nav>
+
+    <!-- Main content with ARIA label -->
+    <main class="govuk-main-wrapper" id="main-content" role="main" aria-labelledby="site-title">
       
-      <!-- Professional Experience -->
-      <section class="govuk-section" aria-labelledby="experience-heading">
-        <h2 class="govuk-heading-l" id="experience-heading">Professional experience</h2>
+      <!-- Professional Experience Section -->
+      <section class="govuk-section" id="experience" aria-labelledby="experience-heading" role="region">
+        <h2 class="govuk-heading-l" id="experience-heading" tabindex="-1">Professional experience</h2>
         
-        {experience.map((exp) => (
-          <article class="govuk-!-margin-bottom-8">
-            <h3 class="govuk-heading-m govuk-!-margin-bottom-2">
+        {experience.map((exp, index) => (
+          <article class="govuk-!-margin-bottom-8" 
+                   aria-label={`${exp.title} at ${exp.company}`}
+                   role="article">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-2" id={`exp-${index}`}>
               {exp.title}
             </h3>
-            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1"
+               aria-describedby={`exp-${index}`}>
               {exp.company}
             </p>
             <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-4">
-              {exp.period} • {exp.location}
+              <time datetime={exp.period}>{exp.period}</time> • 
+              <span aria-label="Location">{exp.location}</span>
             </p>
-            <ul class="govuk-list govuk-list--bullet">
+            <ul class="govuk-list govuk-list--bullet" role="list">
               {exp.points.map((point) => (
-                <li>{point}</li>
+                <li role="listitem">{point}</li>
               ))}
             </ul>
           </article>
         ))}
       </section>
 
-      <!-- Key Projects -->
-      <section class="govuk-section" aria-labelledby="projects-heading">
-        <h2 class="govuk-heading-l" id="projects-heading">Key projects</h2>
+      <!-- Key Projects Section -->
+      <section class="govuk-section" id="projects" aria-labelledby="projects-heading" role="region">
+        <h2 class="govuk-heading-l" id="projects-heading" tabindex="-1">Key projects</h2>
         
         {projects.map((project) => (
           <article class="govuk-!-margin-bottom-7">
@@ -112,17 +162,19 @@ const { personal, skills, experience, projects, education, certifications } = cv
         ))}
       </section>
 
-      <!-- Technical Skills -->
-      <section class="govuk-section" aria-labelledby="skills-heading">
-        <h2 class="govuk-heading-l" id="skills-heading">Technical skills</h2>
+      <!-- Technical Skills Section -->
+      <section class="govuk-section" id="skills" aria-labelledby="skills-heading" role="region">
+        <h2 class="govuk-heading-l" id="skills-heading" tabindex="-1">Technical skills</h2>
         
-        <div class="govuk-grid-row">
+        <div class="govuk-grid-row" role="list" aria-label="Skills by category">
           {Object.entries(skills).map(([category, skillList]) => (
-            <div class="govuk-grid-column-one-half govuk-!-margin-bottom-6">
-              <h3 class="govuk-heading-s govuk-!-margin-bottom-3">{category}</h3>
-              <div class="govuk-tag-list">
+            <div class="govuk-grid-column-one-half govuk-!-margin-bottom-6" role="listitem">
+              <h3 class="govuk-heading-s govuk-!-margin-bottom-3" id={`skills-${category.replace(/\s+/g, '-').toLowerCase()}`}>
+                {category}
+              </h3>
+              <div class="govuk-tag-list" role="list" aria-labelledby={`skills-${category.replace(/\s+/g, '-').toLowerCase()}`}>
                 {skillList.map((skill) => (
-                  <span class="govuk-tag govuk-tag--blue">{skill}</span>
+                  <span class="govuk-tag govuk-tag--blue touch-target" role="listitem">{skill}</span>
                 ))}
               </div>
             </div>
@@ -130,20 +182,24 @@ const { personal, skills, experience, projects, education, certifications } = cv
         </div>
       </section>
 
-      <!-- Education -->
-      <section class="govuk-section" aria-labelledby="education-heading">
-        <h2 class="govuk-heading-l" id="education-heading">Education</h2>
+      <!-- Education Section -->
+      <section class="govuk-section" id="education" aria-labelledby="education-heading" role="region">
+        <h2 class="govuk-heading-l" id="education-heading" tabindex="-1">Education</h2>
         
         {education.map((edu) => (
-          <article class="govuk-!-margin-bottom-6">
-            <h3 class="govuk-heading-m govuk-!-margin-bottom-2">
+          <article class="govuk-!-margin-bottom-6" 
+                   aria-label={`${edu.degree} from ${edu.institution}`}
+                   role="article">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-2" id={`edu-${edu.degree.replace(/\s+/g, '-').toLowerCase()}`}>
               {edu.degree}
             </h3>
-            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">
+            <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1"
+               aria-describedby={`edu-${edu.degree.replace(/\s+/g, '-').toLowerCase()}`}>
               {edu.institution}
             </p>
             <p class="govuk-body-s govuk-text-colour--secondary govuk-!-margin-bottom-3">
-              {edu.period} • {edu.location}
+              <time datetime={edu.period}>{edu.period}</time> • 
+              <span aria-label="Location">{edu.location}</span>
             </p>
             {edu.grade && (
               <p class="govuk-body govuk-!-margin-bottom-3">
@@ -151,16 +207,19 @@ const { personal, skills, experience, projects, education, certifications } = cv
               </p>
             )}
             {edu.modules && edu.modules.length > 0 && (
-              <details class="govuk-details" data-module="govuk-details">
-                <summary class="govuk-details__summary">
+              <details class="govuk-details" data-module="govuk-details"
+                       aria-label="Expand to view key modules studied">
+                <summary class="govuk-details__summary touch-target"
+                         role="button"
+                         aria-expanded="false">
                   <span class="govuk-details__summary-text">
                     Key modules studied
                   </span>
                 </summary>
                 <div class="govuk-details__text">
-                  <ul class="govuk-list govuk-list--bullet">
+                  <ul class="govuk-list govuk-list--bullet" role="list">
                     {edu.modules.map((module) => (
-                      <li>{module}</li>
+                      <li role="listitem">{module}</li>
                     ))}
                   </ul>
                 </div>
@@ -184,17 +243,19 @@ const { personal, skills, experience, projects, education, certifications } = cv
       )}
     </main>
 
-    <!-- Footer -->
-    <footer class="govuk-footer" role="contentinfo">
+    <!-- Footer with ARIA Landmarks -->
+    <footer class="govuk-footer" role="contentinfo" aria-label="Site footer">
       <div class="govuk-footer__meta">
         <div class="govuk-footer__meta-item">
           <p class="govuk-footer__copyright">
-            © 2024 {personal.name}
+            <small>© 2024 {personal.name}. All rights reserved.</small>
           </p>
         </div>
         <div class="govuk-footer__meta-item">
-          <button class="govuk-button govuk-button--secondary" onclick="window.print()">
-            Print this CV
+          <button class="govuk-button govuk-button--secondary touch-target" 
+                  onclick="window.print()"
+                  aria-label="Print this CV as PDF">
+            <span aria-hidden="true">🖨️</span> Print this CV
           </button>
         </div>
       </div>
@@ -203,26 +264,137 @@ const { personal, skills, experience, projects, education, certifications } = cv
 </Layout>
 
 <style>
-  /* GOV.UK Component Styles */
+  /* WCAG 2.2 Component Styles */
   .govuk-width-container {
-    max-width: 1020px;
+    max-width: var(--max-width-page);
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 var(--spacing-3);
+  }
+
+  /* Ensure optimal line length for readability (45-75 characters) */
+  .govuk-body,
+  .govuk-body-l,
+  .govuk-body-s,
+  p, li {
+    max-width: var(--max-width-content); /* 66ch optimal */
+  }
+
+  /* Skip Navigation Links (WCAG 2.2) */
+  .skip-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
   }
 
   .govuk-skip-link {
     position: absolute;
     left: -9999px;
     z-index: 999;
-    padding: 10px 15px;
+    padding: var(--spacing-2) var(--spacing-3);
     background: var(--color-focus);
-    color: var(--color-text);
+    color: var(--color-focus-text);
     text-decoration: none;
     font-weight: 700;
+    min-height: var(--target-size-recommended);
+    display: flex;
+    align-items: center;
   }
 
-  .govuk-skip-link:focus {
+  .govuk-skip-link:focus,
+  .govuk-skip-link:focus-visible {
     left: 0;
+    outline: var(--focus-width) solid var(--color-focus-border);
+    box-shadow: 0 0 0 var(--focus-offset) var(--color-focus);
+  }
+
+  /* Ensure 44x44 touch targets for all interactive elements */
+  .touch-target {
+    min-height: var(--target-size-recommended);
+    min-width: var(--target-size-recommended);
+    padding: var(--spacing-2) var(--spacing-3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Visually hidden but accessible to screen readers */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Separators for better visual structure */
+  .separator {
+    margin: 0 var(--spacing-2);
+    color: var(--color-text-tertiary);
+    user-select: none;
+  }
+
+  /* Help Section (WCAG 2.2 Consistent Help) */
+  .help-section {
+    position: fixed;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    z-index: 100;
+    max-width: 300px;
+  }
+
+  .help-details {
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .help-summary {
+    padding: var(--spacing-3);
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--color-link);
+    list-style: none;
+  }
+
+  .help-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .help-content {
+    padding: var(--spacing-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Progress Indicator (Cognitive Accessibility) */
+  .progress-indicator {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-2) 0;
+    z-index: 50;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: var(--color-bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: var(--spacing-2);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--color-primary);
+    width: 0%;
+    transition: width 0.3s ease;
   }
 
   .govuk-header {
@@ -409,6 +581,9 @@ const { personal, skills, experience, projects, education, certifications } = cv
   }
 
   .govuk-button {
+    /* WCAG 2.2: Ensure 44x44 minimum touch target */
+    min-height: var(--target-size-recommended);
+    min-width: var(--target-size-recommended);
     padding: var(--spacing-2) var(--spacing-3);
     font-size: var(--font-size-19);
     font-weight: 700;
@@ -417,7 +592,10 @@ const { personal, skills, experience, projects, education, certifications } = cv
     border: 2px solid var(--color-success);
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
   }
 
   .govuk-button:hover {
@@ -520,7 +698,10 @@ const { personal, skills, experience, projects, education, certifications } = cv
   @media print {
     .govuk-skip-link,
     .govuk-button,
-    .govuk-details__summary {
+    .govuk-details__summary,
+    .help-section,
+    .progress-indicator,
+    .skip-links {
       display: none !important;
     }
 
@@ -541,3 +722,81 @@ const { personal, skills, experience, projects, education, certifications } = cv
     }
   }
 </style>
+
+<script>
+  // Progress Indicator and Section Tracking (Cognitive Accessibility)
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const progressFill = document.querySelector('.progress-fill');
+    const currentSectionLabel = document.getElementById('current-section');
+    const progressBar = document.querySelector('.progress-bar');
+    
+    // Section names for better cognitive understanding
+    const sectionNames = {
+      'experience': 'Professional Experience',
+      'projects': 'Key Projects',
+      'skills': 'Technical Skills',
+      'education': 'Education',
+      'certifications': 'Certifications'
+    };
+    
+    // Update progress on scroll
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      
+      if (progressFill) {
+        progressFill.style.width = `${scrollPercent}%`;
+        progressBar?.setAttribute('aria-valuenow', Math.round(scrollPercent).toString());
+      }
+      
+      // Update current section
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          const sectionId = section.getAttribute('id');
+          if (currentSectionLabel && sectionId) {
+            currentSectionLabel.textContent = sectionNames[sectionId] || 'Introduction';
+          }
+        }
+      });
+    };
+    
+    // Smooth scroll for skip links
+    document.querySelectorAll('.govuk-skip-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.substring(1);
+        const target = document.getElementById(targetId || '');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.focus();
+        }
+      });
+    });
+    
+    // Update on scroll with throttling for performance
+    let scrollTimer: number;
+    window.addEventListener('scroll', () => {
+      if (scrollTimer) {
+        clearTimeout(scrollTimer);
+      }
+      scrollTimer = setTimeout(updateProgress, 10);
+    });
+    
+    // Initial update
+    updateProgress();
+  });
+  
+  // Keyboard navigation enhancement
+  document.addEventListener('keydown', (e) => {
+    // Press 'H' to toggle help
+    if (e.key === 'h' && !e.ctrlKey && !e.metaKey) {
+      const helpDetails = document.querySelector('.help-details') as HTMLDetailsElement;
+      if (helpDetails && document.activeElement?.tagName !== 'INPUT') {
+        helpDetails.open = !helpDetails.open;
+      }
+    }
+  });
+</script>
