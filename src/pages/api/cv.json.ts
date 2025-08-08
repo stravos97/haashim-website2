@@ -32,6 +32,17 @@ export const GET: APIRoute = async () => {
       achievements: project.achievements,
     })),
     education: cvData.education,
+    certifications: cvData.certifications.map(cert => ({
+      name: cert.name,
+      issuer: cert.issuer,
+      date: cert.date,
+      expiryDate: cert.expiryDate || null,
+      credentialId: cert.credentialId || null,
+      verificationUrl: cert.verificationUrl || null,
+      skills: cert.skills || [],
+      description: cert.description || null,
+      status: cert.date.toLowerCase().includes('planned') ? 'planned' : 'earned'
+    })),
     stats: cvUtils.getProjectStats(),
     technologies: cvUtils.getAllTechnologies(),
   };

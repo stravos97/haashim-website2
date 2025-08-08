@@ -1,11 +1,12 @@
 ---
-import { cvData } from '../data';
+import { cvData, cvUtils } from '../data';
 
-const { personal, skills, experience, projects, education } = cvData;
+const { personal, skills, experience, projects, education, certifications } = cvData;
 
 // Select top experiences and projects for 2-page limit
 const topExperiences = experience.slice(0, 4);
 const topProjects = projects.slice(0, 5);
+const earnedCerts = cvUtils.getEarnedCertifications();
 ---
 
 <!DOCTYPE html>
@@ -372,6 +373,23 @@ const topProjects = projects.slice(0, 5);
           </div>
         ))}
       </section>
+
+      <!-- Certifications -->
+      {earnedCerts.length > 0 && (
+        <section>
+          <h2>Certifications</h2>
+          {earnedCerts.map(cert => (
+            <div class="education-item">
+              <div class="degree">{cert.name}</div>
+              <div class="institution">{cert.issuer}</div>
+              <div class="edu-details">
+                {cert.date} 
+                {cert.credentialId && ` • ID: ${cert.credentialId}`}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
 
       <!-- Additional Info -->
       <section>

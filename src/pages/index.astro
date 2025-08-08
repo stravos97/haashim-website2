@@ -1,9 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PDFGenerator from '../components/PDFGenerator.astro';
-import { cvData } from '../data';
+import CertificationCard from '../components/CertificationCard.astro';
+import { cvData, cvUtils } from '../data';
 
 const { personal, skills, experience, projects, education, certifications, community } = cvData;
+const earnedCerts = cvUtils.getEarnedCertifications();
+const plannedCerts = cvUtils.getPlannedCertifications();
 ---
 
 <Layout title={`${personal.name} - ${personal.title}`}>
@@ -15,6 +18,7 @@ const { personal, skills, experience, projects, education, certifications, commu
       <a href="#experience" class="govuk-skip-link">Skip to experience</a>
       <a href="#projects" class="govuk-skip-link">Skip to projects</a>
       <a href="#skills" class="govuk-skip-link">Skip to skills</a>
+      <a href="#certifications" class="govuk-skip-link">Skip to certifications</a>
       <a href="#community" class="govuk-skip-link">Skip to community</a>
     </div>
     
@@ -225,14 +229,33 @@ const { personal, skills, experience, projects, education, certifications, commu
 
       <!-- Certifications -->
       {certifications && certifications.length > 0 && (
-        <section class="govuk-section" aria-labelledby="certifications-heading">
-          <h2 class="govuk-heading-l" id="certifications-heading">Certifications</h2>
+        <section class="govuk-section" id="certifications" aria-labelledby="certifications-heading" role="region">
+          <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications & Professional Development</h2>
           
-          <ul class="govuk-list govuk-list--bullet">
-            {certifications.map((cert) => (
-              <li class="mb-2">{cert}</li>
-            ))}
-          </ul>
+          {earnedCerts.length > 0 && (
+            <div class="certifications-group">
+              <h3 class="govuk-heading-m">Earned Certifications</h3>
+              <div class="certifications-grid">
+                {earnedCerts.map((cert) => (
+                  <CertificationCard certification={cert} />
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {plannedCerts.length > 0 && (
+            <div class="certifications-group">
+              <h3 class="govuk-heading-m">Planned Certifications</h3>
+              <p class="govuk-body-s govuk-text-colour--secondary mb-4">
+                Continuing education roadmap for professional development
+              </p>
+              <div class="certifications-grid">
+                {plannedCerts.map((cert) => (
+                  <CertificationCard certification={cert} />
+                ))}
+              </div>
+            </div>
+          )}
         </section>
       )}
 
@@ -279,6 +302,27 @@ const { personal, skills, experience, projects, education, certifications, commu
 </Layout>
 
 <style>
+  /* Certifications Grid Styles */
+  .certifications-group {
+    margin-bottom: 40px;
+  }
+  
+  .certifications-group:last-child {
+    margin-bottom: 0;
+  }
+  
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .certifications-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
   /* WCAG 2.2 Component Styles */
   .project-title-link {
     color: var(--color-text);

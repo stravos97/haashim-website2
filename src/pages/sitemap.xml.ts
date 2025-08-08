@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { cvData } from '../data';
 
 export const GET: APIRoute = async ({ site }) => {
-  const siteUrl = site?.toString() || 'https://haashim-alvi.netlify.app';
+  const siteUrl = (site?.toString() || 'https://haashim-alvi.netlify.app').replace(/\/$/, '');
   
   // Generate URLs for all pages
   const staticPages = [

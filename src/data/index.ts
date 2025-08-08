@@ -2,12 +2,13 @@ import { personal, type Personal } from './personal';
 import { skills, type Skills } from './skills';
 import { experience, type Experience } from './experience';
 import { projects, type Project } from './projects';
-import { education, certifications, type Education } from './education';
+import { education, type Education } from './education';
+import { certifications, type Certification } from './certifications';
 import { community, type Community } from './community';
 import { CVDataSchema } from './schemas';
 
 // Re-export types for external use
-export type { Personal, Skills, Experience, Project, Education, Community };
+export type { Personal, Skills, Experience, Project, Education, Certification, Community };
 
 // Main CV data structure
 export interface CVData {
@@ -16,7 +17,7 @@ export interface CVData {
   experience: Experience[];
   projects: Project[];
   education: Education[];
-  certifications: string[];
+  certifications: Certification[];
   community?: Community[];
 }
 
@@ -137,6 +138,20 @@ export const cvUtils = {
   // Get certifications count
   getCertificationCount: (): number => {
     return cvData.certifications.length;
+  },
+  
+  // Get earned certifications (not planned)
+  getEarnedCertifications: (): Certification[] => {
+    return cvData.certifications.filter(cert => 
+      !cert.date.toLowerCase().includes('planned')
+    );
+  },
+  
+  // Get planned certifications
+  getPlannedCertifications: (): Certification[] => {
+    return cvData.certifications.filter(cert => 
+      cert.date.toLowerCase().includes('planned')
+    );
   },
   
   // Check if has community involvement

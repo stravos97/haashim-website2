@@ -24,5 +24,3 @@ export const education: Education[] = [
     ]
   }
 ];
-
-export const certifications: string[] = [];

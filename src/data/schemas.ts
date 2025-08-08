@@ -62,13 +62,24 @@ export const CommunitySchema = z.object({
   points: z.array(z.string()).min(1, "At least one point is required")
 });
 
+export const CertificationSchema = z.object({
+  name: z.string().min(1, "Certification name is required"),
+  issuer: z.string().min(1, "Issuer is required"),
+  date: z.string().min(1, "Date is required"),
+  expiryDate: z.string().optional(),
+  credentialId: z.string().optional(),
+  verificationUrl: z.string().url().optional().or(z.string().optional()),
+  skills: z.array(z.string()).optional(),
+  description: z.string().optional()
+});
+
 export const CVDataSchema = z.object({
   personal: PersonalSchema,
   skills: SkillsSchema,
   experience: z.array(ExperienceSchema),
   projects: z.array(ProjectSchema),
   education: z.array(EducationSchema),
-  certifications: z.array(z.string()),
+  certifications: z.array(CertificationSchema),
   community: z.array(CommunitySchema).optional()
 });
 
@@ -79,3 +90,4 @@ export type ValidatedExperience = z.infer<typeof ExperienceSchema>;
 export type ValidatedProject = z.infer<typeof ProjectSchema>;
 export type ValidatedEducation = z.infer<typeof EducationSchema>;
 export type ValidatedCommunity = z.infer<typeof CommunitySchema>;
+export type ValidatedCertification = z.infer<typeof CertificationSchema>;

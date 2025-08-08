@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { cvData, metaData } from '../data';
 
 export const GET: APIRoute = async ({ site }) => {
-  const siteUrl = site?.toString() || 'https://haashim-alvi.netlify.app';
+  const siteUrl = (site?.toString() || 'https://haashim-alvi.netlify.app').replace(/\/$/, '');
   
   // Generate RSS XML for projects
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
