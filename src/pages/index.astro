@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { cvData } from '../data/cvData';
 
-const { personal, skills, experience, projects, education, certifications } = cvData;
+const { personal, skills, experience, projects, education, certifications, community } = cvData;
 ---
 
 <Layout title={`${personal.name} - ${personal.title}`}>
@@ -13,6 +13,7 @@ const { personal, skills, experience, projects, education, certifications } = cv
       <a href="#experience" class="govuk-skip-link">Skip to experience</a>
       <a href="#projects" class="govuk-skip-link">Skip to projects</a>
       <a href="#skills" class="govuk-skip-link">Skip to skills</a>
+      <a href="#community" class="govuk-skip-link">Skip to community</a>
     </div>
     
     <!-- Header with ARIA Landmarks -->
@@ -196,6 +197,34 @@ const { personal, skills, experience, projects, education, certifications } = cv
               <li class="mb-2">{cert}</li>
             ))}
           </ul>
+        </section>
+      )}
+
+      <!-- Community & Personal Development -->
+      {community && community.length > 0 && (
+        <section class="govuk-section" id="community" aria-labelledby="community-heading" role="region">
+          <h2 class="govuk-heading-l" id="community-heading" tabindex="-1">Community & Personal Development</h2>
+          
+          {community.map((item, index) => (
+            <article aria-label={`${item.title} at ${item.organization}`}
+                     role="article">
+              <h3 class="govuk-heading-m mb-2" id={`comm-${index}`}>
+                {item.title}
+              </h3>
+              <p class="govuk-body font-bold mb-1"
+                 aria-describedby={`comm-${index}`}>
+                {item.organization}
+              </p>
+              <p class="govuk-body-s govuk-text-colour--secondary mb-4">
+                <time datetime={item.period}>{item.period}</time>
+              </p>
+              <ul class="govuk-list govuk-list--bullet" role="list">
+                {item.points.map((point) => (
+                  <li role="listitem">{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </section>
       )}
     </main>
@@ -707,7 +736,8 @@ const { personal, skills, experience, projects, education, certifications } = cv
       'projects': 'Key Projects',
       'skills': 'Technical Skills',
       'education': 'Education',
-      'certifications': 'Certifications'
+      'certifications': 'Certifications',
+      'community': 'Community & Personal Development'
     };
     
     // Update progress on scroll

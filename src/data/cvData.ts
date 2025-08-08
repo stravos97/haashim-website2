@@ -27,6 +27,14 @@ export interface Education {
   modules?: string[];
 }
 
+export interface Community {
+  title: string;
+  organization: string;
+  location: string;
+  period: string;
+  points: string[];
+}
+
 export interface CVData {
   personal: {
     name: string;
@@ -48,17 +56,18 @@ export interface CVData {
   projects: Project[];
   education: Education[];
   certifications: string[];
+  community?: Community[];
 }
 
 export const cvData: CVData = {
   personal: {
     name: "Haashim Alvi",
-    title: "DevOps Engineer | Cloud Infrastructure Specialist",
-    summary: "Passionate DevOps Engineer specializing in cloud infrastructure automation, CI/CD pipelines, and Kubernetes orchestration. Experienced in Azure cloud services, Infrastructure as Code with Terraform, and implementing GitOps workflows. Committed to optimizing deployment processes and maintaining secure, scalable infrastructure solutions.",
+    title: "Software Developer • Security Engineer",
+    summary: "Junior DevOps engineer with hands-on experience automating deployments and managing infrastructure. Currently at Sparta Global developing enterprise DevOps skills: Azure cloud architecture, Terraform IaC, Kubernetes orchestration, and CI/CD pipelines through intensive training projects. Previous role at Dematic involved improving deployment processes with Jenkins and Ansible, while earlier development experience provided insight into application needs. Skilled in Python and Bash scripting, Docker containerization, and cloud platforms (Azure, AWS). Passionate about automation and continuously learning modern DevOps practices.",
     contact: {
       email: "haashimalvi@pm.me",
-      phone: "+44 7450 281 801",
-      location: "Manchester, UK",
+      phone: "",
+      location: "",
       linkedin: "linkedin.com/in/haashim-alvi",
       github: "github.com/stravos97",
       website: "haashim-alvi.netlify.app"
@@ -92,162 +101,171 @@ export const cvData: CVData = {
   },
   experience: [
     {
-      title: "DevOps Consultant",
+      title: "DevOps Training Consultant",
       company: "Sparta Global",
-      period: "Aug 2024 - Present",
-      location: "Manchester, UK",
+      period: "Jan 2025 - Current",
+      location: "Birmingham",
       points: [
-        "Deployed multi-tier Azure architectures using Terraform, implementing hub-spoke networking with secure VNet peering",
-        "Built CI/CD pipelines in Jenkins and Azure DevOps, reducing deployment time from hours to under 15 minutes",
-        "Containerized legacy applications with Docker and deployed to AKS with Helm charts and GitOps practices",
-        "Automated infrastructure provisioning using ARM templates and Terraform modules for consistent environments",
-        "Implemented monitoring solutions with Azure Monitor and Log Analytics for proactive issue detection"
+        "Training in enterprise DevOps practices through hands-on projects: Azure, Terraform, Kubernetes, Jenkins, Docker, Ansible",
+        "Reduced manual deployment steps from 8 to 2 by building CI/CD pipeline with Jenkins and Docker",
+        "Managed configuration for 10+ Azure resources by implementing Terraform modules with state management",
+        "Deployed 5 microservices to Kubernetes by configuring deployments, services, and ingress rules",
+        "Set up basic monitoring by implementing Prometheus metrics collection and Grafana dashboards",
+        "Automated application deployment by writing Ansible playbooks for 3-tier architecture"
       ]
     },
     {
-      title: "DevOps Trainee",
-      company: "Sparta Global",
-      period: "Jun 2024 - Aug 2024",
-      location: "Birmingham, UK",
+      title: "IT Technician",
+      company: "R.A.S Ltd",
+      period: "2024 - 2025",
+      location: "Rochdale",
       points: [
-        "Completed intensive 10-week DevOps engineering program covering cloud, automation, and CI/CD practices",
-        "Achieved Azure Fundamentals (AZ-900) certification with comprehensive cloud services knowledge",
-        "Developed Infrastructure as Code using Terraform to provision Azure resources programmatically",
-        "Created automated deployment pipelines with Jenkins, implementing build, test, and deploy stages",
-        "Built configuration management solutions using Ansible playbooks for consistent server setups"
+        "Sole IT responsible for small business infrastructure: Office 365, firewall configuration, Windows servers, networking",
+        "Achieved Cyber Essentials compliance by implementing required security controls and documentation",
+        "Saved 3-4 hours weekly by automating Windows updates and backups with PowerShell scripts",
+        "Improved system reliability by implementing daily backups and basic disaster recovery procedures",
+        "Enabled faster troubleshooting by setting up ELK stack for centralized log collection"
       ]
     },
     {
-      title: "Data Analyst",
-      company: "BUPA",
-      period: "Jan 2023 - Apr 2024",
-      location: "Manchester, UK",
+      title: "DevOps Engineer",
+      company: "Dematic",
+      period: "2022 - 2023",
+      location: "Stockport",
       points: [
-        "Analyzed healthcare data to identify trends and patterns, improving operational efficiency by 20%",
-        "Created automated Power BI dashboards refreshing daily, reducing manual reporting time by 10 hours weekly",
-        "Developed Python scripts for data extraction and transformation from multiple sources",
-        "Collaborated with cross-functional teams to deliver data-driven insights for strategic decisions",
-        "Implemented data quality checks and validation processes ensuring 99.9% data accuracy"
+        "Improved deployment processes for warehouse software using Jenkins, Docker, and Ansible",
+        "Enabled daily deployments (previously weekly) by implementing Jenkins pipeline with basic testing",
+        "Reduced deployment issues by containerizing applications with Docker for consistency",
+        "Simplified server setup from manual process to scripted approach using Ansible playbooks",
+        "Caught code issues early by integrating SonarQube scanning into build pipeline",
+        "Improved team knowledge by creating deployment documentation and basic runbooks"
       ]
     },
     {
-      title: "Pricing Specialist",
-      company: "Advanced Supply Chain UK (Booker Group/Tesco)",
-      period: "Aug 2021 - Jan 2023",
-      location: "Manchester, UK",
+      title: "Software Developer",
+      company: "Dematic",
+      period: "2021 - 2022",
+      location: "Stockport",
       points: [
-        "Managed product pricing for 300+ items using automated Excel models and SQL queries",
-        "Analyzed competitor pricing data to optimize margins while maintaining market competitiveness",
-        "Developed VBA macros to automate pricing updates, saving 5 hours of manual work weekly",
-        "Coordinated with suppliers and internal teams to implement strategic pricing changes",
-        "Created weekly performance reports tracking pricing effectiveness and market trends"
+        "Developed features for warehouse management systems using C and Python",
+        "Built components for inventory tracking and order processing in warehouse control systems",
+        "Debugged and maintained existing codebase, fixing bugs and improving stability",
+        "Wrote Python scripts for data processing and automation of development tasks",
+        "Participated in agile development with code reviews, Git version control, and regular deployments"
+      ]
+    },
+    {
+      title: "Systems Tester (Placement Year)",
+      company: "Skipton Building Society",
+      period: "2019 - 2020",
+      location: "Skipton",
+      points: [
+        "Tested financial applications including banking systems and mortgage platforms",
+        "Identified and documented defects before production releases through systematic testing",
+        "Created test cases based on business requirements and user stories",
+        "Assisted with test environment management and test data preparation",
+        "Participated in UAT coordination and defect triage meetings"
       ]
     }
   ],
   projects: [
     {
-      name: "Home Media Server - Kubernetes Infrastructure",
-      description: "Production-grade K3s cluster hosting 22 stateful applications with enterprise security",
-      techStack: ["K3s", "ArgoCD", "LLDAP", "Authelia", "Longhorn", "MetalLB", "Traefik", "Prometheus"],
-      metrics: [
-        "22 stateful applications orchestrated",
-        "52 network policies enforced",
-        "1.4TB media storage managed",
-        "99.9% uptime achieved"
-      ],
+      name: "File Organization GUI - Python Desktop Application",
+      description: "Automated file organization tool with GUI interface",
+      techStack: ["Python", "Tkinter", "PyInstaller", "Jenkins", "Bash"],
       achievements: [
-        "Implemented GitOps with ArgoCD for declarative deployments and automated rollbacks",
-        "Configured zero-trust security with LLDAP/Authelia SSO and granular RBAC policies",
-        "Deployed hybrid storage architecture using Longhorn for configs and local-path for media",
-        "Set up comprehensive monitoring with Prometheus/Grafana dashboards and alerting"
+        "Built Python/Tkinter desktop application to automate file organization based on user-defined rules",
+        "Implemented CI/CD with Jenkins pipeline for automated builds using PyInstaller",
+        "Created installation scripts for macOS and Linux to simplify deployment process"
+      ],
+      github: "github.com/stravos97/organise-files-folders-front-end"
+    },
+    {
+      name: "DevOps Learning Documentation",
+      description: "Personal learning journey documentation and guides",
+      techStack: ["Markdown", "Git", "Documentation"],
+      achievements: [
+        "Documented personal learning journey with detailed notes on Azure, Terraform, and Kubernetes",
+        "Created step-by-step guides for Jenkins pipelines and Ansible playbooks to help fellow trainees",
+        "Shared practical examples and troubleshooting tips from hands-on training exercises"
+      ],
+      github: "github.com/stravos97/sparta-code.wiki"
+    },
+    {
+      name: "Home Media Server - Kubernetes Infrastructure",
+      description: "Production-grade K3s cluster hosting 22 stateful applications",
+      techStack: ["K3s", "ArgoCD", "LLDAP", "Authelia", "Longhorn", "MetalLB", "Traefik", "Prometheus"],
+      achievements: [
+        "Orchestrated 22 stateful applications on K3s with LLDAP/Authelia authentication and ArgoCD GitOps",
+        "Implemented zero-trust security with 52 network policies controlling ingress/egress traffic flows",
+        "Configured component-based RBAC with 6 service accounts following least-privilege principles",
+        "Deployed hybrid storage architecture using Longhorn for configs and local-path for 1.4TB media"
       ],
       github: "github.com/stravos97/torrentbox-kubernetes",
       live: "homepage.haashim.org"
     },
     {
-      name: "React Charity Dashboard",
-      description: "Real-time event management dashboard for charity dinner visualization",
-      techStack: ["React", "TypeScript", "Chart.js", "Tailwind CSS", "Vite"],
+      name: "Dependency Update Automation",
+      description: "Automated dependency management with Renovate bot",
+      techStack: ["Renovate", "GitHub Actions", "CI/CD"],
       achievements: [
-        "Built interactive dashboard with real-time data updates and responsive charts",
-        "Implemented table management system with drag-and-drop seating arrangements",
-        "Created donation tracking with visual progress indicators and analytics",
-        "Designed mobile-responsive UI with Tailwind CSS utility classes"
+        "Configured Renovate bot to automatically check for updates across multiple repositories",
+        "Set up automated pull requests for container image updates with semantic versioning",
+        "Reduced manual dependency management work by implementing update scheduling"
       ],
-      github: "github.com/stravos97/anoosh-charity-dashboard"
+      github: "github.com/stravos97/renovate-config-torrentbox"
     },
     {
-      name: "File Organization GUI",
-      description: "Python desktop application for automated file organization",
-      techStack: ["Python", "Tkinter", "PyInstaller", "Jenkins", "Bash"],
+      name: "Bash Automation Scripts",
+      description: "Collection of automation scripts for common tasks",
+      techStack: ["Bash", "Shell Scripting", "Linux"],
       achievements: [
-        "Developed rule-based file organization system with custom filtering logic",
-        "Implemented CI/CD pipeline with Jenkins for automated builds and testing",
-        "Created cross-platform installation scripts for macOS and Linux",
-        "Built intuitive GUI with drag-and-drop file selection"
+        "Created collection of Bash scripts for common tasks like backups, log rotation, and monitoring",
+        "Automated daily backups to cloud storage with basic retention policies",
+        "Wrote health check scripts to monitor service status and send alerts"
       ],
-      github: "github.com/stravos97/organise-files-folders-front-end"
-    },
-    {
-      name: "Infrastructure Automation Suite",
-      description: "Collection of Terraform modules and Ansible playbooks for cloud automation",
-      techStack: ["Terraform", "Ansible", "Azure", "Bash", "Python"],
-      metrics: [
-        "53KB of Terraform configurations",
-        "30+ Ansible playbooks",
-        "365KB of automation scripts"
-      ],
-      achievements: [
-        "Developed reusable Terraform modules for Azure resource provisioning",
-        "Created Ansible playbooks for Windows and Linux server configuration",
-        "Built Python scripts for cloud resource monitoring and cost analysis",
-        "Implemented automated backup and disaster recovery procedures"
-      ],
-      github: "github.com/stravos97/terraform-azure"
-    },
-    {
-      name: "DevOps Learning Documentation",
-      description: "Comprehensive wiki documenting DevOps practices and implementations",
-      techStack: ["Markdown", "Git", "Documentation"],
-      achievements: [
-        "Created step-by-step guides for Jenkins pipelines and CI/CD workflows",
-        "Documented Kubernetes deployment strategies and troubleshooting tips",
-        "Shared practical examples from hands-on training exercises",
-        "Built searchable knowledge base for team reference"
-      ],
-      github: "github.com/stravos97/sparta-code.wiki"
-    },
-    {
-      name: "Smart Meter Data Pipeline",
-      description: "Python application for processing and analyzing energy consumption data",
-      techStack: ["Python", "Pandas", "NumPy", "Matplotlib"],
-      achievements: [
-        "Built data pipeline processing 10,000+ daily meter readings",
-        "Implemented anomaly detection algorithms for usage patterns",
-        "Created visualization dashboards for consumption trends",
-        "Optimized data processing reducing runtime by 60%"
-      ],
-      github: "github.com/stravos97/smart_meter"
+      github: "github.com/stravos97/Bash-Scripts"
     }
   ],
   education: [
     {
-      degree: "BSc Computer Science",
-      institution: "University of Leicester",
-      period: "2015 - 2019",
-      location: "Leicester, UK",
-      grade: "2:1 Honours",
+      degree: "BSc (Hons) Computer Science with Web Development",
+      institution: "University of Salford",
+      period: "Sep 2017 - Jul 2021",
+      location: "Salford, Manchester",
+      grade: "First Class Honours",
       modules: [
-        "Software Engineering",
+        "Cyber Security",
+        "Web Security & Privacy",
         "Database Systems",
+        "Operating Systems",
         "Computer Networks",
-        "Cloud Computing",
-        "Cybersecurity Fundamentals"
+        "Agile Software Development"
       ]
     }
   ],
-  certifications: [
-    "Azure Fundamentals (AZ-900) - Microsoft Certified",
-    "DevOps Engineering - Sparta Global Certified"
+  certifications: [],
+  community: [
+    {
+      title: "Competitive Player",
+      organization: "Local Badminton League",
+      location: "Manchester",
+      period: "2023 - Present",
+      points: [
+        "Compete in regional badminton tournaments, maintaining fitness and strategic thinking",
+        "Apply DevOps principles to training: tracking performance metrics, iterative improvement, consistent practice"
+      ]
+    },
+    {
+      title: "Open Source Contributor",
+      organization: "Community Projects & Technical Content",
+      location: "GitHub",
+      period: "2024 - Present",
+      points: [
+        "Developing React-based charity dinner dashboard (github.com/stravos97/anoosh-charity-dashboard) for event data visualization",
+        "Maintaining open source DevOps tools: Renovate configurations, Windows Ansible playbooks, automation scripts",
+        "Sharing knowledge through GitHub: Kubernetes guides, Docker configurations, helping others learn DevOps practices"
+      ]
+    }
   ]
 };
