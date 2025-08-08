@@ -217,7 +217,7 @@ export const cvData: CVData = {
         "Created step-by-step guides for Jenkins pipelines and Ansible playbooks to help fellow trainees",
         "Shared practical examples and troubleshooting tips from hands-on training exercises"
       ],
-      github: "github.com/stravos97/sparta-code.wiki",
+      github: "github.com/stravos97/sparta-code/wiki",
       detailedDescription: "A comprehensive collection of DevOps learning materials and practical guides created during my training at Sparta Global. This documentation serves as both a personal knowledge base and a resource for fellow engineers learning DevOps practices.",
       features: [
         "Detailed Azure cloud service guides with real-world examples",
@@ -246,7 +246,7 @@ export const cvData: CVData = {
         "Configured component-based RBAC with 6 service accounts following least-privilege principles",
         "Deployed hybrid storage architecture using Longhorn for configs and local-path for 1.4TB media"
       ],
-      github: "github.com/stravos97/torrentbox-kubernetes",
+      github: "github.com/stravos97/torrentBox-kubernetes",
       live: "homepage.haashim.org",
       detailedDescription: "A production-grade Kubernetes cluster running on bare metal, hosting a complete media server infrastructure with 22 stateful applications. This project demonstrates advanced Kubernetes concepts including GitOps deployment, zero-trust networking, centralized authentication, and distributed storage management.",
       features: [
@@ -270,24 +270,9 @@ export const cvData: CVData = {
       architecture: "The cluster runs K3s on bare metal with a single master node and two worker nodes. ArgoCD manages deployments from Git repositories, Longhorn provides distributed block storage, and Traefik handles ingress routing. All applications authenticate through Authelia with LLDAP as the identity provider. Network segmentation is enforced through Cilium CNI with strict NetworkPolicies.",
       gallery: [
         {
-          src: "/images/kubernetes-dashboard.png",
-          alt: "Kubernetes dashboard showing running pods and services",
-          caption: "Main Kubernetes dashboard displaying the health status of all 22 applications"
-        },
-        {
-          src: "/images/argocd-apps.png",
-          alt: "ArgoCD interface showing deployed applications",
-          caption: "ArgoCD GitOps interface managing continuous deployment"
-        },
-        {
-          src: "/images/grafana-metrics.png",
-          alt: "Grafana dashboard with system metrics",
-          caption: "Grafana monitoring dashboard showing resource utilization and performance metrics"
-        },
-        {
-          src: "/images/network-diagram.png",
-          alt: "Network architecture diagram",
-          caption: "Zero-trust network architecture with Cilium CNI and NetworkPolicies"
+          src: "/images/kubernetes-homepage.png",
+          alt: "Homepage dashboard showing all running services",
+          caption: "Homepage dashboard displaying all 22 applications including media management, services, download clients, and media streaming"
         }
       ]
     },
@@ -358,7 +343,8 @@ export const cvData: CVData = {
         "Created visualization dashboards for consumption trends",
         "Optimized data processing reducing runtime by 60%"
       ],
-      github: "github.com/stravos97/smart_meter",
+      github: "github.com/stravos97/Smart_Meter_Prjct",
+      live: "smartmeter.altervista.org/index.php",
       detailedDescription: "A high-performance data pipeline for processing and analyzing smart meter energy consumption data. The application ingests raw meter readings, performs data cleaning and transformation, applies anomaly detection algorithms, and generates insightful visualizations for energy consumption patterns.",
       features: [
         "Real-time data ingestion from multiple meter formats",
@@ -376,7 +362,14 @@ export const cvData: CVData = {
         "Creating meaningful visualizations from complex multi-dimensional data",
         "Handling missing data and meter reading errors gracefully"
       ],
-      architecture: "The pipeline uses Pandas for data manipulation, NumPy for numerical computations, and Matplotlib for visualizations. Data flows through stages: ingestion, validation, transformation, analysis, and visualization. The application uses chunking for large datasets and implements caching for frequently accessed computations."
+      architecture: "The pipeline uses Pandas for data manipulation, NumPy for numerical computations, and Matplotlib for visualizations. Data flows through stages: ingestion, validation, transformation, analysis, and visualization. The application uses chunking for large datasets and implements caching for frequently accessed computations.",
+      gallery: [
+        {
+          src: "/images/smart-meter.png",
+          alt: "Smart meter dashboard showing electricity and gas consumption",
+          caption: "Real-time energy consumption dashboard showing £0 cost for both electricity and gas usage with green status indicators"
+        }
+      ]
     },
     {
       name: "Infrastructure Automation Suite",
@@ -394,7 +387,7 @@ export const cvData: CVData = {
         "Built Python scripts for cloud resource monitoring and cost analysis",
         "Implemented automated backup and disaster recovery procedures"
       ],
-      github: "github.com/stravos97/terraform-azure",
+      github: "github.com/stravos97/tech501-terraform-aws",
       detailedDescription: "A comprehensive infrastructure automation suite combining Terraform modules for cloud provisioning and Ansible playbooks for configuration management. This collection represents best practices learned from enterprise deployments and includes monitoring, cost optimization, and disaster recovery automation.",
       features: [
         "Reusable Terraform modules for Azure infrastructure components",
