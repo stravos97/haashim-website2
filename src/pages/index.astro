@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PDFGenerator from '../components/PDFGenerator.astro';
 import { cvData } from '../data/cvData';
 
 const { personal, skills, experience, projects, education, certifications, community } = cvData;
 ---
 
 <Layout title={`${personal.name} - ${personal.title}`}>
+  <PDFGenerator />
   <div class="govuk-width-container">
     <!-- Skip Navigation Links (WCAG 2.2) -->
     <div class="skip-links">
