@@ -288,13 +288,14 @@ export const cvData: CVData = {
   certifications: [],
   community: [
     {
-      title: "Competitive Player",
-      organization: "Local Badminton League",
+      title: "Sports & Fitness",
+      organization: "Various Athletic Activities",
       location: "Manchester",
       period: "2023 - Present",
       points: [
-        "Compete in regional badminton tournaments, maintaining fitness and strategic thinking",
-        "Apply DevOps principles to training: tracking performance metrics, iterative improvement, consistent practice"
+        "Compete in regional badminton tournaments, maintaining physical fitness and strategic thinking",
+        "Active rock climbing enthusiast, developing problem-solving skills and physical endurance",
+        "Play in local hockey team, fostering teamwork and communication skills"
       ]
     },
     {
