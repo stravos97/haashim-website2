@@ -1,5 +1,5 @@
 ---
-// PDF Generator Component - Optimized 2-page CV
+// PDF Generator Component - Opens optimized print view
 ---
 
 <button id="download-pdf" class="pdf-button" aria-label="Download CV as PDF">
@@ -52,132 +52,13 @@
 </style>
 
 <script>
-  document.getElementById('download-pdf')?.addEventListener('click', async () => {
-    // Load html2pdf.js dynamically
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      // Create a clone of the content for PDF generation
-      const element = document.querySelector('main')?.cloneNode(true) as HTMLElement;
-      
-      if (!element) return;
-
-      // Apply PDF-specific modifications to the clone
-      const pdfContent = document.createElement('div');
-      pdfContent.innerHTML = `
-        <style>
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body { font-family: Arial, sans-serif; font-size: 10pt; line-height: 1.3; }
-          h1 { font-size: 20pt; margin-bottom: 4pt; }
-          h2 { font-size: 14pt; margin-top: 12pt; margin-bottom: 6pt; border-bottom: 1px solid #ccc; padding-bottom: 2pt; }
-          h3 { font-size: 11pt; margin-top: 8pt; margin-bottom: 3pt; font-weight: bold; }
-          p { font-size: 9pt; margin-bottom: 4pt; }
-          ul { margin: 4pt 0 8pt 16pt; }
-          li { font-size: 9pt; margin-bottom: 2pt; line-height: 1.3; }
-          .govuk-section { margin-bottom: 12pt; }
-          .govuk-body-l { font-size: 12pt; margin-bottom: 6pt; }
-          .govuk-body-s { font-size: 8pt; color: #666; }
-          .contact-links { margin-bottom: 8pt; }
-          .contact-link { margin-right: 12pt; font-size: 9pt; }
-          .skill-badge, .govuk-tag { 
-            display: inline-block; 
-            padding: 1pt 4pt; 
-            margin: 2pt 4pt 2pt 0; 
-            border: 1px solid #999; 
-            font-size: 8pt;
-          }
-          .govuk-details, details, .progress-indicator, .skip-links { display: none; }
-          article { margin-bottom: 10pt; page-break-inside: avoid; }
-        </style>
-      `;
-
-      // Get only essential content
-      const header = document.querySelector('.govuk-header__content')?.cloneNode(true);
-      const experience = document.querySelector('#experience')?.cloneNode(true);
-      const projects = document.querySelector('#projects')?.cloneNode(true);
-      const skills = document.querySelector('#skills')?.cloneNode(true);
-      const education = document.querySelector('#education')?.cloneNode(true);
-
-      // Build optimized content structure
-      if (header) {
-        // Simplify header
-        const headerEl = header as HTMLElement;
-        headerEl.querySelectorAll('.skills-highlight, .contact-icon, details').forEach(el => el.remove());
-        pdfContent.appendChild(headerEl);
-      }
-
-      if (experience) {
-        // Keep only first 3 experiences
-        const exp = experience as HTMLElement;
-        const articles = exp.querySelectorAll('article');
-        articles.forEach((article, index) => {
-          if (index >= 3) article.remove();
-          // Limit bullet points to 3 per experience
-          const bullets = article.querySelectorAll('li');
-          bullets.forEach((bullet, i) => {
-            if (i >= 3) bullet.remove();
-          });
-        });
-        pdfContent.appendChild(exp);
-      }
-
-      if (projects) {
-        // Keep only top 5 projects
-        const proj = projects as HTMLElement;
-        const articles = proj.querySelectorAll('article');
-        articles.forEach((article, index) => {
-          if (index >= 5) article.remove();
-          // Remove details/metrics, keep only achievements (max 2)
-          article.querySelectorAll('details').forEach(el => el.remove());
-          const bullets = article.querySelectorAll('li');
-          bullets.forEach((bullet, i) => {
-            if (i >= 2) bullet.remove();
-          });
-        });
-        pdfContent.appendChild(proj);
-      }
-
-      if (skills) {
-        pdfContent.appendChild(skills);
-      }
-
-      if (education) {
-        // Remove module details
-        const edu = education as HTMLElement;
-        edu.querySelectorAll('details').forEach(el => el.remove());
-        pdfContent.appendChild(edu);
-      }
-
-      // PDF generation options for exactly 2 pages
-      const opt = {
-        margin: [10, 12, 10, 12], // top, right, bottom, left (in mm)
-        filename: 'Haashim_Alvi_CV.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2,
-          useCORS: true,
-          letterRendering: true,
-          logging: false
-        },
-        jsPDF: { 
-          unit: 'mm', 
-          format: 'a4', 
-          orientation: 'portrait',
-          compress: true
-        },
-        pagebreak: { 
-          mode: ['avoid-all', 'css', 'legacy'],
-          before: '.page-break-before',
-          after: '.page-break-after',
-          avoid: ['article', 'h3']
-        }
-      };
-
-      // Generate PDF
-      // @ts-ignore
-      html2pdf().set(opt).from(pdfContent).save();
-    };
+  document.getElementById('download-pdf')?.addEventListener('click', () => {
+    // Open the print-optimized page in a new window
+    const printWindow = window.open('/cv-print', '_blank', 'width=850,height=1100');
+    
+    // Optional: If the window was blocked, fall back to navigation
+    if (!printWindow) {
+      window.location.href = '/cv-print';
+    }
   });
 </script>
