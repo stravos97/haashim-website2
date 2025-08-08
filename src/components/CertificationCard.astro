@@ -3,221 +3,69 @@ import type { Certification } from '../data';
 
 export interface Props {
   certification: Certification;
+  index: number;
 }
 
-const { certification } = Astro.props;
+const { certification, index } = Astro.props;
 const isPlanned = certification.date.toLowerCase().includes('planned');
-const statusClass = isPlanned ? 'cert-status-planned' : 'cert-status-earned';
 ---
 
-<article class="certification-card" role="article" aria-label={`${certification.name} certification`}>
-  <div class="cert-header">
-    <h3 class="cert-name">
-      {certification.name}
-      {isPlanned && <span class="cert-badge">Planned</span>}
-    </h3>
-    <p class="cert-issuer">{certification.issuer}</p>
-  </div>
+<article aria-label={`${certification.name} certification`} role="article">
+  <h3 class="govuk-heading-m mb-2" id={`cert-${index}`}>
+    {certification.name}
+    {isPlanned && <span class="govuk-tag govuk-tag--yellow ml-2">Planned</span>}
+  </h3>
   
-  <div class="cert-details">
-    <div class="cert-date">
-      <span class="cert-icon">📅</span>
-      <span>{certification.date}</span>
-    </div>
-    
-    {certification.credentialId && (
-      <div class="cert-credential">
-        <span class="cert-icon">🆔</span>
-        <span>ID: {certification.credentialId}</span>
-      </div>
-    )}
-    
-    {certification.expiryDate && (
-      <div class="cert-expiry">
-        <span class="cert-icon">⏰</span>
-        <span>Expires: {certification.expiryDate}</span>
-      </div>
-    )}
-  </div>
+  <p class="govuk-body font-bold mb-1" aria-describedby={`cert-${index}`}>
+    {certification.issuer}
+  </p>
+  
+  <p class="govuk-body-s govuk-text-colour--secondary mb-4">
+    <time datetime={certification.date}>{certification.date}</time>
+    {certification.credentialId && <span> • ID: {certification.credentialId}</span>}
+    {certification.expiryDate && <span> • Expires: {certification.expiryDate}</span>}
+  </p>
   
   {certification.description && (
-    <p class="cert-description">{certification.description}</p>
+    <p class="govuk-body mb-3">
+      {certification.description}
+    </p>
   )}
   
   {certification.skills && certification.skills.length > 0 && (
-    <div class="cert-skills">
-      {certification.skills.map((skill) => (
-        <span class="cert-skill-tag">{skill}</span>
-      ))}
-    </div>
+    <p class="govuk-body-s govuk-text-colour--secondary mb-3">
+      <strong>Skills:</strong> {certification.skills.join(' • ')}
+    </p>
   )}
   
   {certification.verificationUrl && !isPlanned && (
-    <a 
-      href={certification.verificationUrl} 
-      class="cert-verify-link"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Verify ${certification.name} certification (opens in new tab)`}
-    >
-      <span class="cert-icon">✓</span>
-      Verify Certificate
-    </a>
+    <p class="govuk-body-s">
+      <a href={certification.verificationUrl} 
+         class="govuk-link"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label={`Verify ${certification.name} certification (opens in new tab)`}>
+        Verify certificate →
+      </a>
+    </p>
   )}
 </article>
 
 <style>
-  .certification-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .ml-2 {
+    margin-left: 8px;
   }
   
-  .certification-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cert-header {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--color-border);
-  }
-  
-  .cert-name {
-    font-size: 19px;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin: 0 0 5px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .cert-badge {
-    background: var(--govuk-colour-yellow);
+  .govuk-tag--yellow {
+    background-color: var(--govuk-colour-yellow);
     color: var(--govuk-colour-black);
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
   }
   
-  .cert-issuer {
-    color: var(--color-text-secondary);
-    font-size: 16px;
-    margin: 0;
+  article {
+    margin-bottom: var(--govuk-spacing-8);
   }
   
-  .cert-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-  }
-  
-  .cert-date,
-  .cert-credential,
-  .cert-expiry {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .cert-icon {
-    font-size: 16px;
-    opacity: 0.8;
-  }
-  
-  .cert-description {
-    color: var(--color-text-secondary);
-    font-size: 16px;
-    line-height: 1.5;
-    margin: 15px 0;
-  }
-  
-  .cert-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 15px 0;
-  }
-  
-  .cert-skill-tag {
-    background: var(--color-tag-bg);
-    color: var(--color-tag-text);
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 14px;
-    border: 1px solid var(--color-border);
-  }
-  
-  .cert-verify-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--govuk-link-colour);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 8px 16px;
-    border: 2px solid var(--govuk-link-colour);
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    margin-top: 10px;
-  }
-  
-  .cert-verify-link:hover {
-    background: var(--govuk-link-colour);
-    color: white;
-  }
-  
-  .cert-verify-link:focus {
-    outline: 3px solid var(--govuk-focus-colour);
-    outline-offset: 0;
-  }
-  
-  /* Dark mode specific colors */
-  :root[data-theme="dark"] {
-    --color-surface: rgba(255, 255, 255, 0.05);
-    --color-border: rgba(255, 255, 255, 0.1);
-    --color-tag-bg: rgba(255, 255, 255, 0.1);
-    --color-tag-text: var(--govuk-colour-white);
-  }
-  
-  :root[data-theme="light"] {
-    --color-surface: var(--govuk-colour-white);
-    --color-border: var(--govuk-colour-mid-grey);
-    --color-tag-bg: var(--govuk-colour-light-grey);
-    --color-tag-text: var(--govuk-colour-black);
-  }
-  
-  @media (max-width: 768px) {
-    .cert-details {
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .certification-card {
-      padding: 15px;
-    }
-  }
-  
-  @media print {
-    .certification-card {
-      page-break-inside: avoid;
-      border: 1px solid #ccc;
-      margin-bottom: 10px;
-    }
-    
-    .cert-verify-link {
-      border: 1px solid #000;
-      color: #000;
-    }
+  article:last-child {
+    margin-bottom: 0;
   }
 </style>

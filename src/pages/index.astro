@@ -233,27 +233,23 @@ const plannedCerts = cvUtils.getPlannedCertifications();
           <h2 class="govuk-heading-l" id="certifications-heading" tabindex="-1">Certifications & Professional Development</h2>
           
           {earnedCerts.length > 0 && (
-            <div class="certifications-group">
-              <h3 class="govuk-heading-m">Earned Certifications</h3>
-              <div class="certifications-grid">
-                {earnedCerts.map((cert) => (
-                  <CertificationCard certification={cert} />
-                ))}
-              </div>
+            <div class="mb-6">
+              <h3 class="govuk-heading-m mb-4">Earned Certifications</h3>
+              {earnedCerts.map((cert, idx) => (
+                <CertificationCard certification={cert} index={idx} />
+              ))}
             </div>
           )}
           
           {plannedCerts.length > 0 && (
-            <div class="certifications-group">
-              <h3 class="govuk-heading-m">Planned Certifications</h3>
+            <div>
+              <h3 class="govuk-heading-m mb-3">Planned Certifications</h3>
               <p class="govuk-body-s govuk-text-colour--secondary mb-4">
                 Continuing education roadmap for professional development
               </p>
-              <div class="certifications-grid">
-                {plannedCerts.map((cert) => (
-                  <CertificationCard certification={cert} />
-                ))}
-              </div>
+              {plannedCerts.map((cert, idx) => (
+                <CertificationCard certification={cert} index={earnedCerts.length + idx} />
+              ))}
             </div>
           )}
         </section>
@@ -302,27 +298,6 @@ const plannedCerts = cvUtils.getPlannedCertifications();
 </Layout>
 
 <style>
-  /* Certifications Grid Styles */
-  .certifications-group {
-    margin-bottom: 40px;
-  }
-  
-  .certifications-group:last-child {
-    margin-bottom: 0;
-  }
-  
-  .certifications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .certifications-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
   /* WCAG 2.2 Component Styles */
   .project-title-link {
     color: var(--color-text);
