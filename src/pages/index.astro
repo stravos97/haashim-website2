@@ -29,12 +29,6 @@ const { personal, skills, experience, projects, education, certifications } = cv
             <span aria-hidden="true">📧</span> Email: {personal.contact.email}
           </a>
           <span class="separator" aria-hidden="true">|</span>
-          <a href={`tel:${personal.contact.phone.replace(/\s/g, '')}`} 
-             class="govuk-link touch-target"
-             aria-label={`Call ${personal.name}`}>
-            <span aria-hidden="true">📱</span> Phone: {personal.contact.phone}
-          </a>
-          <span class="separator" aria-hidden="true">|</span>
           <a href={`https://${personal.contact.linkedin}`} 
              class="govuk-link touch-target"
              rel="noopener noreferrer"
@@ -53,27 +47,6 @@ const { personal, skills, experience, projects, education, certifications } = cv
         </nav>
       </div>
     </header>
-
-    <!-- Help Section (WCAG 2.2 Consistent Help) -->
-    <aside class="help-section" role="complementary" aria-label="Help and accessibility">
-      <details class="help-details">
-        <summary class="help-summary touch-target" role="button">
-          <span aria-hidden="true">ℹ️</span> Help & Accessibility Options
-        </summary>
-        <div class="help-content">
-          <h2 class="govuk-heading-s">Accessibility Features</h2>
-          <ul class="govuk-list govuk-list--bullet">
-            <li>Press Tab to navigate through interactive elements</li>
-            <li>Press Ctrl + Plus/Minus to zoom in/out</li>
-            <li>This page is screen reader optimized</li>
-            <li>All images have descriptive text alternatives</li>
-          </ul>
-          <h2 class="govuk-heading-s">Quick Navigation</h2>
-          <p class="govuk-body-s">Estimated reading time: 5 minutes</p>
-          <p class="govuk-body-s">Number of sections: 5</p>
-        </div>
-      </details>
-    </aside>
 
     <!-- Progress Indicator for Page Sections -->
     <nav class="progress-indicator" role="navigation" aria-label="Page sections">
@@ -101,8 +74,7 @@ const { personal, skills, experience, projects, education, certifications } = cv
               {exp.company}
             </p>
             <p class="govuk-body-s govuk-text-colour--secondary mb-4">
-              <time datetime={exp.period}>{exp.period}</time> • 
-              <span aria-label="Location">{exp.location}</span>
+              <time datetime={exp.period}>{exp.period}</time>
             </p>
             <ul class="govuk-list govuk-list--bullet" role="list">
               {exp.points.map((point) => (
@@ -184,8 +156,7 @@ const { personal, skills, experience, projects, education, certifications } = cv
               {edu.institution}
             </p>
             <p class="govuk-body-s govuk-text-colour--secondary mb-3">
-              <time datetime={edu.period}>{edu.period}</time> • 
-              <span aria-label="Location">{edu.location}</span>
+              <time datetime={edu.period}>{edu.period}</time>
             </p>
             {edu.grade && (
               <p class="govuk-body mb-3">
@@ -324,39 +295,6 @@ const { personal, skills, experience, projects, education, certifications } = cv
     user-select: none;
   }
 
-  /* Help Section (WCAG 2.2 Consistent Help) */
-  .help-section {
-    position: fixed;
-    top: var(--spacing-4);
-    right: var(--spacing-4);
-    z-index: 100;
-    max-width: 300px;
-  }
-
-  .help-details {
-    background: var(--color-bg);
-    border: 2px solid var(--color-border);
-    border-radius: 4px;
-    box-shadow: var(--shadow-md);
-  }
-
-  .help-summary {
-    padding: var(--spacing-3);
-    cursor: pointer;
-    font-weight: 700;
-    color: var(--color-link);
-    list-style: none;
-  }
-
-  .help-summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .help-content {
-    padding: var(--spacing-4);
-    border-top: 1px solid var(--color-border);
-  }
-
   /* Progress Indicator (Cognitive Accessibility) */
   .progress-indicator {
     position: sticky;
@@ -365,7 +303,7 @@ const { personal, skills, experience, projects, education, certifications } = cv
     border-bottom: 1px solid var(--color-border);
     padding: var(--spacing-2) 0;
     z-index: 50;
-    margin-bottom: var(--spacing-4);
+    margin-bottom: 0;
   }
 
   .progress-bar {
@@ -732,7 +670,6 @@ const { personal, skills, experience, projects, education, certifications } = cv
     .govuk-skip-link,
     .govuk-button,
     .govuk-details__summary,
-    .help-section,
     .progress-indicator,
     .skip-links {
       display: none !important;
@@ -822,14 +759,4 @@ const { personal, skills, experience, projects, education, certifications } = cv
     updateProgress();
   });
   
-  // Keyboard navigation enhancement
-  document.addEventListener('keydown', (e) => {
-    // Press 'H' to toggle help
-    if (e.key === 'h' && !e.ctrlKey && !e.metaKey) {
-      const helpDetails = document.querySelector('.help-details') as HTMLDetailsElement;
-      if (helpDetails && document.activeElement?.tagName !== 'INPUT') {
-        helpDetails.open = !helpDetails.open;
-      }
-    }
-  });
 </script>
