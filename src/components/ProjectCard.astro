@@ -10,7 +10,9 @@ const { project } = Astro.props;
 
 <article class="project-card">
   <div class="project-header">
-    <h3>{project.name}</h3>
+    <h3>
+      <a href={`/projects/${project.slug}`} class="project-title-link">{project.name}</a>
+    </h3>
     <div class="project-links">
       {project.github && (
         <a href={`https://${project.github}`} target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">
@@ -52,6 +54,12 @@ const { project } = Astro.props;
       <li>{achievement}</li>
     ))}
   </ul>
+  
+  <div class="project-footer">
+    <a href={`/projects/${project.slug}`} class="view-details-link">
+      View Project Details →
+    </a>
+  </div>
 </article>
 
 <style>
@@ -78,12 +86,32 @@ const { project } = Astro.props;
   }
 
   .project-header h3 {
-    color: var(--color-text);
     font-size: var(--font-size-24);
     font-weight: 700;
     margin: 0;
     flex: 1;
     line-height: var(--line-height-tight);
+  }
+
+  .project-title-link {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition-base);
+    display: inline-block;
+  }
+
+  .project-title-link:hover {
+    color: var(--color-link);
+    border-bottom-color: var(--color-link);
+  }
+
+  .project-title-link:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 2px;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+    padding: 0 var(--spacing-1);
   }
 
   .project-links {
@@ -167,6 +195,35 @@ const { project } = Astro.props;
 
   .project-achievements li:last-child {
     margin-bottom: 0;
+  }
+
+  .project-footer {
+    margin-top: var(--spacing-4);
+    padding-top: var(--spacing-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .view-details-link {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-16);
+    display: inline-flex;
+    align-items: center;
+    transition: all var(--transition-base);
+  }
+
+  .view-details-link:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+  }
+
+  .view-details-link:focus {
+    outline: var(--focus-width) solid var(--color-focus);
+    outline-offset: 2px;
+    background-color: var(--color-focus);
+    color: var(--color-text);
+    padding: var(--spacing-1) var(--spacing-2);
   }
 
   @media (max-width: 768px) {

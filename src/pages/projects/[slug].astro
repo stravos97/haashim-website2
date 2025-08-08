@@ -1,0 +1,343 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { cvData, type Project } from '../../data/cvData';
+
+export function getStaticPaths() {
+  return cvData.projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props as { project: Project };
+---
+
+<Layout title={`${project.name} - Haashim Alvi`}>
+  <main>
+    <div class="govuk-width-container">
+      <a href="/" class="govuk-back-link">Back to CV</a>
+      
+      <div class="project-header">
+        <h1 class="govuk-heading-xl">{project.name}</h1>
+        <p class="govuk-body-l">{project.detailedDescription || project.description}</p>
+      </div>
+
+      <div class="project-links">
+        {project.github && (
+          <a href={`https://${project.github}`} class="govuk-button" target="_blank" rel="noopener noreferrer">
+            View on GitHub
+          </a>
+        )}
+        {project.live && (
+          <a href={`https://${project.live}`} class="govuk-button govuk-button--secondary" target="_blank" rel="noopener noreferrer">
+            View Live Demo
+          </a>
+        )}
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          {project.features && project.features.length > 0 && (
+            <section class="project-section">
+              <h2 class="govuk-heading-l">Key Features</h2>
+              <ul class="govuk-list govuk-list--bullet">
+                {project.features.map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {project.achievements && project.achievements.length > 0 && (
+            <section class="project-section">
+              <h2 class="govuk-heading-l">Achievements</h2>
+              <ul class="govuk-list govuk-list--bullet">
+                {project.achievements.map((achievement) => (
+                  <li>{achievement}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {project.challenges && project.challenges.length > 0 && (
+            <section class="project-section">
+              <h2 class="govuk-heading-l">Technical Challenges</h2>
+              <ul class="govuk-list govuk-list--bullet">
+                {project.challenges.map((challenge) => (
+                  <li>{challenge}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {project.architecture && (
+            <section class="project-section">
+              <h2 class="govuk-heading-l">System Architecture</h2>
+              <p class="govuk-body">{project.architecture}</p>
+            </section>
+          )}
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+          <aside class="project-sidebar">
+            <h3 class="govuk-heading-m">Technology Stack</h3>
+            <div class="tech-stack">
+              {project.techStack.map((tech) => (
+                <span class="tech-badge">{tech}</span>
+              ))}
+            </div>
+
+            {project.metrics && project.metrics.length > 0 && (
+              <>
+                <h3 class="govuk-heading-m">Metrics</h3>
+                <ul class="govuk-list">
+                  {project.metrics.map((metric) => (
+                    <li>{metric}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </aside>
+        </div>
+      </div>
+
+      {project.gallery && project.gallery.length > 0 && (
+        <section class="project-gallery">
+          <h2 class="govuk-heading-l">Gallery</h2>
+          <div class="gallery-grid">
+            {project.gallery.map((image) => (
+              <figure class="gallery-item">
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  loading="lazy"
+                />
+                {image.caption && (
+                  <figcaption class="govuk-body-s">{image.caption}</figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .govuk-width-container {
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    padding: 0 var(--spacing-m);
+  }
+
+  .govuk-back-link {
+    display: inline-block;
+    margin-bottom: var(--spacing-l);
+    color: var(--color-link);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .govuk-back-link:hover {
+    border-bottom-color: var(--color-link);
+  }
+
+  .govuk-back-link::before {
+    content: "← ";
+  }
+
+  .project-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .govuk-heading-xl {
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 var(--spacing-m) 0;
+    color: var(--color-heading);
+  }
+
+  .govuk-body-l {
+    font-size: var(--font-size-l);
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0 0 var(--spacing-l) 0;
+  }
+
+  .project-links {
+    display: flex;
+    gap: var(--spacing-m);
+    margin-bottom: var(--spacing-xl);
+    flex-wrap: wrap;
+  }
+
+  .govuk-button {
+    display: inline-block;
+    padding: var(--spacing-s) var(--spacing-l);
+    background: var(--color-primary);
+    color: var(--color-background);
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .govuk-button:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .govuk-button--secondary {
+    background: transparent;
+    color: var(--color-primary);
+  }
+
+  .govuk-button--secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .govuk-grid-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  @media (max-width: 768px) {
+    .govuk-grid-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .project-section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .govuk-heading-l {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-m) 0;
+    color: var(--color-heading);
+  }
+
+  .govuk-heading-m {
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    margin: 0 0 var(--spacing-m) 0;
+    color: var(--color-heading);
+  }
+
+  .govuk-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .govuk-list--bullet {
+    padding-left: var(--spacing-l);
+    list-style: disc;
+  }
+
+  .govuk-list--bullet li {
+    margin-bottom: var(--spacing-s);
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .govuk-body {
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .project-sidebar {
+    background: var(--color-surface);
+    padding: var(--spacing-l);
+    border-radius: 8px;
+    position: sticky;
+    top: var(--spacing-l);
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+    margin-bottom: var(--spacing-l);
+  }
+
+  .tech-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-s);
+    background: var(--color-primary);
+    color: var(--color-background);
+    border-radius: 4px;
+    font-size: var(--font-size-s);
+    font-weight: 600;
+  }
+
+  .project-gallery {
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-xl);
+    border-top: 2px solid var(--color-border);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-l);
+    margin-top: var(--spacing-l);
+  }
+
+  .gallery-item {
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .gallery-item figcaption {
+    padding: var(--spacing-m);
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-s);
+  }
+
+  @media print {
+    .govuk-back-link,
+    .project-links,
+    .project-gallery {
+      display: none;
+    }
+
+    .govuk-grid-row {
+      display: block;
+    }
+
+    .project-sidebar {
+      position: static;
+      margin-top: var(--spacing-l);
+    }
+  }
+</style>
