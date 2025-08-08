@@ -15,21 +15,28 @@ const topProjects = projects.slice(0, 5);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{personal.name} - CV</title>
   <style>
+    /* Precise A4 page setup for exactly 2 pages */
     @page {
       size: A4;
-      margin: 15mm 15mm 15mm 15mm;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+
+    @page:first {
+      margin-top: 10mm;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      font-size: 10pt;
-      line-height: 1.4;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.35;
       color: #000;
       background: white;
     }
@@ -38,38 +45,45 @@ const topProjects = projects.slice(0, 5);
       max-width: 100%;
     }
 
-    /* Header Section */
+    /* Header Section - Optimized for space */
     .header {
-      border-bottom: 2px solid #000;
-      padding-bottom: 10pt;
-      margin-bottom: 10pt;
+      border-bottom: 1.5pt solid #1d70b8;
+      padding-bottom: 8pt;
+      margin-bottom: 8pt;
     }
 
     h1 {
-      font-size: 22pt;
-      font-weight: bold;
-      margin-bottom: 3pt;
+      font-size: 20pt;
+      font-weight: 700;
+      margin-bottom: 2pt;
+      letter-spacing: -0.3pt;
     }
 
     .title {
-      font-size: 13pt;
-      color: #333;
-      margin-bottom: 6pt;
+      font-size: 12pt;
+      color: #2a2a2a;
+      margin-bottom: 4pt;
       font-weight: 600;
     }
 
     .summary {
-      font-size: 9.5pt;
-      line-height: 1.4;
-      color: #333;
-      margin-bottom: 6pt;
+      font-size: 9pt;
+      line-height: 1.35;
+      color: #1a1a1a;
+      margin-bottom: 5pt;
+      text-align: justify;
+      hyphens: auto;
     }
 
     .contact {
-      font-size: 9pt;
+      font-size: 8.5pt;
       display: flex;
-      gap: 15pt;
+      gap: 12pt;
       flex-wrap: wrap;
+    }
+
+    .contact span {
+      white-space: nowrap;
     }
 
     .contact a {
@@ -77,126 +91,143 @@ const topProjects = projects.slice(0, 5);
       text-decoration: none;
     }
 
-    /* Section Headers */
+    /* Section Headers - Compact but clear */
     h2 {
-      font-size: 13pt;
-      font-weight: bold;
-      margin-top: 12pt;
-      margin-bottom: 6pt;
-      padding-bottom: 2pt;
-      border-bottom: 1px solid #666;
+      font-size: 11.5pt;
+      font-weight: 700;
+      margin-top: 10pt;
+      margin-bottom: 5pt;
+      padding-bottom: 1.5pt;
+      border-bottom: 0.75pt solid #666;
       text-transform: uppercase;
-      letter-spacing: 0.5pt;
+      letter-spacing: 0.3pt;
+      color: #0b0c0c;
     }
 
-    /* Experience & Projects */
+    /* Experience & Projects - Space optimized */
     .item {
-      margin-bottom: 8pt;
+      margin-bottom: 7pt;
       page-break-inside: avoid;
     }
 
     h3 {
-      font-size: 11pt;
-      font-weight: bold;
-      margin-bottom: 1pt;
+      font-size: 10.5pt;
+      font-weight: 700;
+      margin-bottom: 0.5pt;
+      color: #0b0c0c;
     }
 
     .company, .subtitle {
-      font-size: 10pt;
-      color: #333;
+      font-size: 9.5pt;
+      color: #2a2a2a;
       font-weight: 600;
-      margin-bottom: 1pt;
+      margin-bottom: 0.5pt;
     }
 
     .period {
-      font-size: 9pt;
-      color: #666;
-      margin-bottom: 3pt;
+      font-size: 8.5pt;
+      color: #555;
+      margin-bottom: 2pt;
+      font-style: italic;
     }
 
     ul {
-      margin-left: 15pt;
-      margin-top: 3pt;
+      margin-left: 13pt;
+      margin-top: 2pt;
     }
 
     li {
-      font-size: 9pt;
-      line-height: 1.3;
-      margin-bottom: 2pt;
+      font-size: 8.5pt;
+      line-height: 1.25;
+      margin-bottom: 1.5pt;
+      text-align: justify;
     }
 
-    /* Skills Section - Compact Grid */
+    /* Skills Section - Ultra Compact Grid */
     .skills-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8pt;
-      margin-top: 6pt;
+      gap: 6pt 10pt;
+      margin-top: 4pt;
     }
 
     .skill-category {
-      margin-bottom: 6pt;
+      margin-bottom: 4pt;
     }
 
     .skill-category h4 {
-      font-size: 10pt;
-      font-weight: bold;
-      margin-bottom: 3pt;
+      font-size: 9pt;
+      font-weight: 700;
+      margin-bottom: 2pt;
+      color: #0b0c0c;
     }
 
     .skill-tags {
-      font-size: 8.5pt;
-      line-height: 1.4;
-      color: #333;
+      font-size: 8pt;
+      line-height: 1.3;
+      color: #2a2a2a;
     }
 
-    /* Education */
+    /* Education - Compact */
     .education-item {
-      margin-bottom: 6pt;
+      margin-bottom: 5pt;
+      page-break-inside: avoid;
     }
 
     .degree {
-      font-size: 11pt;
-      font-weight: bold;
-      margin-bottom: 1pt;
+      font-size: 10pt;
+      font-weight: 700;
+      margin-bottom: 0.5pt;
+      color: #0b0c0c;
     }
 
     .institution {
-      font-size: 10pt;
-      color: #333;
-      margin-bottom: 1pt;
+      font-size: 9pt;
+      color: #2a2a2a;
+      margin-bottom: 0.5pt;
+      font-weight: 600;
     }
 
     .edu-details {
-      font-size: 9pt;
-      color: #666;
+      font-size: 8.5pt;
+      color: #555;
+      font-style: italic;
     }
 
     /* Projects - Compact */
     .projects-grid {
-      margin-top: 6pt;
+      margin-top: 4pt;
     }
 
     .project {
-      margin-bottom: 8pt;
+      margin-bottom: 7pt;
       page-break-inside: avoid;
     }
 
     .tech-stack {
-      font-size: 8.5pt;
-      color: #666;
-      margin-bottom: 2pt;
+      font-size: 8pt;
+      color: #555;
+      margin-bottom: 1.5pt;
+      font-style: italic;
     }
 
-    /* Page Management */
+    /* Page Management for exactly 2 pages */
     .page-1 {
-      min-height: 277mm;
-      max-height: 277mm;
-      overflow: hidden;
+      page-break-after: auto;
     }
 
     .page-2 {
       page-break-before: always;
-      min-height: 277mm;
+    }
+
+    /* Force page break after experience section */
+    #experience-section {
+      page-break-after: auto;
+    }
+
+    #skills-section {
+      page-break-after: always;
+      margin-bottom: 0;
     }
 
     /* Print-specific */
@@ -270,7 +301,7 @@ const topProjects = projects.slice(0, 5);
       </header>
 
       <!-- Experience Section -->
-      <section>
+      <section id="experience-section">
         <h2>Professional Experience</h2>
         {topExperiences.map((exp, index) => (
           <div class="item">
@@ -278,7 +309,7 @@ const topProjects = projects.slice(0, 5);
             <div class="company">{exp.company}</div>
             <div class="period">{exp.period} • {exp.location}</div>
             <ul>
-              {exp.points.slice(0, index === 0 ? 4 : 3).map(point => (
+              {exp.points.slice(0, index === 0 ? 4 : index === 1 ? 3 : 2).map(point => (
                 <li>{point}</li>
               ))}
             </ul>
@@ -287,24 +318,24 @@ const topProjects = projects.slice(0, 5);
       </section>
 
       <!-- Skills Section - Compact -->
-      <section>
+      <section id="skills-section">
         <h2>Technical Skills</h2>
         <div class="skills-container">
           <div class="skill-category">
             <h4>Cloud & Infrastructure</h4>
-            <div class="skill-tags">Azure, AWS, Terraform, ARM Templates, CloudFormation, IaC</div>
+            <div class="skill-tags">Azure • AWS • Terraform • ARM Templates • CloudFormation • IaC</div>
           </div>
           <div class="skill-category">
             <h4>Container & Orchestration</h4>
-            <div class="skill-tags">Docker, Kubernetes, K3s, Helm, ArgoCD, GitOps</div>
+            <div class="skill-tags">Docker • Kubernetes • K3s • Helm • ArgoCD • GitOps</div>
           </div>
           <div class="skill-category">
             <h4>CI/CD & Automation</h4>
-            <div class="skill-tags">Jenkins, GitHub Actions, Azure DevOps, Ansible, Bash, Python</div>
+            <div class="skill-tags">Jenkins • GitHub Actions • Azure DevOps • Ansible • Bash • Python</div>
           </div>
           <div class="skill-category">
             <h4>Development & Tools</h4>
-            <div class="skill-tags">Python, TypeScript, React, Git, Linux, Agile</div>
+            <div class="skill-tags">Python • TypeScript • React • Git • Linux • Agile</div>
           </div>
         </div>
       </section>
@@ -316,12 +347,12 @@ const topProjects = projects.slice(0, 5);
       <section>
         <h2>Key Projects</h2>
         <div class="projects-grid">
-          {topProjects.map(project => (
+          {topProjects.map((project, index) => (
             <div class="project">
               <h3>{project.name}</h3>
-              <div class="tech-stack">{project.techStack.slice(0, 4).join(' • ')}</div>
+              <div class="tech-stack">{project.techStack.slice(0, 3).join(' • ')}</div>
               <ul>
-                {project.achievements.slice(0, 2).map(achievement => (
+                {project.achievements.slice(0, index < 3 ? 2 : 1).map(achievement => (
                   <li>{achievement}</li>
                 ))}
               </ul>
@@ -356,13 +387,20 @@ const topProjects = projects.slice(0, 5);
   </div>
 
   <script>
-    // Auto-trigger print dialog if opened from main site
-    if (window.opener) {
-      window.print();
-      window.onafterprint = () => {
+    // Auto-trigger print dialog when page loads
+    window.addEventListener('load', () => {
+      // Small delay to ensure styles are loaded
+      setTimeout(() => {
+        window.print();
+      }, 100);
+    });
+
+    // Optional: Close window after printing if opened in new tab
+    window.onafterprint = () => {
+      if (window.opener) {
         window.close();
-      };
-    }
+      }
+    };
   </script>
 </body>
 </html>
