@@ -1,16 +1,41 @@
 {
-  "name": "@example/basics",
+  "name": "haashim-cv-website",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Haashim Alvi's personal CV website built with Astro and TypeScript",
+  "author": "Haashim Alvi <haashimalvi@pm.me>",
+  "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stravos97/Haashim-CV"
+  },
+  "keywords": [
+    "cv",
+    "resume",
+    "portfolio",
+    "astro",
+    "typescript",
+    "devops"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rm -rf dist .astro node_modules/.vite",
+    "validate": "astro check && tsc --noEmit"
   },
   "dependencies": {
-    "astro": "^4.15.3"
+    "astro": "^4.15.3",
+    "zod": "^3.25.76"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "terser": "^5.43.1"
   }
 }

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { cvData, type Project } from '../../data/cvData';
+import { cvData, type Project } from '../../data';
 
 export function getStaticPaths() {
   return cvData.projects.map((project) => ({
