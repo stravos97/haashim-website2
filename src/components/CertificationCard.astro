@@ -14,19 +14,19 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   aria-label={`${certification.name} certification`} 
   role="article">
   
-  <h3 class="govuk-heading-m cert-title" id={`cert-${index}`}>
+  <h3 class="govuk-heading-m mb-2" id={`cert-${index}`}>
     {certification.name}
   </h3>
   
-  <p class="govuk-body cert-issuer" aria-describedby={`cert-${index}`}>
-    <strong>{certification.issuer}</strong>
+  <p class="govuk-body font-bold mb-1" aria-describedby={`cert-${index}`}>
+    {certification.issuer}
   </p>
   
-  <p class="govuk-body-s govuk-text-colour--secondary cert-date">
+  <p class="govuk-body-s govuk-text-colour--secondary mb-3">
     <time datetime={certification.date}>{certification.date}</time>
   </p>
   {certification.credentialId && (
-    <p class="govuk-body cert-id">
+    <p class="govuk-body mb-3">
       <strong>ID:</strong> {certification.credentialId}
     </p>
   )}
@@ -89,44 +89,16 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
     padding-left: calc(var(--spacing-4) - 2px);
   }
   
-  .cert-title {
-    margin-bottom: var(--govuk-spacing-2);
-    font-size: var(--font-size-24);
-    line-height: 1.3;
-  }
-  
-  .cert-issuer {
-    margin-bottom: var(--govuk-spacing-2);
-    font-size: var(--font-size-19);
-    line-height: 1.4;
-  }
-  
-  .cert-date {
-    margin-bottom: var(--govuk-spacing-3);
-    font-size: var(--font-size-16);
-    line-height: 1.5;
-  }
-  
-  .cert-id {
-    margin-bottom: var(--govuk-spacing-4);
-    font-size: var(--font-size-19);
-    line-height: 1.5;
-  }
-  
   .mb-1 {
-    margin-bottom: var(--govuk-spacing-1);
+    margin-bottom: var(--govuk-spacing-1) !important;
   }
   
   .mb-2 {
-    margin-bottom: var(--govuk-spacing-2);
+    margin-bottom: var(--govuk-spacing-2) !important;
   }
   
   .mb-3 {
-    margin-bottom: var(--govuk-spacing-3);
-  }
-  
-  .mb-4 {
-    margin-bottom: var(--govuk-spacing-4);
+    margin-bottom: var(--govuk-spacing-3) !important;
   }
   
   .mt-3 {
@@ -162,46 +134,36 @@ const isPlanned = certification.date.toLowerCase().includes('planned');
   }
 
   .govuk-details__text {
-    padding: var(--govuk-spacing-4) 0 var(--govuk-spacing-4) var(--govuk-spacing-5);
+    padding: var(--spacing-3) 0 var(--spacing-3) var(--spacing-4);
     border-left: 5px solid var(--color-border);
-    line-height: 1.6;
   }
   
   .cert-description {
-    margin-bottom: var(--govuk-spacing-5);
-    line-height: 1.7;
-    font-size: var(--font-size-19);
+    margin-bottom: var(--govuk-spacing-3);
+    line-height: 1.5;
   }
   
   .skills-section {
-    margin-top: var(--govuk-spacing-4);
+    margin-top: var(--govuk-spacing-2);
   }
   
   .skills-heading {
-    margin-bottom: var(--govuk-spacing-3);
-    font-size: var(--font-size-19);
+    margin-bottom: var(--govuk-spacing-2);
+    font-weight: bold;
   }
   
   .cert-skills-list {
     margin-top: var(--govuk-spacing-2);
-    margin-bottom: var(--govuk-spacing-4);
-    margin-left: var(--govuk-spacing-4);
+    margin-bottom: var(--govuk-spacing-3);
   }
   
   .cert-skills-list li {
-    margin-bottom: var(--govuk-spacing-2);
-    line-height: 1.6;
-    font-size: var(--font-size-19);
-  }
-  
-  .cert-skills-list li:last-child {
-    margin-bottom: 0;
+    margin-bottom: var(--govuk-spacing-1);
+    line-height: 1.5;
   }
   
   .verify-link {
-    margin-top: var(--govuk-spacing-5);
-    padding-top: var(--govuk-spacing-3);
-    border-top: 1px solid var(--color-border-light);
+    margin-top: var(--govuk-spacing-3);
   }
   
   .govuk-details__summary-text {
