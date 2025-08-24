@@ -31,7 +31,7 @@
     "test:api": "echo '🔍 Testing API Endpoints...' && curl -s https://haashim-alvi.netlify.app/api/cv.json | python3 -c \"import json, sys; data = json.load(sys.stdin); print('✅ JSON API: Valid'); print(f'  - Projects: {len(data[\\\"projects\\\"])}'); print(f'  - Skills: {len(data[\\\"skills\\\"])} categories'); print(f'  - Experience: {len(data[\\\"experience\\\"])} roles')\" && curl -s https://haashim-alvi.netlify.app/sitemap.xml | grep -c '<url>' | xargs -I {} echo '✅ Sitemap: {} URLs found' && curl -s https://haashim-alvi.netlify.app/rss.xml | grep -c '<item>' | xargs -I {} echo '✅ RSS Feed: {} items found' && echo '🎉 All endpoints working!'"
   },
   "dependencies": {
-    "astro": "^4.15.3",
+    "astro": "^5.13.3",
     "zod": "^3.25.76"
   },
   "engines": {
